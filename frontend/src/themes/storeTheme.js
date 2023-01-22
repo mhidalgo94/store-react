@@ -1,9 +1,8 @@
 import {createTheme} from '@mui/material';
-import { red } from '@mui/material/colors';
+import { red, lightBlue, grey } from '@mui/material/colors';
 
 const storeTheme = createTheme({
     palette:{
-        mode:'light',
         primary: red,
         success: {
             main: '#54B435',
@@ -25,11 +24,8 @@ const storeTheme = createTheme({
             light: '#ffa952',
             dark: '#f2910a',
         },
-        profile1:{
-            main:'#d23f57',
-            light:'#d23f57'
-
-        }
+        lightBlue,
+        grey,
         
     },
 })

@@ -1,19 +1,20 @@
 import { Container, Grid } from "@mui/material";
-import CardProduct from "../../components/Card/CardProduct";
 import MenuFiler from "../../components/MenuFilter/MenuFiler";
+import ListProducts from "../../components/List/ListProducts";
+
 export default function Products() {
+
   return (
     <div style={{ backgroundColor: "#F6F9FC" }}>
       <Container sx={{p:4}}>
-        <Grid container spacing={4}>
-          <Grid item xs={12} sm={4} md={3} lg={2}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={3} md={3} lg={3}>
             <MenuFiler />
           </Grid>
-          <Grid item xs={12} sm={8} md={9} lg={10}>
-              <Grid container sparcing={3}>
-                <Grid item xs={12} md={6} lg={4}>
-                  <CardProduct item={{title:'Police Gray Eyeglasses'}} />
-                </Grid>
+          <Grid item xs={12} sm={9} md={9} lg={9}>
+              <Grid container spacing={2}>
+                  {/*  sould include data in param list component */ }
+                  <ListProducts />
               </Grid>
           </Grid>
         </Grid>

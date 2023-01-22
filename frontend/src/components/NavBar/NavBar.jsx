@@ -1,27 +1,19 @@
+import {useState} from 'react';
 import { Link } from "react-router-dom";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Typography } from "@mui/material";
+import CartMenu from './CartMenu';
+import styleNabVar from './styleNavbar'
 import "./NavBar.scss";
 
+
 export default function NavBar() {
-  const styleLink = {
-    color: "#7D879C",
-    fontSize: "17px",
-    fontWeight: 500,
-    lineHeight: 1.6,
-    letterSpacing: "0.0075em",
 
-    "&:hover": {
-      color: "rgb(210, 63, 87)",
-    },
-  };
+  const [openCart, setOpenCart] = useState(false)
 
-  const styleIcons={
-    color:'#7D879C',
-    "&:hover": { color: "rgb(210, 63, 87)" }
-  }
+
 
   return (
     <div className="content-navbar">
@@ -34,14 +26,14 @@ export default function NavBar() {
         <div className="list-page">
           <div className="items">
             <Link className="link" to="/">
-              <Typography variant="h6" sx={styleLink}>
+              <Typography variant="h6" sx={styleNabVar.styleLink}>
                 Home
               </Typography>
             </Link>
           </div>
           <div className="items">
-            <Link className="link" to="/shop">
-              <Typography variant="h6" sx={styleLink}>
+            <Link className="link" to="/shop/products">
+              <Typography variant="h6" sx={styleNabVar.styleLink}>
                 Shop
               </Typography>
             </Link>
@@ -55,21 +47,24 @@ export default function NavBar() {
         <div className="icons">
           <div className="item">
             <FavoriteBorderIcon
-              sx={styleIcons}
+              sx={styleNabVar.styleIcons}
             />
           </div>
           <div className="item">
             <AccountCircleIcon
-              sx={styleIcons}
+              sx={styleNabVar.styleIcons}
             />
           </div>
           <div className="item">
-            <AddShoppingCartIcon
-              sx={styleIcons}
+            <ShoppingBagIcon
+              onClick={()=>setOpenCart(!openCart)}
+              sx={styleNabVar.styleIcons}
             />
           </div>
         </div>
       </div>
+      {/* Swager to Cart Shop */}
+      <CartMenu openCart={openCart} setOpenCart={setOpenCart} />
     </div>
   );
 }
