@@ -1,0 +1,44 @@
+
+.content-navbar{
+    
+    .navbar{
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        
+        
+        .list-page{
+            display: flex; 
+            gap: 20px;
+            
+            .items{
+                
+                .link{
+                    text-decoration: none;
+                    font-weight: bold;
+                    
+                }
+            }
+        }
+        
+        .icons{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap:20px;
+            
+        }
+    }
+
+.info{
+    width: 100%;
+    background-color: #222935;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+}

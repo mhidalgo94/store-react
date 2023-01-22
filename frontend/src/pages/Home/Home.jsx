@@ -1,16 +1,11 @@
-import SliderHome from "../../components/Slider/SliderHome";
-import AdProducts from "../../components/AdProducts/AdProducts";
-import './Home.scss';
-import Contact from "../../components/Contact/Contact";
+import { Typography } from '@mui/material'
+import React from 'react'
+import {  lightGreen} from '@mui/material/colors'
 
-function Home() {
-  
+export default function Home() {
   return (
-    <div className='home'>
-      <SliderHome />
-      <AdProducts />
-      <Contact />
-    </div>
+    <div  style={{backgroundColor:'#F6F9FC'}}>
+        <Typography  variant='contained' color={lightGreen['A700']}>Click me</Typography>
+        </div>
   )
 }
-export default Home;

@@ -1,55 +1,23 @@
-import './Products.scss'
-import List from '../../components/List/List';
-import { useParams } from 'react-router-dom';
-import {useState} from 'react';
-
-function Products() {
-  const catId = parseInt(useParams().id)
-  const [maxPrice, setMaxPrice] = useState(1000);
-  const [sort, setSort] = useState(null)
-  
-
-
+import { Container, Grid } from "@mui/material";
+import CardProduct from "../../components/Card/CardProduct";
+import MenuFiler from "../../components/MenuFilter/MenuFiler";
+export default function Products() {
   return (
-    <div className='products'>
-      <div className="left">
-        <div className="filterItem">
-          <h3>Product Categories</h3>
-          <div className="inputItem">
-            <input type="checkbox" id="1" value="gift" />
-            <label htmlFor='1' >Gift</label>
-            <input type="checkbox" id="2" value="party" />
-            <label htmlFor='2' >Party</label>
-          </div>
-        </div>
-        <div className="filterItem">
-          <div className="inputItem">
-          <h3>Filter by Price</h3>
-            <span>0</span>
-            <input type="range" min={0} value={maxPrice} max={1000} onChange={(e)=> setMaxPrice(e.target.value)} />
-            <span>{maxPrice}</span>
-          </div>
-        </div>
-        <div className="filterItem">
-          <h3>Sort by</h3>
-          <div className="inputItem">
-            <input type="radio" id="asc" name="price" onChange={e=> setSort('asc')}/>
-            <label htmlFor="asc">Price (Lowest first)</label>
-          </div>
-          <div className="inputItem">
-          <input type="radio" id="desc" name="price" onChange={e=> setSort('desc')}/>
-            <label htmlFor="desc">Price (Highes first)</label>
-          </div>
-        </div>
-      </div>
-
-      <div className="right">
-        <List catId={catId} maxPrice={maxPrice} sort={sort} />
-      </div>
-
+    <div style={{ backgroundColor: "#F6F9FC" }}>
+      <Container sx={{p:4}}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={4} md={3} lg={2}>
+            <MenuFiler />
+          </Grid>
+          <Grid item xs={12} sm={8} md={9} lg={10}>
+              <Grid container sparcing={3}>
+                <Grid item xs={12} md={6} lg={4}>
+                  <CardProduct item={{title:'Police Gray Eyeglasses'}} />
+                </Grid>
+              </Grid>
+          </Grid>
+        </Grid>
+      </Container>
     </div>
-  )
+  );
 }
-
-
-export default Products;

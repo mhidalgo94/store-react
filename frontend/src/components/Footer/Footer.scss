@@ -1,0 +1,46 @@
+.footer{
+    background-color: #222935;
+    color:#AEB4BE;
+    padding: 40px 20px;
+
+    .container{
+        display: grid;
+        width: 90%;
+        margin: 0px auto;
+        grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+        gap:16px;
+
+        div{
+            margin-bottom: 10px;
+        }
+
+        .contact{
+            display: flex;
+            align-items: left;
+            flex-direction: column;
+    
+            .items{
+                display: flex;
+                align-items: left;
+                flex-direction: column;
+    
+                .item{
+                    margin: 2px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: left;
+                    gap:10px;
+                }
+            }
+        }
+    
+        .signup{
+            h6{
+                &:hover{
+                    cursor: pointer;
+                    color:white;
+                } 
+            }
+        }
+    }
+}
