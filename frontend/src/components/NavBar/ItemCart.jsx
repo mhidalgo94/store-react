@@ -8,7 +8,7 @@ export default function ItemCart({item}) {
     <>
         <Box sx={{display:'flex',alignItems:'center',margin:'10px 5px',justifyContent:'space-between'}}>
             <Box sx={{display:'flex', flexDirection:'column',alignItems:'center', gap:'2px'}}>
-                <IconButton variant='outlined'  sx={{borderRadius:'50%',border:'1px solid #f44336'}} size='small'>
+                <IconButton variant='outlined' sx={{borderRadius:'50%',border:'1px solid #f44336',}} size='small'>
                     <AddIcon  color='primary' fontSize='10px'/>
                 </IconButton>
                 <Typography variant='subtitle2' sx={{fontWeight:'bold'}}>{item.mount}</Typography>
