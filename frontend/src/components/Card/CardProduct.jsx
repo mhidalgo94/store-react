@@ -1,4 +1,4 @@
-import React from "react";
+import {Link} from 'react-router-dom'
 import {
   Tooltip,
   IconButton,
@@ -15,7 +15,7 @@ import { Stack } from "@mui/system";
 
 export default function CardProduct({ item }) {
   return (
-    <div>
+    <Link to='/' className='link'>
       <Card elevation={1}>
         <CardMedia
           component="img"
@@ -67,6 +67,6 @@ export default function CardProduct({ item }) {
           </Stack>
         </CardActions>
       </Card>
-    </div>
+    </Link>
   );
 }

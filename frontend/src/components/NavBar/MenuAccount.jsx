@@ -7,6 +7,16 @@ import styleNavBar from './styleNavbar';
 
 export default function MenuAccount({ anchorEl,open,handleClose}) {
 
+
+  const styleLinkMenu = {
+    p:0,
+    color:'#7D879C',
+
+    "&:hover": {
+      color: "rgb(210, 63, 87)",
+    }
+  }
+
   return (
     <Menu
     PaperProps={{
@@ -21,21 +31,21 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
       transformOrigin={{ horizontal: 'right', vertical: 'top' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
-      <MenuItem>
-        <ListItem sx={{p:0}}>
-          <AccountCircleIcon sx={styleNavBar.styleIcons} />
+      <MenuItem sx={styleLinkMenu}>
+        <ListItem sx={{padding:0,margin:'0 10px'}}>
+          <AccountCircleIcon  />
           <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1} >My Acount</Typography>
         </ListItem>
       </MenuItem>
-      <MenuItem>
-        <ListItem sx={{p:0}}>
-          <SettingsIcon sx={styleNavBar.styleIcons}/>
+      <MenuItem sx={styleLinkMenu}>
+        <ListItem sx={{padding:0,margin:'0 10px'}}>
+          <SettingsIcon />
           <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1} >Settings</Typography>
         </ListItem>
       </MenuItem>
-      <MenuItem>
-        <ListItem sx={{p:0}}>
-          <LogoutIcon sx={styleNavBar.styleIcons}/>
+      <MenuItem sx={styleLinkMenu}>
+        <ListItem sx={{padding:0,margin:'0 10px'}}>
+          <LogoutIcon/>
           <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1} >Logout</Typography>
         </ListItem>
       </MenuItem>

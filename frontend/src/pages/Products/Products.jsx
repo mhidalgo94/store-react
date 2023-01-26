@@ -13,7 +13,7 @@ export default function Products() {
           </Grid>
           <Grid item xs={12} sm={9} md={9} lg={9}>
               <Grid container spacing={2}>
-                  {/*  sould include data in param list component */ }
+                  {/*  should include data in param list component */ }
                   <ListProducts />
               </Grid>
           </Grid>

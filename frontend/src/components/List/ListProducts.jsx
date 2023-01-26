@@ -50,7 +50,7 @@ export default function ListProducts() {// include data in params
           <Grid key={index} item xs={12} md={5} lg={4}>
             <CardProduct item={item} />
           </Grid>
-        );
+        )
       })}
     </React.Fragment>
   );
