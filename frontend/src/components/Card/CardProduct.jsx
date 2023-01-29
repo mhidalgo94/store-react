@@ -13,9 +13,9 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Stack } from "@mui/system";
 
-export default function CardProduct({ item }) {
+export default function CardProduct({ item,id }) {
   return (
-    <Link to='/' className='link'>
+    <Link to={`/shop/product/${id}`} className='link'>
       <Card elevation={1}>
         <CardMedia
           component="img"

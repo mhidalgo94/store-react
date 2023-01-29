@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
-
+import Product from './pages/Product/Product';
 import storeTheme from "./themes/storeTheme";
 
 
@@ -15,7 +15,9 @@ const LayoutStore = ()=>{
             <ThemeProvider theme={storeTheme}>
                 <CssBaseline />
                 <NavBar />
-                <Outlet />
+                <div style={{backgroundColor:'#F6F9FC',padding:'20px 0'}}>
+                    <Outlet />
+                </div>
                 <Footer />
             </ThemeProvider>
         </div>
@@ -35,7 +37,11 @@ const Routers = createBrowserRouter([
             {
                 path:'/shop/products',
                 element: <Products />
-            }
+            },
+            {
+                path:'/shop/product/:id',
+                element: <Product />
+            },
 
         ]
     }
