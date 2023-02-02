@@ -30,7 +30,13 @@ const storeTheme = createTheme({
             'dark':lightBlue[800],
             contrastText:'#fff'
         },
-        grey,
+        grey:{
+            ...grey,
+            'main':grey[500],
+            'dark': grey[800],
+            contrastText:'#fff'
+
+        },
         myBlue:{
             main:blue[200]
         }
