@@ -15,7 +15,7 @@ const LayoutStore = ()=>{
             <ThemeProvider theme={storeTheme}>
                 <CssBaseline />
                 <NavBar />
-                <div style={{backgroundColor:'#F6F9FC',padding:'20px 0'}}>
+                <div style={{backgroundColor:'#F6F9FC'}}>
                     <Outlet />
                 </div>
                 <Footer />
