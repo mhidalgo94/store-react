@@ -3,7 +3,6 @@ import ItemsCarousel from './ItemsCarousel';
 import value from './CarouselData'
 export default function CarouselComponent() {
 
-  console.log(value)
   return (
     <Carousel height='500px' >
       {value.map((item,index)=>{

@@ -42,6 +42,10 @@ const storeTheme = createTheme({
         }
         
     },
+    typography:{
+        fontFamily:['Fira Sans', 'sans-serif'].join(',')
+
+    }
 })
 
 

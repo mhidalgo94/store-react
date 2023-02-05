@@ -27,11 +27,11 @@ export default function NavBar() {
 
   return (
     <div className="content-navbar">
-      <div className="info">
+      {/* <div className="info">
         <Typography variant="subtitle1" sx={{ color: "#fff" }}>
           You Store Art & Craft
         </Typography>
-      </div>
+      </div> */}
       <div className="navbar">
         <div className="list-page">
           <div className="items">
