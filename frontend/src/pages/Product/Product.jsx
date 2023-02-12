@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {useParams} from 'react-router-dom';
 import { Container, Grid, Typography, Rating, IconButton, Button } from "@mui/material"
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
@@ -7,16 +8,20 @@ import MiniSlider from "../../components/MiniSlider/MiniSlider";
 import TabsProduct from "../../components/TabsProduct/TabsProduct";
 import { Stack } from "@mui/system";
 
+import {useCartState} from './../../store/cartState.js'
+
+
 export default function Product() {
 
     const [imageSelected, setImageSelected] = useState(0);
     const [rating, setRating] = useState(2);
+    const [quantityProduct,setQuantityProduct] = useState(0)
+    const {id} = useParams();
+    const {setNewProduct, addProduct,} = useCartState()
 
-    const [quantityProduct,setQuantityProduct] = useState(1)
-
-
+    // eslint-disable-next-line
     const data = {
-        id:4,
+        id,
         title: "Sian Ban Black",
         desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem adipisci...",
         price: 180,
@@ -28,6 +33,15 @@ export default function Product() {
           "https://bazaar.ui-lib.com/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F9.RayBanBlack.png&w=1200&q=75",
           "https://bazaar.ui-lib.com/_next/image?url=%2Fassets%2Fimages%2Fproducts%2FFashion%2FAccessories%2F8.RayBanMattBlack.png&w=1200&q=75",
         ],
+    }
+
+    useEffect(()=>{
+        setNewProduct(data,quantityProduct)
+    // eslint-disable-next-line
+    },[setNewProduct,quantityProduct])
+
+    const addCart = () =>{
+        addProduct();
     }
 
 
@@ -73,7 +87,7 @@ export default function Product() {
                         >
                         <AddIcon color='primary'/>
                     </IconButton>
-                    <Button sx={{py:1,px:2,fontWeight:600}} variant="contained" color="lightBlue" startIcon={<AddShoppingCartIcon />}>Add To Cart</Button>
+                    <Button sx={{py:1,px:2,fontWeight:600}} disabled={!Boolean(quantityProduct)} onClick={addCart} variant="contained" color="lightBlue" startIcon={<AddShoppingCartIcon />}>Add To Cart</Button>
                 </Stack>
                 
             </Grid>
