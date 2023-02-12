@@ -2,11 +2,11 @@ import {useState} from 'react';
 import { Box,Divider,Tab } from "@mui/material";
 import {TabContext, TabList, TabPanel } from '@mui/lab'
 import Comment from '../Comment/Comment';
-import FormReview from '../Card/Form/FormReview/FormReview';
+import FormReview from '../Form/FormReview/FormReview';
+
 
 export default function TabsProduct() {
     const [value, setValue] = useState('0');
-
     const styleTab = {
         textTransform:'capitalize',
         fontWeight:'bold',
