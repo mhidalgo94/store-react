@@ -5,6 +5,7 @@ import CardProduct from "../Card/CardProduct";
 export default function ListProducts() {// include data in params
   const data = [
     {
+      id:1,
       title: "Police Gray Eyeglasses",
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem adipisci...",
       price: 180,
@@ -14,6 +15,7 @@ export default function ListProducts() {// include data in params
       ],
     },
     {
+      id:2,
       title: "Sian Ban Black",
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem adipisci...",
       price: 180,
@@ -23,6 +25,7 @@ export default function ListProducts() {// include data in params
       ],
     },
     {
+      id:3,
       title: "Police Gray Eyeglasses",
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem adipisci...",
       price: 180,
@@ -32,6 +35,7 @@ export default function ListProducts() {// include data in params
       ],
     },
     {
+      id:10,
       title: "Sian Ban Black",
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolorem adipisci...",
       price: 180,

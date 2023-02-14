@@ -76,7 +76,7 @@ export default function Product() {
                 <Stack direction="row" spacing={1} sx={{my:1}} alignItems='center'>
                     <IconButton sx={{border:'1px solid red', borderRadius:'8px'}} 
                     onClick={()=>setQuantityProduct(value=> value===0 ? 0 : value-1)}
-                    onDoubleClick={()=>setQuantityProduct(value=> value === 0 ? 0 : value < 10 ? 0 : value-10)}
+                    // onDoubleClick={()=>setQuantityProduct(value=> value === 0 ? 0 : value < 10 ? 0 : value-10)}
                     >
                         <RemoveIcon color='primary' />
                     </IconButton>

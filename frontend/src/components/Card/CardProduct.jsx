@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom'
 import {
+  Box,
   Tooltip,
   IconButton,
   Card,
@@ -11,28 +12,46 @@ import {
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Stack } from "@mui/system";
+import { Stack } from "@mui/material";
+
+import { useCartState } from '../../store/cartState';
+
+
 
 export default function CardProduct({ item,id }) {
+
+  const {setNewProduct, addProduct}= useCartState()
+
+  const addCart = ()=>{
+    setNewProduct(item, 1);
+    addProduct();
+
+
+  }
+
   return (
-    <Link to={`/shop/product/${id}`} className='link'>
+    <>
       <Card elevation={1}>
-        <CardMedia
-          component="img"
-          alt={item.title}
-          height="240"
-          width={200}
-          image={item.image[0]}
-        />
+        <Link to={`/shop/product/${id}`} className='link'>
+          <CardMedia
+            component="img"
+            alt={item.title}
+            height="240"
+            width={200}
+            image={item.image[0]}
+          />
         <CardContent sx={{ padding: "10px" }}>
-          <Typography variant="h6">{item.title}</Typography>
-          <Typography
-            variant="body1"
-            sx={{ textAlign: "justify", fontSize: "14px" }}
-          >
-            {item.desc}
-          </Typography>
+            <Box>
+              <Typography variant="h6">{item.title}</Typography>
+              <Typography
+                variant="body1"
+                sx={{ textAlign: "justify", fontSize: "14px" }}
+              >
+                {item.desc}
+              </Typography>
+            </Box>
         </CardContent>
+        </Link>
         <CardActions
           sx={{
             display: "felx",
@@ -55,8 +74,8 @@ export default function CardProduct({ item,id }) {
           </Stack>
           <Stack direction="row">
             <Tooltip title="Add to Cart" arrow >
-              <IconButton color="primary" size="small">
-                <AddShoppingCartIcon />
+              <IconButton color="primary" size="small" onClick={addCart}>
+                <AddShoppingCartIcon  />
               </IconButton>
             </Tooltip>
             <Tooltip title="Add to Favorite" arrow >
@@ -67,6 +86,6 @@ export default function CardProduct({ item,id }) {
           </Stack>
         </CardActions>
       </Card>
-    </Link>
+    </>
   );
 }
