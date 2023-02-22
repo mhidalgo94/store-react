@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { Tooltip, Typography } from "@mui/material";
 import CartMenu from "./CartMenu";
 import MenuAccount from "./MenuAccount";
@@ -73,7 +73,7 @@ export default function NavBar() {
           </div>
           <div className="item">
             <Tooltip title="Cart" arrow>
-              <ShoppingBagIcon
+              <AddShoppingCartIcon
                 onClick={() => setOpenCart(!openCart)}
                 sx={styleNavBar.styleIcons}
               />

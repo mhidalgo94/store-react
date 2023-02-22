@@ -1,4 +1,5 @@
 import { Menu, MenuItem, ListItem, Typography } from "@mui/material";
+import {Link} from 'react-router-dom';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -32,10 +33,12 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
       <MenuItem sx={styleLinkMenu}>
-        <ListItem sx={{padding:0,margin:'0 10px'}}>
-          <AccountCircleIcon  />
-          <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1} >My Acount</Typography>
-        </ListItem>
+        <Link to='/account/profile' className="link">
+          <ListItem sx={{padding:0,margin:'0 10px'}}>
+              <AccountCircleIcon  />
+              <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1} >My Acount</Typography>
+          </ListItem>
+        </Link>
       </MenuItem>
       <MenuItem sx={styleLinkMenu}>
         <ListItem sx={{padding:0,margin:'0 10px'}}>

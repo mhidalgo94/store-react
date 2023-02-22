@@ -20,7 +20,7 @@ export default function Home() {
       <Box sx={{ bgcolor: "white" }}>
         <Container sx={{ py: 2 }}>
           <Grid container spacing={2} style={{ alignItems: "start" }}>
-            <Grid item spacing={2} md={6} lg={6}>
+            <Grid item  md={6} lg={6}>
               <Paper sx={stylePaper} elevation={0}>
                 <Grid container alignItems='center'>
                   <Grid item xs={12} sm={3} md={4}>
