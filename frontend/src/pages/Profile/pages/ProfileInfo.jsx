@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import {Avatar, Button, Box, Grid,Stack, Paper,Typography} from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import Profile from '../Profile';
@@ -6,7 +7,7 @@ import Profile from '../Profile';
 export default function ProfileInfo() {
   return (
     <Profile>
-        <Box>
+        <Box sx={{my:2}}>
           <Grid container justifyContent='space-between'>
             <Grid item md={10} sm={9} xs={12}>
               <Stack direction='row' alignItems='center' gap={1}>
@@ -15,7 +16,11 @@ export default function ProfileInfo() {
               </Stack>
             </Grid>
             <Grid md={2} sm={3} xs={6} sx={{margin:'0 auto'}}>
-                <Button variant='outlined' fullWidth sx={{bgcolor:'primary.50',textTransform:'capitalize', fontWeight:'bold'}}>Edit Profile</Button>
+                <Link className='link' to='/account/profile/profile-edit'>
+                  <Button variant='outlined' fullWidth sx={{bgcolor:'primary.50',textTransform:'capitalize', fontWeight:'bold'}}>
+                    Edit Profile
+                  </Button>
+                </Link> 
             </Grid>
           </Grid>
 

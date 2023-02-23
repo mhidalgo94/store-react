@@ -1,32 +1,36 @@
 import {Link} from 'react-router-dom';
-import {Box,Button ,Grid,Stack, Typography, Paper} from '@mui/material';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Profile from '../Profile';
+import {Button,Box, Grid, Typography, Stack, Paper, } from "@mui/material";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import FormEditProfile from '../../../components/Form/formProfile/FormEditProfile';
+import Profile from "../Profile";
 
 
-export default function Addresses() {
+export default function EditProfile() {
+
   return (
     <Profile>
         <Box sx={{my:2}}>
             <Grid sx={{my:2}} container justifyContent='space-between'>
                 <Grid item md={10} sm={9} xs={12}>
                 <Stack direction='row' alignItems='center' gap={1}>
-                    <LocationOnIcon sx={{fontSize:'28px'}} color="primary"/>
-                    <Typography variant="h4">Address</Typography>
+                    <ManageAccountsIcon sx={{fontSize:'28px'}} color="primary"/>
+                    <Typography variant="h4">Edit Profile</Typography>
                 </Stack>
                 </Grid>
                 <Grid md={2} sm={3} xs={6} sx={{margin:'0 auto'}}>
                     <Link className='link' to='/account/profile/profile-info'>
                     <Button variant='outlined' fullWidth sx={{bgcolor:'primary.50',textTransform:'capitalize', fontWeight:'bold'}}>
-                        Add New Address
+                        Back To Profile
                     </Button>
                     </Link> 
                 </Grid>
             </Grid>
 
             <Paper sx={{p:3, my:4}}>
+                <FormEditProfile />
             </Paper>
         </Box>
+
     </Profile>
   )
 }

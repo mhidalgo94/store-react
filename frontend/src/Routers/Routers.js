@@ -6,7 +6,16 @@ import Products from "../pages/Products/Products";
 import Product from '../pages/Product/Product';
 
 import Profile from "../pages/Profile/Profile";
-import { Addresses,Orders, Order,ProfileInfo,PayMethods, WishList } from "../pages/Profile/pages/index";
+import { 
+    Addresses,
+    Orders, 
+    Order,
+    ProfileInfo,
+    PayMethods,
+    WishList,
+    EditProfile
+
+} from "../pages/Profile/pages/index";
 
 
 const Routers = createBrowserRouter([
@@ -30,6 +39,7 @@ const Routers = createBrowserRouter([
             { path:'profile/order/:id', element: <Order /> },
             { path:'profile/wishlist', element: <WishList /> },
             { path:'profile/profile-info', element: <ProfileInfo /> },
+            { path:'profile/profile-edit', element: <EditProfile /> },
             { path:'profile/addresses', element: <Addresses /> },
             { path:'profile/pay-methods', element: <PayMethods /> },
         ]

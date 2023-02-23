@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Box,IconButton, Typography, Stack, Container,Grid, Paper, Chip } from "@mui/material";
+import { Box,IconButton, Typography, Stack,Grid, Paper, Chip } from "@mui/material";
 import Profile from "../Profile";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -16,7 +16,7 @@ export default function PageOrders() {
 
   return (
     <Profile>
-        <Container sx={{my:2}}>
+        <Box sx={{my:2}}>
             <Stack direction='row' alignItems='center' gap={1}>
                 <ShoppingBagIcon sx={{fontSize:'28px'}} color="primary"/>
                 <Typography variant="h4">My Orders</Typography>
@@ -72,7 +72,7 @@ export default function PageOrders() {
               
 
             </Box>
-        </Container>
+        </Box>
     </Profile>
   )
 }
