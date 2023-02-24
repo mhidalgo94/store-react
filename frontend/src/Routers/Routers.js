@@ -7,13 +7,15 @@ import Product from '../pages/Product/Product';
 
 import Profile from "../pages/Profile/Profile";
 import { 
-    Addresses,
     Orders, 
     Order,
     ProfileInfo,
-    PayMethods,
+    EditProfile,
+    Addresses,
+    NewAddress,
+    EditAddress,
     WishList,
-    EditProfile
+    PayMethods,
 
 } from "../pages/Profile/pages/index";
 
@@ -41,6 +43,8 @@ const Routers = createBrowserRouter([
             { path:'profile/profile-info', element: <ProfileInfo /> },
             { path:'profile/profile-edit', element: <EditProfile /> },
             { path:'profile/addresses', element: <Addresses /> },
+            { path:'profile/address-edit', element: <EditAddress /> },
+            { path:'profile/address-new', element: <NewAddress /> },
             { path:'profile/pay-methods', element: <PayMethods /> },
         ]
     }

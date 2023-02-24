@@ -15,7 +15,7 @@ export default function ProfileInfo() {
                   <Typography variant="h4">Profile Info </Typography>
               </Stack>
             </Grid>
-            <Grid md={2} sm={3} xs={6} sx={{margin:'0 auto'}}>
+            <Grid item md={2} sm={3} xs={6} sx={{margin:'0 auto'}}>
                 <Link className='link' to='/account/profile/profile-edit'>
                   <Button variant='outlined' fullWidth sx={{bgcolor:'primary.50',textTransform:'capitalize', fontWeight:'bold'}}>
                     Edit Profile

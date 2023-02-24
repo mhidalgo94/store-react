@@ -8,19 +8,19 @@ export default function FormEditProfile() {
                     <Input variant='outlined' type='file'/>
                 </Stack>
                     <Grid container spacing={2}> 
-                        <Grid item md={6} sx={6} xs={12} >
+                        <Grid item md={6} sm={6} xs={12} >
                             <TextField fullWidth label='Name' type='text' required size='small' />
                         </Grid>
-                        <Grid item md={6} sx={6} xs={12} >
+                        <Grid item md={6} sm={6} xs={12} >
                             <TextField fullWidth label='Last Name' type='text' required size='small' />
                         </Grid>
-                        <Grid item md={6} sx={6} xs={12} >
+                        <Grid item md={6} sm={6} xs={12} >
                             <TextField fullWidth label='Email' type='email' required size='small' />
                         </Grid>
-                        <Grid item md={6} sx={6} xs={12} >
+                        <Grid item md={6} sm={6} xs={12} >
                             <TextField fullWidth label='Phone' type='tel' required size='small' />
                         </Grid>
-                        <Grid item md={6} sx={6} xs={12} >
+                        <Grid item md={6} sm={6} xs={12} >
                             <TextField fullWidth label='Main Address' type='text' required size='small' />
                         </Grid>
                     </Grid>
