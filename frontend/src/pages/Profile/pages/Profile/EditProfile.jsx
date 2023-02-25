@@ -1,14 +1,14 @@
 import {Link} from 'react-router-dom';
 import {Button,Box, Grid, Typography, Stack, Paper, } from "@mui/material";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import FormEditProfile from '../../../components/Form/formProfile/FormEditProfile';
-import Profile from "../Profile";
+import FormEditProfile from '../../../../components/Form/FormProfile/FormEditProfile';
+import ProfileBase from '../../ProfileBase';
 
 
 export default function EditProfile() {
 
   return (
-    <Profile>
+    <ProfileBase>
         <Box sx={{my:2}}>
             <Grid container sx={{my:2}} justifyContent='space-between'>
                 <Grid item md={10} sm={9} xs={12}>
@@ -31,6 +31,6 @@ export default function EditProfile() {
             </Paper>
         </Box>
 
-    </Profile>
+    </ProfileBase>
   )
 }

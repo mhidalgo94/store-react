@@ -1,13 +1,13 @@
 import {Box, Typography} from '@mui/material';
-import Profile from '../Profile';
+import ProfileBase from '../../ProfileBase';
 
 
 export default function WishList() {
   return (
-    <Profile>
+    <ProfileBase>
         <Box>
             <Typography variant='h1'>WishList</Typography>
         </Box>
-    </Profile>
+    </ProfileBase>
   )
 }

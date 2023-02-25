@@ -1,13 +1,16 @@
 import {useParams} from 'react-router-dom';
 import { Box, Container,Grid, Typography, Stack, Paper, Button, Divider} from "@mui/material";
-import Profile from "../Profile";
+import ProfileBase from '../../ProfileBase';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+
+
+
 export default function PageOrder() {
 
     const {id} = useParams();
   return (
-    <Profile>
+    <ProfileBase>
         <Container sx={{my:2}}>
             <Stack direction='row' alignItems='center' gap={1}>
                 <ShoppingBagIcon sx={{fontSize:'28px'}} color="primary"/>
@@ -98,6 +101,6 @@ export default function PageOrder() {
 
 
         </Container>
-    </Profile>
+    </ProfileBase>
   )
 }

@@ -2,7 +2,7 @@ import { Container } from "@mui/material"
 import HeadProfile from "./HeadProfile"
 
 
-export default function Profile({children}) {
+export default function ProfileBase({children}) {
   return (
     <>
         <HeadProfile />

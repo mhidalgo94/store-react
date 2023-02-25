@@ -1,12 +1,12 @@
 import {Link} from 'react-router-dom';
 import {Avatar, Button, Box, Grid,Stack, Paper,Typography} from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
-import Profile from '../Profile';
+import ProfileBase from '../../ProfileBase';
 
 
 export default function ProfileInfo() {
   return (
-    <Profile>
+    <ProfileBase>
         <Box sx={{my:2}}>
           <Grid container justifyContent='space-between'>
             <Grid item md={10} sm={9} xs={12}>
@@ -73,6 +73,6 @@ export default function ProfileInfo() {
             </Grid>
           </Box>
         </Box>
-    </Profile>
+    </ProfileBase>
   )
 }

@@ -1,12 +1,15 @@
-import {Link} from 'react-router-dom';
+import {Link,useParams} from 'react-router-dom';
 import {Box, Button,Grid, Paper, Typography, Stack} from '@mui/material';
-import Profile from '../Profile';
+import ProfileBase from '../../ProfileBase';
 import EditLocationIcon from '@mui/icons-material/EditLocation';
+import FormAddress from '../../../../components/Form/FormAddress/FormAddress';
 
 
 export default function EditAddress() {
+
+    const {id} = useParams()
   return (
-    <Profile>
+    <ProfileBase>
         <Box sx={{my:2}}>
             <Grid sx={{my:2}} container justifyContent='space-between'>
                 <Grid item md={10} sm={9} xs={12}>
@@ -24,9 +27,9 @@ export default function EditAddress() {
                 </Grid>
             </Grid>
             <Paper  sx={{p:'9px',my:2, borderRadius: '10px'}}>
-                
+                <FormAddress edit={true} data={{name:id}}/>
             </Paper>
         </Box>
-    </Profile>
+    </ProfileBase>
   )
 }

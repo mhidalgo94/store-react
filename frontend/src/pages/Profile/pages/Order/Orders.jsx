@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Box,IconButton, Typography, Stack,Grid, Paper, Chip } from "@mui/material";
-import Profile from "../Profile";
+import ProfileBase from '../../ProfileBase';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import useMediaQuery from '@mui/material/useMediaQuery'
-import storeTheme from '../../../themes/storeTheme';
+import storeTheme from '../../../../themes/storeTheme';
 
 
 export default function PageOrders() {
@@ -15,7 +15,7 @@ export default function PageOrders() {
   const data = [1,2,3,4,5]
 
   return (
-    <Profile>
+    <ProfileBase>
         <Box sx={{my:2}}>
             <Stack direction='row' alignItems='center' gap={1}>
                 <ShoppingBagIcon sx={{fontSize:'28px'}} color="primary"/>
@@ -73,6 +73,6 @@ export default function PageOrders() {
 
             </Box>
         </Box>
-    </Profile>
+    </ProfileBase>
   )
 }
