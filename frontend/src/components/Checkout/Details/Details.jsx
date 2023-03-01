@@ -1,0 +1,84 @@
+
+import {Box, Typography, Stack, Divider} from '@mui/material';
+import { useCartState } from '../../../store/cartState';
+
+export default function DetailsCheckout({valuesDelivery}) {
+    const {products, getSubtotal,getTax} = useCartState();
+
+    const subtotal = getSubtotal();
+    const tax = getTax();
+    const total = subtotal + tax;
+
+  return (
+    <Box p={2} my={2}>
+        <Typography variant='subtitle2' fontWeight='bold'>Your Order</Typography>
+        <Box my={1}>
+            {products.map((item, index)=>{
+                return (
+                    <Box key={index} py={0.5}>
+                        <Stack direction='row' justifyContent='space-between'>
+                            <Stack direction='row' gap={1}>
+                                <Typography variant='body2' fontWeight='bold'>{item.quantity}</Typography>
+                                <Typography variant='body2'>x</Typography>
+                                <Typography variant='body2'>{item.title}</Typography>
+                            </Stack>
+                            <Box>
+                                <Typography variant='body2' fontWeight='400'>$ {item.priceXquantity}</Typography>
+                            </Box>
+                        </Stack>
+                    </Box>
+                    
+                )
+            })}
+        </Box>
+        <Divider sx={{my:2  }}/>
+        <Box py={1}>
+            <Stack direction='row' justifyContent='space-between' my={0.5}>
+                <Typography variant='body2' >Subtotal:</Typography>
+                <Typography variant='body2' >${subtotal}</Typography>
+            </Stack>
+            <Stack direction='row' justifyContent='space-between'>
+                <Typography variant='body2'>Tax:</Typography>
+                <Typography variant='body2'>${tax}</Typography>
+            </Stack>
+            <Stack direction='row' justifyContent='space-between' sx={{mt:2}}>
+                <Typography variant='body2' fontWeight='bold'>Total:</Typography>
+                <Typography variant='body2' fontWeight='bold'>${total}</Typography>
+            </Stack>
+            
+        </Box>
+        <Divider sx={{my:4}}/>
+       
+        <Box>
+            {valuesDelivery.name && 
+                (
+                <>
+                    <Typography variant='body2' fontWeight='700' >Name:</Typography>
+                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.name}</Typography>
+                </>
+            )}
+            {valuesDelivery.addressLine && 
+                (
+                <>
+                    <Typography variant='body2' fontWeight='700' >Address:</Typography>
+                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.addressLine}</Typography>
+                </>
+            )}
+            {valuesDelivery.name && 
+                (
+                <>
+                    <Typography variant='body2' fontWeight='700' >Zip Code:</Typography>
+                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.zip_code}</Typography>
+                </>
+            )}
+            {valuesDelivery.name && 
+                (
+                <>
+                    <Typography variant='body2' fontWeight='700' >Phone:</Typography>
+                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.phone}</Typography>
+                </>
+            )}
+        </Box>
+    </Box>
+  )
+}

@@ -28,8 +28,6 @@ export default function Comment() {
                     <AccountCircleIcon />
                 </Avatar>
             }
-
-
             <Stack>
                     <Typography variant='h6'>Jhon Valerio</Typography>
                 <Stack direction='row' spacing={1} alignItems='center' gap={1}>

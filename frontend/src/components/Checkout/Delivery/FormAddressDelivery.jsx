@@ -1,16 +1,10 @@
-import { useState,useEffect } from 'react';
-import {Box, Button, Grid, TextField} from '@mui/material';
+import {Box, Grid, TextField} from '@mui/material';
 
-export default function FormAddress({edit=false,data={}}) {
-    console.log(data)
-    const [values, setValues ] = useState(data);
+export default function FormAddressDelivery({values,setValues}) {
 
-    useEffect(()=>{
-        console.log(values);
-    },[values])
-
+    
   return (
-    <Box component='form'>
+    <Box component='form' sx={{mt:2}}>
         <Grid container spacing={2}>
             <Grid item md={6} sm={6} xs={12}>
                 <TextField 
@@ -61,9 +55,6 @@ export default function FormAddress({edit=false,data={}}) {
                     />
             </Grid>
         </Grid>
-        <Button sx={{mt:2,textTransform:'capitalize',fontWeight:'600'}} type='submit' variant='contained'>
-            {edit ? 'Save Changes' : 'Submit'}
-        </Button>
     </Box>
   )
 }

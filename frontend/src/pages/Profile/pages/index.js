@@ -11,4 +11,16 @@ import EditPayMethod from './PayMethod/EditPayMethod';
 import NewPayMethod from "./PayMethod/NewPayMethod";
 
 
-export { Addresses, EditAddress, NewAddress, EditProfile,Orders, Order, WishList, ProfileInfo, PayMethods, EditPayMethod,NewPayMethod };
+export { 
+    Addresses, 
+    EditAddress,
+    NewAddress,
+    EditProfile,
+    Orders,
+    Order,
+    WishList,
+    ProfileInfo,
+    PayMethods,
+    EditPayMethod,
+    NewPayMethod 
+};

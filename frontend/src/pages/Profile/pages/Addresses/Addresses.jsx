@@ -18,7 +18,7 @@ export default function Addresses() {
                     </Stack>
                 </Grid>
                 <Grid item md={2} sm={3} xs={6} sx={{margin:'0 auto'}}>
-                    <Link className='link' to='/account/profile/pay-methods-new'>
+                    <Link className='link' to='/account/profile/address-new'>
                     <Button variant='outlined' fullWidth sx={{bgcolor:'primary.50',textTransform:'capitalize', fontWeight:'bold'}}>
                         Add New Address
                     </Button>

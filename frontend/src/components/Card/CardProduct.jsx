@@ -12,13 +12,14 @@ import {
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Stack } from "@mui/material";
 
 import { useCartState } from '../../store/cartState';
 
 
 
-export default function CardProduct({ item,id }) {
+export default function CardProduct({ item,id, btnFavorite=false }) {
 
   const {setNewProduct, addProduct}= useCartState()
 
@@ -74,15 +75,24 @@ export default function CardProduct({ item,id }) {
           </Stack>
           <Stack direction="row">
             <Tooltip title="Add to Cart" arrow >
-              <IconButton color="primary" size="small" onClick={addCart}>
+              <IconButton color="lightBlue" size="small" onClick={addCart}>
                 <AddShoppingCartIcon  />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Add to Favorite" arrow >
-              <IconButton color="primary" size="small">
-                <FavoriteBorderIcon />
-              </IconButton>
-            </Tooltip>
+            {btnFavorite ? ( 
+              <Tooltip title="Add to Favorite" arrow >
+                <IconButton color="primary" size="small">
+                  <FavoriteBorderIcon />
+                </IconButton>
+              </Tooltip>
+            ) :
+            (
+              <Tooltip title="Remove" arrow >
+                <IconButton color="primary" size="small">
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            )}
           </Stack>
         </CardActions>
       </Card>

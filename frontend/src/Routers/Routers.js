@@ -4,6 +4,7 @@ import LayoutStore from "../components/Base/LayoutStore";
 import Home from "../pages/Home/Home";
 import Products from "../pages/Products/Products";
 import Product from '../pages/Product/Product';
+import PageCheckoutAlternative1 from "../pages/Checkout/CheckoutAlternative_1";
 
 import ProfileBase from "../pages/Profile/ProfileBase";
 import { 
@@ -30,13 +31,13 @@ const Routers = createBrowserRouter([
             { path:'', element: <Home/>,},
             { path:'/shop/products', element: <Products /> },
             { path:'/shop/product/:id', element: <Product /> },
+            { path:'/checkout-alternative', element: <PageCheckoutAlternative1 /> },
 
         ]
     },
     {
         path:'/account',
-        element: <LayoutStore>
-                </LayoutStore>,
+        element: <LayoutStore />,
         children: [
             { path:'profile', element: <ProfileBase /> },
             { path:'profile/orders', element: <Orders /> },

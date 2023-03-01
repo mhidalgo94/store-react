@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button,Container,Typography,Tooltip,Stack, SwipeableDrawer, Divider, Grid, IconButton,Box} from "@mui/material";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -38,8 +39,16 @@ export default function CartMenu({openCart, setOpenCart}) {
           </>
           <Container sx={{backgroundColor:'white',p:1,borderTop:'1px solid #f1f1f1', position:'sticky', bottom:0,right:0,height:'100px',width:'100%'}}>
             <Box display='flex' flexDirection='column' gap={1}>
-              <Button variant='contained' disabled={!Boolean(data.length)}>Checkout Now</Button>
-              <Button variant='outlined'>View Cart</Button>
+              <Box width='100%'>
+                <Link className='link' to='/checkout-alternative'>
+                  <Button fullWidth variant='contained' disabled={!Boolean(data.length)}>Checkout Now</Button>
+                </Link>
+              </Box>
+              <Box width='100%'>
+                <Link className='link' to='#'>
+                  <Button fullWidth variant='outlined'>View Cart</Button>
+                </Link>
+              </Box>
             </Box>
           </Container>
       </SwipeableDrawer>

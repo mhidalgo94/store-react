@@ -52,17 +52,18 @@ export default function Product() {
                 <Grid container justifyContent='center'>
                     <img src={data.image[imageSelected]} width="350" height='350' alt={`${data.title}${data.id}`} />
                 </Grid>
-                <Grid container>
+                <Grid item container>
                     <MiniSlider values={data} imageSelected={imageSelected}  setImageSelected={setImageSelected}/>
                 </Grid>
             </Grid>
+
             <Grid item xs={12} md={6} lg={6}>
                 <Typography variant='h3' sx={{my:2}}>{data.title}</Typography>
                 <Typography variant='subtitle1' fontWeight='bold'>Description:</Typography>
                 <Typography variant='body2' textAlign='justify' sx={{mx:1,maxWidth: '380px'}}>{data.desc}</Typography>
                 
                 <Typography variant='subtitle1' fontWeight='bold' sx={{mt:3}}>Rated:</Typography>
-                <Stack direction='row' spacing={1}s>
+                <Stack direction='row' spacing={1}>
                     <Rating name='rating' value={rating} onChange={(event,newValue)=>setRating(newValue)} /> 
                     <Typography variant="subtitle2">(20)</Typography>
                 </Stack>
@@ -74,17 +75,27 @@ export default function Product() {
                     <Typography variant="body1" sx={{marginBottom:'20px'}}>Stock Available</Typography>
 
                 <Stack direction="row" spacing={1} sx={{my:1}} alignItems='center'>
-                    <IconButton sx={{border:'1px solid red', borderRadius:'8px'}} 
-                    onClick={()=>setQuantityProduct(value=> value===0 ? 0 : value-1)}
-                    // onDoubleClick={()=>setQuantityProduct(value=> value === 0 ? 0 : value < 10 ? 0 : value-10)}
+                    {quantityProduct === 0 ? (
+                        <IconButton sx={{border:'1px solid ', borderRadius:'8px',cursor:'no-drop'}}
+                        onClick={()=>setQuantityProduct(value=> value===0 ? 0 : value-1)}
+                        // onDoubleClick={()=>setQuantityProduct(value=> value === 0 ? 0 : value < 10 ? 0 : value-10)}
+                    >
+                        <RemoveIcon color='grey' />
+                    </IconButton>
+                    ):(
+
+                    <IconButton sx={{border:'1px solid red', borderRadius:'8px'}}
+                        onClick={()=>setQuantityProduct(value=> value===0 ? 0 : value-1)}
+                        // onDoubleClick={()=>setQuantityProduct(value=> value === 0 ? 0 : value < 10 ? 0 : value-10)}
                     >
                         <RemoveIcon color='primary' />
                     </IconButton>
+                    )}
                     <Typography variant='h6'>{quantityProduct}</Typography>
                     <IconButton sx={{border:'1px solid red', borderRadius:'8px',p:1}} 
                         onClick={()=>setQuantityProduct(value=>value+1)} 
-                        onDoubleClick={()=>setQuantityProduct(value=>value+10)}
-                        >
+                        // onDoubleClick={()=>setQuantityProduct(value=>value+10)}
+                    >
                         <AddIcon color='primary'/>
                     </IconButton>
                     <Button sx={{py:1,px:2,fontWeight:600}} disabled={!Boolean(quantityProduct)} onClick={addCart} variant="contained" color="lightBlue" startIcon={<AddShoppingCartIcon />}>Add To Cart</Button>

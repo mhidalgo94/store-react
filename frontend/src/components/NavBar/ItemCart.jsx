@@ -42,7 +42,7 @@ export default function ItemCart({values: item})  {
             <Box >
                 <Typography variant="subtitle1" fontWeight='bold'>{item.title.substring(0,10)}...</Typography>
                 <Typography variant="caption text" fontSize='12px' color='grey.A700'>${item.price} x {item.quantity}</Typography>
-                <Typography variant="h6" color='primary' fontWeight='bold'>${parseFloat(item.price) * parseFloat(item.quantity)}</Typography>
+                <Typography variant="h6" color='primary' fontWeight='bold'>${item.priceXquantity}</Typography>
             </Box>
             <Box>
             <IconButton variant='outlined'   size='small'>

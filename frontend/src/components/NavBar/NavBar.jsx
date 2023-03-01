@@ -56,9 +56,11 @@ export default function NavBar() {
 
         <div className="icons">
           <div className="item">
-            <Tooltip title="Wishlist" arrow>
-              <FavoriteBorderIcon sx={styleNavBar.styleIcons} />
-            </Tooltip>
+            <Link className='link' to='/account/profile/wishlist'>
+              <Tooltip title="Wishlist" arrow>
+                <FavoriteBorderIcon sx={styleNavBar.styleIcons} />
+              </Tooltip>
+            </Link>
           </div>
           <div className="item">
             <Tooltip title="Account" arrow>
