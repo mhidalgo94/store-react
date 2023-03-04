@@ -1,11 +1,11 @@
+import {Box, Paper, Typography,Stack, Divider, Button} from '@mui/material'
+import { useCartState } from '../../store/cartState'
 
-import {Box, Typography, Stack, Divider} from '@mui/material';
-import { useCartState } from '../../../store/cartState';
 
-export default function DetailsCheckout({valuesDelivery}) {
-    const check = Object.keys(valuesDelivery)
+export default function DetailsShop() {
 
-    const {products, getSubtotal,getTax} = useCartState();
+    const {products,getSubtotal,getTax} = useCartState()
+
     const items = products.reduce((sum,value)=> sum + value.quantity, 0)
 
     const subtotal = getSubtotal();
@@ -13,9 +13,10 @@ export default function DetailsCheckout({valuesDelivery}) {
     const total = subtotal + tax;
 
   return (
-    <Box p={2} my={2}>
-        <Typography variant='subtitle2' fontWeight='bold'>Your Order</Typography>
-        <Box my={1}>
+    <Box>
+        <Paper sx={{m:2,p:2}} elevation={1}>
+            
+            <Box my={1}>
             {products.map((item, index)=>{
                 return (
                     <Box key={index} py={0.5}>
@@ -34,7 +35,7 @@ export default function DetailsCheckout({valuesDelivery}) {
                 )
             })}
         </Box>
-        {Boolean(products.length) && <Divider sx={{my:2}}/>}
+        <Divider sx={{my:2}}/>
         <Box py={1}>
             <Stack direction='row' justifyContent='space-between' my={0.5}>
                 <Typography variant='body2' >Items:</Typography>
@@ -54,39 +55,8 @@ export default function DetailsCheckout({valuesDelivery}) {
             </Stack>
             
         </Box>
-       
-        {Boolean(check.length) && <Divider sx={{my:4}}/>}    
-
-        <Box>
-            {valuesDelivery.name && 
-                (
-                    <>
-                    <Typography variant='body2' fontWeight='700' >Name:</Typography>
-                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.name}</Typography>
-                </>
-            )}
-            {valuesDelivery.addressLine && 
-                (
-                <>
-                    <Typography variant='body2' fontWeight='700' >Address:</Typography>
-                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.addressLine}</Typography>
-                </>
-            )}
-            {valuesDelivery.zip_code && 
-                (
-                <>
-                    <Typography variant='body2' fontWeight='700' >Zip Code:</Typography>
-                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.zip_code}</Typography>
-                </>
-            )}
-            {valuesDelivery.phone && 
-                (
-                <>
-                    <Typography variant='body2' fontWeight='700' >Phone:</Typography>
-                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.phone}</Typography>
-                </>
-            )}
-        </Box>
+        <Button sx={{mt:2,textTransform:'capitalize'}} fullWidth variant='contained' color='primary'>Checkout Now</Button>
+        </Paper>
     </Box>
   )
 }

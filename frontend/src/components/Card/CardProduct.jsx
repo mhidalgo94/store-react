@@ -17,17 +17,25 @@ import { Stack } from "@mui/material";
 
 import { useCartState } from '../../store/cartState';
 
-
+import { useSnackBar } from '../../store/snackbarState';
 
 export default function CardProduct({ item,id, btnFavorite=false }) {
 
   const {setNewProduct, addProduct}= useCartState()
+  const {setOpen} = useSnackBar()
 
   const addCart = ()=>{
     setNewProduct(item, 1);
-    addProduct();
+    const e = addProduct();
+    if(e){
+      setOpen('Added to cart','success')
+    }else{
+      setOpen('Server Error!','warning')
+    }
+  }
 
-
+  const addWishList = ()=>{
+    setOpen('Added to wishlist','success')
   }
 
   return (
@@ -81,7 +89,7 @@ export default function CardProduct({ item,id, btnFavorite=false }) {
             </Tooltip>
             {btnFavorite ? ( 
               <Tooltip title="Add to Favorite" arrow >
-                <IconButton color="primary" size="small">
+                <IconButton color="primary" size="small" onClick={addWishList}>
                   <FavoriteBorderIcon />
                 </IconButton>
               </Tooltip>

@@ -21,10 +21,15 @@ export const useCartState = create((set,get)=>({
             newProduct:{...item,quantity,priceXquantity: (item.price * quantity)},
         }))
     },
-    addProduct(){
-        set( state =>({
-            products : addCart(state.products, state.newProduct),
-        }));
+    addProduct:  ()=>{
+            try{
+                set( state =>({
+                products : addCart(state.products, state.newProduct),
+            }));
+                return true
+            }catch(e){
+                return e.message 
+            }
     },
     updateMountProductCart(idItem,quantity){
         set(state =>{
@@ -32,7 +37,7 @@ export const useCartState = create((set,get)=>({
             item.quantity = quantity;
             item.priceXquantity = item.price * item.quantity
 
-        return [...state.products] 
+        return [...state.products]
         })
     },
     removeForIdProducts(idItem){
@@ -56,3 +61,4 @@ export const useCartState = create((set,get)=>({
         return tax;
     },
 }))
+

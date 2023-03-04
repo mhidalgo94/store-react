@@ -27,7 +27,7 @@ export default function CartItems({item,update, remove}) {
                   <Typography variant='subtitle1'>{item.title}</Typography>
                   <Tooltip title="Remove" arrow>
                     <IconButton onClick={()=>remove(item.id)} >
-                      <CloseIcon />
+                      <CloseIcon  sx={{fontSize:'20px'}} />
                     </IconButton>
                   </Tooltip>
                 </Stack>

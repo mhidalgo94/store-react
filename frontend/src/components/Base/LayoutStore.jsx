@@ -5,6 +5,7 @@ import { CssBaseline } from '@mui/material'
 import storeTheme from "../../themes/storeTheme.js";
 import NavBar from "../NavBar/NavBar";
 import Footer from '../Footer/Footer';
+import SnackBarAlert from "../SnackBar/SnackBar.jsx";
 
 
 const LayoutStore = ()=>{
@@ -17,6 +18,7 @@ const LayoutStore = ()=>{
                     <Outlet />
                 </div>
                 <Footer />
+                <SnackBarAlert />
             </ThemeProvider>
         </div>
     )

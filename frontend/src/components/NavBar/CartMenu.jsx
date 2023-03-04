@@ -45,7 +45,7 @@ export default function CartMenu({openCart, setOpenCart}) {
                 </Link>
               </Box>
               <Box width='100%'>
-                <Link className='link' to='#'>
+                <Link className='link' to='/cart-shop'>
                   <Button fullWidth variant='outlined'>View Cart</Button>
                 </Link>
               </Box>

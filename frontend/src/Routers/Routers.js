@@ -5,8 +5,10 @@ import Home from "../pages/Home/Home";
 import Products from "../pages/Products/Products";
 import Product from '../pages/Product/Product';
 import PageCheckoutAlternative1 from "../pages/Checkout/CheckoutAlternative_1";
+import CartShopPage from "../pages/CartShop/CartShopPage";
 
 import ProfileBase from "../pages/Profile/ProfileBase";
+
 import { 
     Orders, 
     Order,
@@ -32,6 +34,7 @@ const Routers = createBrowserRouter([
             { path:'/shop/products', element: <Products /> },
             { path:'/shop/product/:id', element: <Product /> },
             { path:'/checkout-alternative', element: <PageCheckoutAlternative1 /> },
+            { path:'/cart-shop', element: <CartShopPage /> },
 
         ]
     },

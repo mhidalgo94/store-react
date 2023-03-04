@@ -8,16 +8,25 @@ import MiniSlider from "../../components/MiniSlider/MiniSlider";
 import TabsProduct from "../../components/TabsProduct/TabsProduct";
 import { Stack } from "@mui/system";
 
+
+import { useSnackBar } from "../../store/snackbarState";
 import {useCartState} from './../../store/cartState.js'
 
 
 export default function Product() {
-
+    // Img for mini slider pre-view
     const [imageSelected, setImageSelected] = useState(0);
+
+    // rating product
     const [rating, setRating] = useState(2);
+    // quantity product
     const [quantityProduct,setQuantityProduct] = useState(0)
+    // id product for fetch and search in products cart shop
     const {id} = useParams();
+    // for include product in cart shop
     const {setNewProduct, addProduct,} = useCartState()
+    // Notifications
+    const {setOpen} = useSnackBar()
 
     // eslint-disable-next-line
     const data = {
@@ -42,6 +51,7 @@ export default function Product() {
 
     const addCart = () =>{
         addProduct();
+        setOpen('Added to cart','info','standard')
     }
 
 
