@@ -8,7 +8,7 @@ import PageCheckoutAlternative1 from "../pages/Checkout/CheckoutAlternative_1";
 import CartShopPage from "../pages/CartShop/CartShopPage";
 
 import ProfileBase from "../pages/Profile/ProfileBase";
-
+import LoginPage from "../pages/Login/LoginPage";
 import { 
     Orders, 
     Order,
@@ -23,24 +23,27 @@ import {
     EditPayMethod
 
 } from "../pages/Profile/pages/index";
+import VerifyCodePage from "../pages/Login/VerifyCode/VerifyCodePage";
 
 
 const Routers = createBrowserRouter([
     {
         path:'/',
-        element: <LayoutStore />,
+        element: <LayoutStore authRequired={false} />,
         children: [
             { path:'', element: <Home/>,},
             { path:'/shop/products', element: <Products /> },
             { path:'/shop/product/:id', element: <Product /> },
             { path:'/checkout-alternative', element: <PageCheckoutAlternative1 /> },
             { path:'/cart-shop', element: <CartShopPage /> },
+            { path:'/login', element: <LoginPage /> },
+            { path:'/verify-code', element: <VerifyCodePage /> },
 
         ]
     },
     {
         path:'/account',
-        element: <LayoutStore />,
+        element: <LayoutStore authRequired={true} toRedirect='/login' />,
         children: [
             { path:'profile', element: <ProfileBase /> },
             { path:'profile/orders', element: <Orders /> },
@@ -52,8 +55,9 @@ const Routers = createBrowserRouter([
             { path:'profile/address-new', element: <NewAddress /> },
             { path:'profile/address-edit/:id', element: <EditAddress /> },
             { path:'profile/pay-methods', element: <PayMethods /> },
-            { path:'profile/pay-methods-new', element: <NewPayMethod /> },
-            { path:'profile/pay-methods-edit/:id', element: <EditPayMethod /> },
+            { path:'/pay-methods-new', element: <NewPayMethod /> },
+            { path:'/pay-methods-edit/:id', element: <EditPayMethod /> },
+
         ]
     }
 

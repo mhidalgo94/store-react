@@ -2,12 +2,13 @@ import { Menu, MenuItem, ListItem, Typography } from "@mui/material";
 import {Link} from 'react-router-dom';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from '@mui/icons-material/Login';
 import SettingsIcon from "@mui/icons-material/Settings";
 import styleNavBar from './styleNavbar';
 
+import { userState } from "../../store/userState";
 
 export default function MenuAccount({ anchorEl,open,handleClose}) {
-
 
   const styleLinkMenu = {
     p:0,
@@ -16,6 +17,12 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
     "&:hover": {
       color: "rgb(210, 63, 87)",
     }
+  }
+
+  const {isAuth,setLogout,setLogin} = userState();
+
+  const handleLogout = ()=>{
+    setLogout();
   }
 
   return (
@@ -47,10 +54,17 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
         </ListItem>
       </MenuItem>
       <MenuItem sx={styleLinkMenu}>
-        <ListItem sx={{padding:0,margin:'0 10px'}}>
-          <LogoutIcon/>
-          <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1} >Logout</Typography>
-        </ListItem>
+        {isAuth ?
+          <ListItem sx={{padding:0,margin:'0 10px'}} onClick={handleLogout}>
+            <LogoutIcon/>
+            <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1}  >Logout</Typography>
+          </ListItem>  
+          :
+          <ListItem sx={{padding:0,margin:'0 10px'}} onClick={()=>setLogin()}>
+            <LoginIcon/>
+            <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1} >Login</Typography>
+          </ListItem>
+      }
       </MenuItem>
     </Menu>
   );

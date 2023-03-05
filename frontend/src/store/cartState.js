@@ -1,4 +1,5 @@
 import { create } from 'zustand'; 
+import { persist} from 'zustand/middleware'
 
 const  addCart = (products, newProduct)=>{
     const item = products.find(item=> item.id === newProduct.id);
@@ -11,7 +12,7 @@ const  addCart = (products, newProduct)=>{
     }
 }
 
-export const useCartState = create((set,get)=>({
+export const useCartState = create(persist((set,get)=>({
     products:[],
     newProduct:{},
     // For products
@@ -60,5 +61,9 @@ export const useCartState = create((set,get)=>({
         const tax = (parseFloat(getSubtotal()) * parseInt(7)) / 100;
         return tax;
     },
-}))
+    }),
+    {
+        name:'products-cart '
+    }
+))
 
