@@ -55,8 +55,8 @@ const Routers = createBrowserRouter([
             { path:'profile/address-new', element: <NewAddress /> },
             { path:'profile/address-edit/:id', element: <EditAddress /> },
             { path:'profile/pay-methods', element: <PayMethods /> },
-            { path:'/pay-methods-new', element: <NewPayMethod /> },
-            { path:'/pay-methods-edit/:id', element: <EditPayMethod /> },
+            { path:'pay-methods-new', element: <NewPayMethod /> },
+            { path:'pay-methods-edit/:id', element: <EditPayMethod /> },
 
         ]
     }
