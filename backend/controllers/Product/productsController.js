@@ -6,7 +6,6 @@ const Product = db.products;
 const addProduct = async (req, res)=>{
 
     const user_id = req.user.id;
-    console.log(user_id)
     
     let values = {
         name : req.body.name,
@@ -20,6 +19,7 @@ const addProduct = async (req, res)=>{
 
     try{
         const product = await Product.create(values);
+        
         res.status(200).json(product);
     }
     catch{

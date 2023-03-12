@@ -30,7 +30,8 @@ const { Sequelize,sequelize, DataTypes} = require('../../db/index.js')
         UUID: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
-            allowNull: false
+            allowNull: false,
+            unique:true
         }
 
     })

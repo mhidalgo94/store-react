@@ -3,7 +3,7 @@ const {Sequelize,DataTypes} = require('sequelize');
 
 
 const sequelize = new Sequelize(
-    dbConfig.DB,
+    dbConfig.DB_NAME,
     dbConfig.USER,
     dbConfig.PASSWORD,
     {

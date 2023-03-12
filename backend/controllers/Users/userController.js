@@ -9,6 +9,7 @@ const addUser =  async (req,res)=>{
         password : req.body.password,
         phone : req.body.phone,
         address : req.body.phone,
+        image: req.body.image
     }
     try{
         const user = await User.create(values);
@@ -46,7 +47,17 @@ const getOneUser = async (req,res)=>{
         res.status(500).json({"message":"Server Error"});
     }
 }
-
+// self-update user
+const selfUpdateUser = async (req,res)=>{
+    try{
+        let id = req.user.id
+        const user = await User.update(req.body, {where: { id:id }})
+        res.status(200).json(user);
+    }catch(err){
+        console.log('Something Wrong for update user.');
+        res.status(500).json({"message":"Server Error"});
+    }
+}
 
 const updateUser = async (req,res)=>{
     try{
@@ -78,5 +89,6 @@ module.exports ={
     getAllUsers,
     getOneUser,
     updateUser,
+    selfUpdateUser,
     removeUser
 }

@@ -23,9 +23,15 @@ app.use(express.urlencoded({extended:true}));
 const router = require('./routes/index.js');
 
 // Api Auth
-app.use('/api', router.auth)
+app.use('/api', router.auth);
+
+// Api Category
+app.use('/api/category', router.category);
+
 // Api Products
 app.use('/api/products', router.products);
+// Api Reviews
+app.use('/api/reviews', router.reviews);
 // Api User
 app.use('/api/user', router.users);
 

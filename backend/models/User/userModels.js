@@ -37,6 +37,16 @@ const User = sequelize.define('user', {
         type : DataTypes.BOOLEAN,
         allowNull:false,
         defaultValue: false,
+    },
+    image: {
+        type: DataTypes.BLOB,
+        allowNull: true,
+    },
+    UUID: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        unique:true
     }
 
     });

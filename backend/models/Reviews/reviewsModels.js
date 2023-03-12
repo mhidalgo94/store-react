@@ -10,6 +10,11 @@ const { Sequelize,sequelize, DataTypes} = require('../../db/index.js')
             allowNull: false,
             default:4,
 
+        },
+        available: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         }
     })
     
