@@ -13,14 +13,13 @@ db.category = require('./Categoria/categoriaModels.js');
 db.wishlist = require('./WishList/wishListModels.js');
 db.addresses = require('./Addresses/adressesModels.js');
 db.salesOrder = require('./Order/orderModels.js');
+db.statusOrder = require('./Order/statusOrderModels.js');
 
-db.sequelize.sync({force:true}).then(()=>{
+db.sequelize.sync({alter:true}).then(()=>{
     console.log('DB re-sync done!')
 }).catch(err=>{
     console.log("Sync" + err)
 })
-
-
 
 
 // 1  Relation Models
@@ -29,7 +28,7 @@ db.products.hasMany(db.reviews,{
     as:'review'
 })
 
-db.products.belongsTo(db.user,{
+db.products.User = db.products.belongsTo(db.user,{
     foreignKey:'user_id',
     as:'user',
 })
@@ -52,14 +51,30 @@ db.products.belongsToMany(db.user, { through: db.wishlist });
 
 // User can have multiple addresses
 db.user.hasMany(db.addresses);
-db.addresses.belongsTo(db.user);
+db.addresses.belongsTo(db.user,{
+    foreignKey:'user_id',
+    as:'user',
+});
 
 // An address can have many sales orders
 db.addresses.hasMany(db.salesOrder);
-db.salesOrder.belongsTo(db.addresses);
+db.salesOrder.belongsTo(db.addresses,{
+    foreignKey:'address_id',
+    as:'address',
+});
+
+// Match Sales Order with Status Order
+db.salesOrder.belongsTo(db.statusOrder,{
+    foreignKey:'status_order_id',
+    as:'status_order',
+});
 
 // Match Sales order with User
-db.salesOrder.belongsTo(db.user);
+db.salesOrder.belongsTo(db.user,{
+    foreignKey:'user_id',
+    as:'user',
+});
+
 db.user.hasMany(db.salesOrder);
 
 

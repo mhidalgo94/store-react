@@ -3,11 +3,14 @@ const products = require('./productRouter.js');
 const reviews = require('./reviewsRouter.js')
 const users = require('./userRouter.js');
 const auth = require('./authRouter.js');
+const address = require('./addressesRouter.js');
 
 module.exports ={
     category,
     products,
     reviews,
     users,
-    auth
+    auth,
+    address
+
 }

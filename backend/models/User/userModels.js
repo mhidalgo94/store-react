@@ -1,5 +1,11 @@
 const bcrypt = require('bcrypt');
-const { Sequelize,sequelize, DataTypes} = require('../../db/index.js')
+const { Sequelize,sequelize, DataTypes} = require('../../db/index.js');
+
+
+const Product = require('../Product/productModels.js');
+const WishList = require('../WishList/wishListModels.js');
+const SalesOrder = require('../Order/orderModels.js');
+const Addresses = require('../Addresses/adressesModels.js');
 
 
 const User = sequelize.define('user', {
@@ -50,14 +56,16 @@ const User = sequelize.define('user', {
     }
 
     });
-    User.beforeCreate((user, options)=>{
-        const salt = bcrypt.genSalt(10);
-        user.password = bcrypt.hashSync(user.password, parseInt(salt))
-    });
 
-    User.prototype.checkPassword =function (password){
-        return bcrypt.compareSync(password, this.password)
+
+User.beforeCreate((user, options)=>{
+    const salt = bcrypt.genSalt(10);
+    user.password = bcrypt.hashSync(user.password, parseInt(salt))
+});
+
+User.prototype.checkPassword = function (password){
+    return bcrypt.compareSync(password, this.password)
+              
 }
 
-
- module.exports = User
+module.exports = User

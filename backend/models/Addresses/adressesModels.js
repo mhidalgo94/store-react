@@ -1,6 +1,10 @@
 const { Sequelize,sequelize, DataTypes} = require('../../db/index.js');
 
-const Direccion = sequelize.define('direccion', {
+const User = require('../User/userModels.js');
+const SalesOrder = require('../Order/orderModels.js');
+
+
+const Addresses = sequelize.define('address', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -20,4 +24,5 @@ const Direccion = sequelize.define('direccion', {
     }
 });
 
-module.exports = Direccion
+
+module.exports = Addresses

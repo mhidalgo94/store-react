@@ -1,7 +1,7 @@
 const db = require('../../models/index.js');
 
 const Product = db.products;
-
+const User = db.user;
 
 const addProduct = async (req, res)=>{
 
@@ -30,11 +30,24 @@ const addProduct = async (req, res)=>{
 
 const getAllProducts = async (req,res)=>{
     try{
-        let products = await Product.findAll({});
+        let products = await Product.findAll({
+            attributes:{
+                exclude:['updatedAt','createdAt','categoriumId','user_id']
+            },
+        //     include: [
+        //         {
+        //             association:Product.User,
+        //             attributes:{
+        //                 exclude:['password','is_active','role','updatedAt','createdAt','UUID']
+        //             }
 
+        //         }
+        // ]
+        });
         res.status(200).json(products);
-    }catch{
+    }catch(err){
         console.log('Something Wrong in get all products');
+        console.error(err)
         res.status(500).json({"message":"Server Error"});
     }
     

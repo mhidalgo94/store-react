@@ -22,7 +22,7 @@ const addCategory = async (req, res)=>{
 const getAllCategories = async (req,res)=>{
     try{
         let categories = await Category.findAll({});
-
+        console.log(categories);
         res.status(200).json(categories);
     }catch{
         console.log('Something Wrong in get all categories.');

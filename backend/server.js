@@ -27,13 +27,14 @@ app.use('/api', router.auth);
 
 // Api Category
 app.use('/api/category', router.category);
-
 // Api Products
 app.use('/api/products', router.products);
 // Api Reviews
 app.use('/api/reviews', router.reviews);
 // Api User
 app.use('/api/user', router.users);
+// Api Addresses
+app.use('/api/addresses', router.address);
 
 
 // test server

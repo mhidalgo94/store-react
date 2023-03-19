@@ -1,5 +1,7 @@
+require('dotenv').config();
 const  prompt = require("prompt-sync")({ sigint: true })
 const {sequelize} = require('../db/index.js');
+
 const User = require('../models/User/userModels.js')
 
 
