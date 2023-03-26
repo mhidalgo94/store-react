@@ -9,6 +9,9 @@ import CartShopPage from "../pages/CartShop/CartShopPage";
 
 import ProfileBase from "../pages/Profile/ProfileBase";
 import LoginPage from "../pages/Login/LoginPage";
+import SignIn from "../pages/Login/SignIn";
+import VerifyCodePage from "../pages/Login/VerifyCode/VerifyCodePage";
+import ResendCodePage from "../pages/Login/ResendCodeVerifyUser/ResendCodeVerifyUser";
 import { 
     Orders, 
     Order,
@@ -23,7 +26,6 @@ import {
     EditPayMethod
 
 } from "../pages/Profile/pages/index";
-import VerifyCodePage from "../pages/Login/VerifyCode/VerifyCodePage";
 
 
 const Routers = createBrowserRouter([
@@ -37,6 +39,8 @@ const Routers = createBrowserRouter([
             { path:'/checkout-alternative', element: <PageCheckoutAlternative1 /> },
             { path:'/cart-shop', element: <CartShopPage /> },
             { path:'/login', element: <LoginPage /> },
+            { path:'/sign-in', element: <SignIn /> },
+            { path:'/resendCode', element: <ResendCodePage /> },
             { path:'/verify-code', element: <VerifyCodePage /> },
 
         ]

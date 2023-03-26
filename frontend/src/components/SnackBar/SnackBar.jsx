@@ -20,7 +20,7 @@ export default function SnackBarAlert() {
             variant={variant} 
             onClose={handleClose} 
             severity={severity} 
-            sx={{ width: '100%',bgcolor:`white` }}
+            sx={{ width: '100%',color:'white' }}
         >
             {message}
         </Alert>

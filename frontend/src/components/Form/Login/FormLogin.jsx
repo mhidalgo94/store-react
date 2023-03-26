@@ -1,13 +1,10 @@
 import {Box, TextField, Typography, Button} from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function FormLogin() {
-    const nav = useNavigate();
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        
-        nav('/verify-code')
     }
 
     return (
@@ -23,8 +20,8 @@ export default function FormLogin() {
                 <TextField fullWidth color='info' required helperText='Password required.' size='small' label='password' placeholder='*********' type='password' sx={{my:1}}/>
                 
                 <Button  fullWidth variant='contained' sx={{my:1, textTransform:'capitalize'}} type='submit' color='primary'>Login</Button>
-                <Link className='link' to='/'>
-                    <Button  fullWidth variant='outlined' sx={{my:1, textTransform:'capitalize'}} color='lightBlue' >Back Home</Button>
+                <Link className='link' to='/sign-in'>
+                    <Button  fullWidth variant='outlined' sx={{my:1, textTransform:'capitalize'}} color='lightBlue' >Sign In</Button>
                 </Link>
             </Box>
         </>
