@@ -3,26 +3,19 @@ const db = require('../../models/index.js');
 const User = db.user;
 
 const addUser =  async (req,res)=>{
-
     let values = req.body.data;
-
     try{
-
         const user = await User.create(values).then(user=>{
-
             // Aqui debes enviar email para activate
             console.log(user.UUID)
             res.status(200).json({message:'User create successfully. Need verify code with your email for activated.'});
         })
-
-
     }catch(err){
         res.status(400).json({
             success: false,
             msg: err.errors.map(e => e.message)
         });
-    }
-    
+    } 
     // res.status(500).json({"message":"Server Error"})
 }
 
@@ -32,7 +25,7 @@ const verifyCodeUser = async (req,res)=>{
     const user = await User.findOne({where:{UUID:code},attributes:{
         exclude:['password','createdAt']
     }});
-    if (await user){
+    if (user){
         const updatedAt = user.dataValues.updatedAt.getTime(); // Obtener la fecha de creación del usuario en milisegundos
         const now = new Date().getTime();
         const diff = now - updatedAt
@@ -65,8 +58,6 @@ const resetCodeVerifyUser = async (req,res)=>{
     }else{
         res.status(400).json({message:"Your email is not valid."})
     }
-
-
 }
 
 // find all users activate

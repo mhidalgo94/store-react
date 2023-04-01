@@ -10,10 +10,13 @@ function checkPassword(password, hash) {
 
   // Función para generar un token JWT
 function generateToken(user) {
+  
     const payload = {
-      id: user.id,
       username: user.username,
       email: user.email,
+      address: user.address,
+      image: user.image,
+      phone: user.phone,
       role: user.role
     };
     const token = jwt.sign(payload,SECRET_KEY_JWT,{expiresIn:String(EXPIRES_IN_JWT)});

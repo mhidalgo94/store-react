@@ -8,8 +8,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import styleProfile from './styleProfile.js';
 
-
 export default function HeadProfile({children}) {
+
   return (
     <Container sx={{p:2}}>
         <Paper sx={{px:2, py:1}} elevation={2}>
