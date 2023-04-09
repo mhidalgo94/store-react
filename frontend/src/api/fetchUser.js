@@ -1,5 +1,10 @@
 import { instance } from "./baseFetch";
 
+
+// const headers = {Authorization: `Bearer ${token}`}
+// const headersFiles = {"Content-Type": "multipart/form-data"}
+
+
 export const getAllUsers = async ()=>{
     const res = await instance.get('/user/allUsers')
     return res;
@@ -10,8 +15,10 @@ export const getOneUser = async (id)=>{
     return res;
 }
 
-export const updateUserClient = async (id,headers)=>{
-    const res = await instance.put(`/user/update/${id}`,{headers});
+export const updateUserClient = async (formData, token)=>{
+    const headers = {Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data'}
+
+    const res = await instance.put(`/user/update`,formData,{headers});
     return res
 }
 

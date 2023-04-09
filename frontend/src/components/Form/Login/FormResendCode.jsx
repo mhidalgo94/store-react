@@ -6,33 +6,30 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {resendCode} from '../../../api/fetchUser.js';
 import { useSnackBar } from '../../../store/snackbarState.js';
 
-export default function FormResendCode() {
+function FormResendCode() {
   const navigate = useNavigate();
   const {setOpen} = useSnackBar();
-  const [loadingBtn, setLoadingBtn] = useState()
+  const [loadingBtn, setLoadingBtn] = useState(false);
 
-    const handleSubmit=(e)=>{
-      e.preventDefault();
-      setLoadingBtn(true);
-      
-      const form = new FormData(e.target)
-      const body = Object.fromEntries(form)
-      resendCode(body).then(res=>{
-        const msg = res?.data?.message;
-        setOpen(msg)
-        navigate('/verify-code')
-      }).catch(err=>{
-        const msg = err?.response?.data?.message || 'Error servidor';
-        setOpen(msg,'error')
-      }).finally(()=>{
-        setLoadingBtn(false)
-      })
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    setLoadingBtn(true);
+    
+    const form = new FormData(e.target);
+    const body = Object.fromEntries(form);
+    resendCode(body).then(res=>{
+      const msg = res?.data?.message;
+      setOpen(msg);
+      navigate('/verify-code');
+    }).catch(err=>{
+      const msg = err?.response?.data?.message || 'Error servidor';
+      setOpen(msg,'error')
+    }).finally(()=>{
+      setLoadingBtn(false)
+    })
 
-    }
-
-  const backVerifyCode = ()=>{
-    navigate('/verify-code')
   }
+
 
   return (
     <>
@@ -50,10 +47,12 @@ export default function FormResendCode() {
              disabled={loadingBtn}>
               {loadingBtn ? <CircularProgress color='primary' size={24} /> : 'Resend Code' }  
             </Button>
-            <Button onClick={backVerifyCode} variant='outlined' color='info' fullWidth sx={{textTransform:'capitalize',mt:1}}>
+            <Button onClick={()=>navigate('/verify-code')} variant='outlined' color='info' fullWidth sx={{textTransform:'capitalize',mt:1}}>
               Back to Verify Code
             </Button>
         </Box>
     </>
   )
 }
+
+export default FormResendCode;

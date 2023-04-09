@@ -1,6 +1,8 @@
 const { v4: uuidv4 } = require('uuid')
 const db = require('../../models/index.js');
+const {generateToken} = require('../Auth/auth.js');
 const User = db.user;
+
 
 const addUser =  async (req,res)=>{
     let values = req.body.data;
@@ -89,11 +91,31 @@ const getOneUser = async (req,res)=>{
 // self-update user
 const selfUpdateUser = async (req,res)=>{
     try{
-        let id = req.user.id
-        const user = await User.update(req.body, {where: { id:id }})
-        res.status(200).json(user);
+        const userEmail = req.user.email;
+        const user = await User.findOne({where: { email:userEmail }})
+        // Verfiy users exist.
+        if (!user) {
+            return res.status(404).json({ message: 'User does not exist' });
+        }
+        // Get values request
+        let {firstName, lastName, email, phone,address} = req.body;
+        // uPdate values 
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.email = email;
+        user.phone = phone;
+        user.address = address;
+        // Save if exist file in values
+        if (req.file){
+            user.image = req.file.filename;
+        }
+        await user.save()
+
+        const token = generateToken(user)
+        res.status(200).json({token});
     }catch(err){
         console.log('Something Wrong for update user.');
+        console.log(err)
         res.status(500).json({"message":"Server Error"});
     }
 }

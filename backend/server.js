@@ -6,6 +6,7 @@ const {PORT} = require('./config/config.js');
 const cors = require('cors');
 const express = require('express');
 
+
 var corOption = {
     host:'http://localhost:8081'
 }
@@ -18,6 +19,8 @@ app.use(cors(corOption));
 app.use(express.json());
 
 app.use(express.urlencoded({extended:true}));
+
+app.use(express.static('static'))
 
 // routes
 const router = require('./routes/index.js');

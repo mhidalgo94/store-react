@@ -1,5 +1,8 @@
 const bcrypt = require('bcrypt');
 const { Sequelize,sequelize, DataTypes} = require('../../db/index.js');
+// const path = require('path');
+// const {pathStaticPublic} = require('../../static/index.js');
+
 
 const User = sequelize.define('user', {
     firstName: {
@@ -40,6 +43,14 @@ const User = sequelize.define('user', {
     image: {
         type: DataTypes.BLOB,
         allowNull: true,
+        get() {
+            const email = this.getDataValue('email');
+            const filename = this.getDataValue('image');
+            const user = email.split('@');
+            const username = user[0];
+            const str = process.env.DOMAIN_SERVER + ":" + process.env.PORT + '/public' + '/user/' + username +  "/" + filename;
+            return str
+          }
     },
     UUID: {
         type: DataTypes.UUID,

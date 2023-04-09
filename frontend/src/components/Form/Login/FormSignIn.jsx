@@ -16,17 +16,19 @@ export default function FormSignIn() {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        setLoadingBtn(true)
-        const form = new FormData(e.target)
+        setLoadingBtn(true);
+        const form = new FormData(e.target);
         const body = Object.fromEntries(form);
 
         createUserClient(body).then(res=>{
             if(res.status === 200){
-                setOpen(res.data.message)
-                navigate('/verify-code')
+                setOpen(res.data.message);
+                navigate('/verify-code');
             }
         }).catch(err=>{
-            console.log(err)
+            const msg = err?.response?.data?.message || 'Error servidor';
+            setOpen(msg,'error');
+            console.log(err);
         }).finally(()=>{
             setLoadingBtn(false);
         });

@@ -1,6 +1,8 @@
 const userController = require('../controllers/Users/userController.js');
 const { authenticated } =require('../middleware/authenticate.js');
 const { authorize } = require('../middleware/authorize.js');
+const {uploadPublic} = require('../middleware/multerConfig.js')
+
 const router = require('express').Router()
 
 // Create
@@ -13,8 +15,11 @@ router.post('/resendCode', userController.resetCodeVerifyUser)
 router.get('/allUsers',authenticated, userController.getAllUsers);
 // One User
 router.get('/:id',authenticated, userController.getOneUser);
-// self-Update User
-router.put('/update/:id',authenticated,authorize(['client']),userController.updateUser);
+
+
+
+// self-Update User required params email.
+router.put('/update',authenticated,authorize(['client','admin','moderator']),uploadPublic.single('image'),userController.selfUpdateUser);
 // Update User Authorize
 router.put('/:id',authenticated, authorize(['moderator','admin']),userController.updateUser);
 // Remove one User Authorize

@@ -3,8 +3,17 @@ import {Avatar, Button, Box, Grid,Stack, Paper,Typography} from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import ProfileBase from '../../ProfileBase';
 
+import {userState} from '../../../../store/userState';
+
 
 export default function ProfileInfo() {
+
+  const {user} = userState();
+
+  const firstName = user.firstName.substring(0,1).toUpperCase() + user.firstName.substring(1);
+  const lastName = user.lastName.substring(0,1).toUpperCase() + user.lastName.substring(1);
+  const fullName = `${firstName} ${lastName}`;
+
   return (
     <ProfileBase>
         <Box sx={{my:2}}>
@@ -29,16 +38,16 @@ export default function ProfileInfo() {
                 <Grid item md={6} sm={12} xs={12}>
                     <Paper sx={{ px:5,height:'200px'}} elevation={2}>
                       <Stack direction='row' sx={{height:'100%', margin:'0 auto'}} alignItems='center' >
-                          <Avatar sx={{width:'100px',height:'100px'}} />
+                          <Avatar alt="Picture user profile" src={user.image} sx={{width:'100px',height:'100px'}} />
                           <Box sx={{mx:2}} >
                             <Typography variant='body2' color='grey.500'>Name:</Typography>
-                            <Typography variant='body1' mx={1}>Jhon James</Typography>
+                            <Typography variant='body1' mx={1}>{fullName}</Typography>
                             <Typography variant='body2' color='grey.500'>Email:</Typography>
-                            <Typography variant='body1' mx={1}>jhonjames@gmail.com</Typography>
+                            <Typography variant='body1' mx={1}>{user.email}</Typography>
                             <Typography variant='body2' color='grey.500'>Phone:</Typography>
-                            <Typography variant='body1' mx={1}>+1 243 784 1422</Typography>
+                            <Typography variant='body1' mx={1}>+1 {user.phone}</Typography>
                             <Typography variant='body2' color='grey.500'>Address:</Typography>
-                            <Typography variant='body1' mx={1}>978 Elton Springs, Eribertoview</Typography>
+                            <Typography variant='body1' mx={1}>{user.address}</Typography>
                           </Box>
                       </Stack>
                     </Paper>

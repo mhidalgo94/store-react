@@ -12,7 +12,8 @@ function checkPassword(password, hash) {
 function generateToken(user) {
   
     const payload = {
-      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       address: user.address,
       image: user.image,

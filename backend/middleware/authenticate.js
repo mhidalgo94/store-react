@@ -7,8 +7,7 @@ function authenticated(req,res,next){
         // Obtiene el token JWT de la cabecera Authorization
         const authHeader = req.headers.authorization;
         const token = authHeader && authHeader.split(' ')[1];
-        console.log(token)
-
+        console.log({"Token auth":token})
         if(!token){
             return res.status(401).json({message:"Token not provided."})
         }
