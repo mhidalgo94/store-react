@@ -26,6 +26,10 @@ const User = sequelize.define('user', {
         type: Sequelize.STRING,
         allowNull: true
     },
+    zip_code: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
     address: {
         type: Sequelize.STRING,
         allowNull: true
@@ -44,8 +48,11 @@ const User = sequelize.define('user', {
         type: DataTypes.BLOB,
         allowNull: true,
         get() {
-            const email = this.getDataValue('email');
             const filename = this.getDataValue('image');
+            if(!filename){
+                return null;
+            }
+            const email = this.getDataValue('email');
             const user = email.split('@');
             const username = user[0];
             const str = process.env.DOMAIN_SERVER + ":" + process.env.PORT + '/public' + '/user/' + username +  "/" + filename;

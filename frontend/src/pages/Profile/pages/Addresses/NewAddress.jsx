@@ -5,6 +5,7 @@ import FormAddress from '../../../../components/Form/FormAddress/FormAddress';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 
 export default function NewAddress() {
+
     return(
         <ProfileBase>
         <Box sx={{my:2}}>

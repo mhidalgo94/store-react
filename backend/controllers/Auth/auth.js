@@ -18,7 +18,8 @@ function generateToken(user) {
       address: user.address,
       image: user.image,
       phone: user.phone,
-      role: user.role
+      role: user.role,
+      zip_code: user.zip_code
     };
     const token = jwt.sign(payload,SECRET_KEY_JWT,{expiresIn:String(EXPIRES_IN_JWT)});
     return token

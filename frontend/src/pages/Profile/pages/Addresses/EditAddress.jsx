@@ -1,13 +1,39 @@
+import { useEffect, useState } from 'react';
 import {Link,useParams} from 'react-router-dom';
 import {Box, Button,Grid, Paper, Typography, Stack} from '@mui/material';
 import ProfileBase from '../../ProfileBase';
 import EditLocationIcon from '@mui/icons-material/EditLocation';
 import FormAddress from '../../../../components/Form/FormAddress/FormAddress';
+import CircularProgress from '@mui/material/CircularProgress';
 
+import { getOneAddress } from '../../../../api/fetchUser.js';
+import { userState } from '../../../../store/userState';
+import { useSnackBar } from '../../../../store/snackbarState';
 
 export default function EditAddress() {
+    const {setOpen}  = useSnackBar();
+    const {id} = useParams();
+    const {token, setLogout} = userState();
 
-    const {id} = useParams()
+    const [data, setData] = useState();
+    const [btnLoading, setBtnLoading] = useState(false);
+
+    useEffect(()=>{
+        setBtnLoading(true);
+        getOneAddress(id,token).then(res=>{
+            setData(res.data);
+        }).catch(err=>{
+            if (err.response.status === 401) {
+                setLogout();
+            }
+            const msg = err?.response?.data?.message || 'Error Server';
+            setOpen(msg,'error')
+        }).finally(()=>{
+            setBtnLoading(false)
+        })
+    },[id,token,setLogout, setOpen])
+
+
   return (
     <ProfileBase>
         <Box sx={{my:2}}>
@@ -26,9 +52,15 @@ export default function EditAddress() {
                     </Link> 
                 </Grid>
             </Grid>
-            <Paper  sx={{p:'9px',my:2, borderRadius: '10px'}}>
-                <FormAddress edit={true} data={{name:id}}/>
-            </Paper>
+                {btnLoading ? 
+                    <Box sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+                        <CircularProgress color='lightBlue' size={24}  />
+                    </Box>
+                    :
+                    <Paper  sx={{p:5,my:2, borderRadius: '10px'}}>
+                        <FormAddress edit={true} data={data}/>
+                    </Paper>
+                }
         </Box>
     </ProfileBase>
   )

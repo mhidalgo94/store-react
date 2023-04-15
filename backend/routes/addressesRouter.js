@@ -1,15 +1,15 @@
 const addressesControllers = require('../controllers/Addresses/addressesControllers.js');
-const { authenticated } =require('../middleware/authenticate.js');
+const { authenticated } = require('../middleware/authenticate.js');
 
 
 const router = require('express').Router()
 
 // Create
-router.post('/addAddress', addressesControllers.addAddress);
+router.post('/addAddress',authenticated, addressesControllers.addAddress);
 // List Category
-router.get('/allAddresses',addressesControllers.getAllAddresses);
+router.get('/allAddresses',authenticated, addressesControllers.getAllAddresses);
 // One Category
-router.get('/:id', addressesControllers.getOneAddres);
+router.get('/:id',authenticated, addressesControllers.getOneAddres);
 // Update Category
 router.put('/:id',authenticated, addressesControllers.updateAddress);
 // Remove one Category

@@ -30,7 +30,7 @@ export default function CartShopPage() {
                     </Grid>
                     <Grid item md={4} sm={4} xs={12}>
                         <Box sx={useStyles.infoBox}>
-                            <Link className='link' to='#'>
+                            <Link className='link' to='/shop/products'>
                                 <Button variant='outlined' color='lightBlue'  sx={{textTransform:'capitalize'}}>Go to Shop</Button>
                             </Link>
                             <Link className='link' to='/account/profile/wishlist'>
