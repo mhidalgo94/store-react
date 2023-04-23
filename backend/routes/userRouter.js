@@ -16,8 +16,6 @@ router.get('/allUsers',authenticated, userController.getAllUsers);
 // One User
 router.get('/:id',authenticated, userController.getOneUser);
 
-
-
 // self-Update User required params email.
 router.put('/update',authenticated,authorize(['client','admin','moderator']),uploadPublic.single('image'),userController.selfUpdateUser);
 // Update User Authorize

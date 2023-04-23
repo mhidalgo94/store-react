@@ -36,18 +36,13 @@ export default function Addresses() {
 
     useEffect(()=>{
         getListAddresses();
-        
+    // eslint-disable-next-line 
     },[])
 
     // Dialog for Delete Address
     const [btnLoadingDelete, setBtnLoadingDelete] = useState(false);
     const [openCloseDialog, setOpenCloseDialog] = useState(false);
-    const [idAddresDeleted, setIdAddressDelete] = useState()
-
-
-    const handleOpenCloseDialog = ()=>{
-        setOpenCloseDialog(!openCloseDialog);
-    }
+    const [idAddresDeleted, setIdAddressDelete] = useState();
 
     const handleDeleteAddress = ()=>{
         setBtnLoadingDelete(true);
@@ -90,7 +85,7 @@ export default function Addresses() {
                     <CircularProgress color='lightBlue' size={24}  />
                 </Box>
             : 
-            Boolean(addresses) ? 
+            Boolean(addresses.length) ? 
                 addresses.map((values)=>{
                     return (
                         <Paper  sx={{p:'2px',my:2, borderRadius: '10px'}} key={values.id}>
@@ -111,8 +106,8 @@ export default function Addresses() {
                                             <EditIcon />
                                         </IconButton>
                                     </Link>
-                                    <IconButton disabled={btnLoadingDelete} aria-label='Delete' onClick={handleOpenCloseDialog} onMouseEnter={()=>setIdAddressDelete(values.id)}>
-                                        {btnLoadingDelete ? <CircularProgress color='lightBlue' size={24}/> : <DeleteIcon />}
+                                    <IconButton aria-label='Delete' onClick={()=>setOpenCloseDialog(true)} onMouseEnter={()=>setIdAddressDelete(values.id)}>
+                                        {<DeleteIcon />}
                                     </IconButton>
 
                                 </Stack>
@@ -127,10 +122,11 @@ export default function Addresses() {
             }
             
         </Box>
-        <CustomDialog isOpen={openCloseDialog} onClose={handleOpenCloseDialog}
+        <CustomDialog isOpen={openCloseDialog} onClose={setOpenCloseDialog}
         title={'Confirm deletion!'}
         description={'Are you sure you want to permanently delete this address?.'}
         isAcept={handleDeleteAddress}
+        loadingBtn={btnLoadingDelete}
         />
     </ProfileBase>
   )

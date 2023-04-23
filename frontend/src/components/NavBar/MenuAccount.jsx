@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from '@mui/icons-material/Login';
+import InventoryIcon from '@mui/icons-material/Inventory';
 import styleNavBar from './styleNavbar';
 
 import { userState } from "../../store/userState";
@@ -18,7 +19,7 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
     }
   }
 
-  const {isAuth,setLogout} = userState();
+  const {isAuth,setLogout, user} = userState();
 
   const handleLogout = ()=>{
     setLogout();
@@ -58,6 +59,18 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
       </MenuItem>
       <MenuItem sx={styleLinkMenu}>
       </MenuItem>
+      {['admin','moderator'].includes(user.role) ?
+        <MenuItem sx={styleLinkMenu}>
+        <Link to='/manage/list-products' className="link">
+          <ListItem sx={{padding:0,margin:'0 10px'}}>
+            <InventoryIcon/>
+            <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1}>Inventory</Typography>
+          </ListItem> 
+        </Link>
+        </MenuItem> 
+        :
+        null
+      }
       <MenuItem sx={styleLinkMenu}>
         {isAuth ?
           <ListItem sx={{padding:0,margin:'0 10px'}} onClick={handleLogout}>

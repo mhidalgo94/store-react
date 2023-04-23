@@ -4,12 +4,8 @@ const Category = db.category;
 
 
 const addCategory = async (req, res)=>{
-    
-    let values = {
-        name : req.body.body
-    }
-
     try{
+        const values = req.body;
         const category = await Category.create(values);
         res.status(200).json(category);
     }
@@ -22,7 +18,6 @@ const addCategory = async (req, res)=>{
 const getAllCategories = async (req,res)=>{
     try{
         let categories = await Category.findAll({});
-        console.log(categories);
         res.status(200).json(categories);
     }catch{
         console.log('Something Wrong in get all categories.');
@@ -62,7 +57,7 @@ const removeCategory = async (req,res)=>{
 
         let id = req.params.id
         Category.destroy({where: {id: id}})
-        res.status(200).json({"message":"Catergory deleted successfully."});
+        res.status(200).json({"message":"Category deleted successfully."});
     }catch{
         console.error('Something Wrong for remove a category.');
         res.status(500).json({"message":"Server Error"});

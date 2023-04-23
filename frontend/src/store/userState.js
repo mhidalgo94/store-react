@@ -1,9 +1,9 @@
 import { create } from 'zustand'; 
-import { persist} from 'zustand/middleware'
+// import { persist} from 'zustand/middleware'
 import jwt_decode from 'jwt-decode';
 
 
-export const userState = create(persist((set,get)=>({
+export const userState = create((set,get)=>({
     user:{},
     isAuth:false,
     token:"",
@@ -13,8 +13,5 @@ export const userState = create(persist((set,get)=>({
         const decode = jwt_decode(token);
         return set(state => ({...state, user: ({...decode}) , isAuth:true, token}));
     }
-    }),
-    {
-        name:'user-profile'
-    }
-))
+    })
+)

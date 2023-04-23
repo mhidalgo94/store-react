@@ -22,6 +22,24 @@ const storagePublicUser = multer.diskStorage({
   }
 });
 
-const uploadPublic = multer({storage:storagePublicUser}) 
+const storageProducts = multer.diskStorage({
+  destination: function(req, file, cb) {
+    const user = req.user.firstName;
+    const date = new Date();
+    const stringDate =user + date.getMonth() + "-" +  date.getDate() + "-" + date.getFullYear() + "H"+ date.getHours()+"M"+ date.getMinutes();
+    const pathProduct = path.join(pathStaticPublic, 'products', stringDate);
+    if(!fs.existsSync(pathProduct)){
+      fs.mkdirSync(pathProduct);
+    }
+    cb(null, pathProduct);
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
 
-module.exports = { uploadPublic }
+
+const uploadPublic = multer({storage:storagePublicUser}) 
+const uploadProducts = multer({storage:storageProducts}) 
+
+module.exports = { uploadPublic, uploadProducts }

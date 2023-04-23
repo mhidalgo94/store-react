@@ -80,8 +80,7 @@ const removeAddress = async (req,res)=>{
 
     try{
 
-        let id = req.params.id
-        console.log(id)
+        let id = req.params.id;
         const deleted = Addresses.destroy({where: {id: id}})
         res.status(200).json({"message":"Address successfully removed."});
     }catch(err){

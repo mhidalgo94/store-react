@@ -1,17 +1,32 @@
-const { Sequelize,sequelize, DataTypes} = require('../../db/index.js')
+const { Sequelize,sequelize, DataTypes} = require('../../db/index.js');
+const { pathStaticPrivate } = require('../../static/index.js');
+const path = require('path');
 
-const Product = sequelize.define("product",{
+const Product = sequelize.define("Product",{
     name: {
         type: DataTypes.STRING,
         allowNull: false
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true
     },
     specification: {
-        type: DataTypes.JSON,
+        type: DataTypes.TEXT,
         allowNull: true
+    },
+    images: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        get() {
+            const images = this.getDataValue('images');
+            if(!images){
+                return null;
+            }
+            const baseUrl = process.env.DOMAIN_SERVER + ":" + process.env.PORT + '/public/'
+            let urlImages = images.split(',').map(item=> baseUrl + item);
+            return urlImages;
+          }
     },
     price: {
         type: DataTypes.FLOAT,

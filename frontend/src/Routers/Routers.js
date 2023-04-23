@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import LayoutStore from "../components/Base/LayoutStore";
+import LayoutManger from "../components/Base/LayoutManger";
 
 import Home from "../pages/Home/Home";
 import Products from "../pages/Products/Products";
@@ -26,6 +27,9 @@ import {
     EditPayMethod
 
 } from "../pages/Profile/pages/index";
+
+import { ProductsPage, AddProduct, AddNewCategory } from "../pages/Manage";
+
 
 
 const Routers = createBrowserRouter([
@@ -63,7 +67,19 @@ const Routers = createBrowserRouter([
             { path:'pay-methods-edit/:id', element: <EditPayMethod /> },
 
         ]
-    }
+    },
+    {
+        path:'/manage',
+        element: <LayoutManger authRequired={true} roles={['admin','moderator']} toRedirect='/login' />,
+        children: [
+            { path:'list-products', element: <ProductsPage /> },
+            { path:'add-product', element: <AddProduct /> },
+            { path:'add-category', element: <AddNewCategory /> },
+            
+
+        ]
+    },
+
 
 ])
 

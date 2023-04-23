@@ -1,11 +1,10 @@
 const { Sequelize,sequelize, DataTypes} = require('../../db/index.js')
 
-const Product = require('../Product/productModels.js');
-
-const Category = sequelize.define('categoria', {
+const Category = sequelize.define('Category', {
     nombre: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique:true
     }
 });
 

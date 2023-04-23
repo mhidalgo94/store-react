@@ -1,11 +1,12 @@
 const productController = require('../controllers/Product/productsController.js');
 const { authenticated } =require('../middleware/authenticate.js')
+const {uploadProducts} = require('../middleware/multerConfig.js')
 
 
 const router = require('express').Router()
 
 // Create
-router.post('/addProduct', authenticated ,productController.addProduct);
+router.post('/addProduct', authenticated,uploadProducts.array('images') ,productController.addProduct);
 // List products
 router.get('/allProducts',productController.getAllProducts);
 // List product available

@@ -26,4 +26,5 @@ node_modules/*
 
 task.txt
 backend/static/public/user/*
+backend/static/public/products/*
 backend/static/private/*

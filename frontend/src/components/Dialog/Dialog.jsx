@@ -3,12 +3,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 
-// import DialogActions from '@mui/material/DialogActions';
-// import DialogContentText from '@mui/material/DialogContentText';
+import LoadingButton from '@mui/lab/LoadingButton/LoadingButton';
 
-
-
-import Button from '@mui/material/Button';
 
 const CustomDialog = ({
   isOpen,
@@ -16,26 +12,25 @@ const CustomDialog = ({
   title,
   description,
   children,
-  isAcept
+  isAcept,
+  loadingBtn=false,
 }) => {
 
-
-
+  
   return (
-    <Dialog open={isOpen} onClose={onClose} fullWidth={true}
-        maxWidth={'sm'}>
+    <Dialog open={isOpen} onClose={()=> onClose(false)} fullWidth={true} maxWidth={'sm'}>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         {description && <p>{description}</p>}
         {children}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="info">
+        <LoadingButton onClick={()=>onClose(false)} color="info">
           Cancel
-        </Button>
-        <Button onClick={isAcept}>
+        </LoadingButton>
+        <LoadingButton loading={loadingBtn} onClick={isAcept}>
           Ok
-        </Button>
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   );

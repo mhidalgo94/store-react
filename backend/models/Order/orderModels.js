@@ -1,9 +1,5 @@
 const { Sequelize,sequelize, DataTypes} = require('../../db/index.js');
 
-const Addresses = require('../Addresses/adressesModels.js');
-const StatusOrder = require('./statusOrderModels.js');
-const User = require('../User/userModels.js');
-
 const SalesOrder = sequelize.define('orderSales', {
     id: {
       type: DataTypes.INTEGER,

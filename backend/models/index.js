@@ -23,27 +23,31 @@ db.sequelize.sync({alter:true}).then(()=>{
 
 
 // 1  Relation Models
+// Product with reviews
 db.products.hasMany(db.reviews,{
     foreignKey:'product_id',
-    as:'review'
-})
-
-db.products.User = db.products.belongsTo(db.user,{
-    foreignKey:'user_id',
-    as:'user',
+    as:'review',
+    onDelete: 'CASCADE'
 })
 
 db.reviews.belongsTo(db.products,{
     foreignKey:'product_id',
-    as:'product'
+    as:'product',
+    onDelete: 'CASCADE'
+})
+
+// User with products
+db.products.User = db.products.belongsTo(db.user,{
+    foreignKey:'user_id',
+    as:'user',
+    onDelete: 'CASCADE'
 })
 
 // Relation Products model with Category
-db.category.hasMany(db.products);
-db.products.belongsTo(db.category,{
-    foreignKey:'category_id',
-    as: 'category'
-});
+db.products.belongsToMany(db.category,{ through: 'ProductCategory', as:'categories' });
+
+db.category.belongsToMany(db.products, { through: 'ProductCategory' })
+
 
 // Products and User model with WishList
 db.user.belongsToMany(db.products, { through: db.wishlist });
@@ -57,7 +61,7 @@ db.addresses.belongsTo(db.user,{
 });
 
 // An address can have many sales orders
-db.addresses.hasMany(db.salesOrder);
+// db.addresses.hasMany(db.salesOrder);
 db.salesOrder.belongsTo(db.addresses,{
     foreignKey:'address_id',
     as:'address',

@@ -1,8 +1,7 @@
 import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import {Avatar,Box, Button, Grid, TextField,Stack, Input  } from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
-
+import {Avatar,Box, Grid, TextField,Stack, Input  } from '@mui/material';
+import LoadingButton from "@mui/lab/LoadingButton/LoadingButton";
 import { updateUserClient } from '../../../api/fetchUser.js';
 import { userState } from '../../../store/userState.js';
 import {useSnackBar} from '../../../store/snackbarState.js'
@@ -13,19 +12,20 @@ export default function FormEditProfile() {
     const [dataUser,setDataUser] = useState(user);
     const [loadingBtn, setLoadingBtn] = useState(false)
     const navigate = useNavigate();
-    const {setOpen} = useSnackBar()
+    const {setOpen} = useSnackBar();
+
     useEffect(()=>{
         setDataUser(user)
     },[user])
 
     function handleFileChange(event) {
         setFile(event.target.files[0]);
-      }
+    }
 
 
     const onSubmit = (e) =>{
         e.preventDefault();
-        setLoadingBtn(true)
+        setLoadingBtn(true);
         const formData= new FormData(e.target); 
         if(file){
             formData.set('image', file, file.name);
@@ -89,9 +89,9 @@ export default function FormEditProfile() {
         </Grid>
 
         <Box sx={{my:2}}>
-            <Button disabled={loadingBtn} variant='contained' type='submit' sx={{fontWeight:600, textTransform:'capitalize', minWidth:'120px'}}>
-                    {loadingBtn ? <CircularProgress color='lightBlue' size={24} /> : 'Submit' }  
-            </Button>
+            <LoadingButton loading={loadingBtn}  variant='contained' type='submit' sx={{fontWeight:600, textTransform:'capitalize', minWidth:'120px'}}>
+                    Submit
+            </LoadingButton>
         </Box>
     </Box>
   )
