@@ -1,4 +1,4 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {Chip, Typography, Box} from '@mui/material'
 import { DataGrid,GridActionsCellItem } from '@mui/x-data-grid';
@@ -37,10 +37,12 @@ export default function DataGridProducts() {
     const [loadingTable, setLoadingTable] = useState(false);
     const {setLogout, token} = userState();
     const {setOpen} = useSnackBar()
-    
+    const navigate = useNavigate()
 
     const handleEdit = (event, params)=>{
-        console.log(params);
+        const {id} = params;
+        navigate(`/manage/edit-product/${id}`)
+
     }
 
     // Dialog for Delete Address

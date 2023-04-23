@@ -14,10 +14,7 @@ export default function Footer() {
             About Us
           </Typography>
           <Typography variant="body1">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-            blanditiis tenetur unde suscipit, quam beatae rerum inventore
-            consectetur, neque doloribus, cupiditate numquam dignissimos laborum
-            fugiat deleniti? Eum quasi quidem quibusdam.
+          We are an e-commerce specialized in the sale of craft and handicraft products, as well as in the customization of items such as shirts, mugs and glasses. We offer a wide variety of high-quality products and exceptional customization services to meet all of your creative needs. Thanks for trusting us!
           </Typography>
         </div>
         <div className="contact">

@@ -12,6 +12,18 @@ export const getAllProducts = async ()=>{
     return res;
 }
 
+export const getOneProduct = async (id,token)=>{
+    const headers = {Authorization: `Bearer ${token}`};
+    const res = await instance.get(`/products/${id}`, {headers});
+    return res;
+}
+
+export const updateProduct = async (id,formData,token)=>{
+    const headers = {Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data'};
+    const res = await instance.put(`/products/${id}`,formData, {headers});
+    return res;
+}
+
 export const removeProduct = async (id,token)=>{
     const headers = {Authorization: `Bearer ${token}`};
     const res = await instance.delete(`/products/${id}`, {headers});

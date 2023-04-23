@@ -28,7 +28,7 @@ import {
 
 } from "../pages/Profile/pages/index";
 
-import { ProductsPage, AddProduct, AddNewCategory } from "../pages/Manage";
+import { ProductsPage, AddProduct,EditProduct, AddNewCategory } from "../pages/Manage";
 
 
 
@@ -74,6 +74,7 @@ const Routers = createBrowserRouter([
         children: [
             { path:'list-products', element: <ProductsPage /> },
             { path:'add-product', element: <AddProduct /> },
+            { path:'edit-product/:id', element: <EditProduct /> },
             { path:'add-category', element: <AddNewCategory /> },
             
 

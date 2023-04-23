@@ -14,7 +14,7 @@ router.get('/published', productController.getAvailableProducts);
 // One Product
 router.get('/:id', productController.getOneProduct);
 // Update Product
-router.put('/:id',authenticated, productController.updateProduct);
+router.put('/:id',authenticated,uploadProducts.array('images'), productController.updateProduct);
 // Remove one product
 router.delete('/:id',authenticated, productController.removeProduct);
 

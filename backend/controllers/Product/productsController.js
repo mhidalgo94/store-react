@@ -39,7 +39,7 @@ const addProduct = async (req, res)=>{
             description: values.description,
             specification: values.specification,
             price : values.price,
-            old_price: values.oldPrice,
+            old_price: values.old_price,
             available: values.available,
             user_id: user.id,
             images,
@@ -116,14 +116,41 @@ const getOneProduct = async (req,res)=>{
 
 const updateProduct = async (req,res)=>{
     try{
-        let id = req.params.id
-        const product = await Product.update(req.body, {where: { id:id }})
-        if(!product){
-            res.status(401).json({message:"The product does not exist"})
+        const userEmail = req.user.email
+       // Find id user request.
+       const user = await User.findOne({where:{email:userEmail}})
+       if(user.role !== 'admin' && user.role !== 'moderator'){
+           return res.status(401).json({message:"You do not have authorization to create this product."})
+       }
+
+        const values = req.body;
+        const files = req.files;
+        const categories = values.categories.split(',').map(id=>parseInt(id));
+        
+        const newValues = {
+            name : values.name,
+            description: values.description,
+            specification: values.specification,
+            price : values.price,
+            old_price: values.old_price,
+            available: values.available,
+            user_id: user.id,
         }
-        res.status(200).json(product);
-    }catch{
+        const relativeRouteFilestoStr = makeRelativeFilesRoute(files).toString();
+        const images = relativeRouteFilestoStr;
+        if(files.length){
+            newValues.images = images;
+        }
+
+        let id = req.params.id
+        const product = await Product.update(newValues, {where: { id:id }})
+        if(!product){
+            return res.status(401).json({message:"The product does not exist."})
+        }
+        res.status(200).json({message:"Product updated successfully."});
+    }catch(err){
         console.log('Something Wrong for update a product.');
+        console.log(err)
         res.status(500).json({"message":"Server Error"});
     }
 }
