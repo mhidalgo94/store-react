@@ -49,6 +49,7 @@ export default function FormSignIn() {
                 <TextField color='info' fullWidth required sx={{my:1}} size='small' label='Email' type='email' name='email'/>
                 <TextField fullWidth label='Phone' type='tel' name='phone' required sx={{my:1}} size='small' />
                 <TextField fullWidth label='Full Address' type='text' name='address' sx={{my:1}} required size='small' />
+                <TextField fullWidth color='info' required sx={{my:1}} size='small' name='zip_code' label='Zip Code' type='text'/>
                 <TextField fullWidth color='info' required sx={{my:1}} size='small' name='password' label='Password' placeholder='*********' type='password'/>
                 
                 <Button  

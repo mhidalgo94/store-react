@@ -4,12 +4,12 @@ import PersonIcon from '@mui/icons-material/Person';
 import ProfileBase from '../../ProfileBase';
 
 import {userState} from '../../../../store/userState';
-
+import {useCartState} from '../../../../store/cartState.js';
 
 export default function ProfileInfo() {
 
   const {user} = userState();
-
+  const {products} = useCartState();
   const firstName = user.firstName.substring(0,1).toUpperCase() + user.firstName.substring(1);
   const lastName = user.lastName.substring(0,1).toUpperCase() + user.lastName.substring(1);
   const fullName = `${firstName} ${lastName}`;
@@ -73,7 +73,7 @@ export default function ProfileInfo() {
                     </Grid>
                     <Grid item sm={6} xs={12}>
                       <Paper sx={{p:2}} elevation={2}>
-                        <Typography variant='h5' color='primary' textAlign='center'>4</Typography>
+                        <Typography variant='h5' color='primary' textAlign='center'>{products.length}</Typography>
                         <Typography variant='body2' color='grey.600' textAlign='center'>Items in Cart</Typography>
                       </Paper>
                     </Grid>

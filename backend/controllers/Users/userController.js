@@ -98,13 +98,14 @@ const selfUpdateUser = async (req,res)=>{
             return res.status(404).json({ message: 'User does not exist' });
         }
         // Get values request
-        let {firstName, lastName, email, phone,address} = req.body;
+        let {firstName, lastName, email, phone,address, zip_code} = req.body;
         // uPdate values 
         user.firstName = firstName;
         user.lastName = lastName;
         user.email = email;
         user.phone = phone;
         user.address = address;
+        user.zip_code = zip_code;
         // Save if exist file in values
         if (req.file){
             user.image = req.file.filename;

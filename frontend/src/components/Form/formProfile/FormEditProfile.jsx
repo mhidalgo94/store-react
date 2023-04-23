@@ -15,7 +15,7 @@ export default function FormEditProfile() {
     const {setOpen} = useSnackBar();
 
     useEffect(()=>{
-        setDataUser(user)
+        setDataUser(user);
     },[user])
 
     function handleFileChange(event) {
@@ -81,6 +81,13 @@ export default function FormEditProfile() {
             </Grid>
             <Grid item md={6} sm={6} xs={12} >
                 <TextField fullWidth label='Main Address' name='address' value={dataUser.address} 
+                    type='text'
+                    required
+                    size='small'
+                    onChange={(e)=>setDataUser(values=>({...values, [e.target.name]:e.target.value}))}  />
+            </Grid>
+            <Grid item md={6} sm={6} xs={12} >
+                <TextField fullWidth label='Zip Code' name='zip_code' value={dataUser.zip_code} 
                     type='text'
                     required
                     size='small'
