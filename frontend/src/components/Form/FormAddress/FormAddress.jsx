@@ -48,7 +48,7 @@ export default function FormAddress({edit=false,data={}}) {
                     setLogout();
                 }
                 const msg = err?.response?.data?.message || 'Error Server';
-                setOpen(msg,'error')
+                setOpen(msg,'error');
     
             }).finally(()=>{
                 setBtnLoading(false)

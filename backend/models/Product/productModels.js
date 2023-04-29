@@ -1,4 +1,4 @@
-const { Sequelize,sequelize, DataTypes} = require('../../db/index.js');
+const { sequelize, DataTypes} = require('../../db/index.js');
 const { pathStaticPrivate } = require('../../static/index.js');
 const path = require('path');
 

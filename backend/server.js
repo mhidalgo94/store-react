@@ -39,6 +39,9 @@ app.use('/api/user', router.users);
 // Api Addresses
 app.use('/api/addresses', router.address);
 
+// Api Payment Methods
+app.use('/api/paymentMethods', router.paymentMetods);
+
 
 // test server
 app.get('/',(req,res)=>res.json({"message":"Server Running"}))

@@ -23,21 +23,23 @@ function EditProduct() {
     const {token, setLogout} = userState();
     const {id} = params;
 
-    const fetchData = ()=>{
-        setLoadingData(true);
-        getOneProduct(id,token).then(res=>{
-            setData(res?.data);
-        }).catch(err=>{
-            if (err.response.status === 401) {
-                setLogout();
-            }
-        }).finally(()=>{
-            setLoadingData(false);
-        })
-    }
+    
     useEffect(()=>{
+        const fetchData = ()=>{
+            setLoadingData(true);
+            getOneProduct(id,token).then(res=>{
+                setData(res?.data);
+            }).catch(err=>{
+                if (err.response.status === 401) {
+                    setLogout();
+                }
+            }).finally(()=>{
+                setLoadingData(false);
+            })
+        }
         fetchData();
-    },[]);
+    },[id, token,setLogout]);
+    
   return (
     <BasePage title={'Edit Product'} BtnHead={<BtnHead />}>
         {!loadingData ? 

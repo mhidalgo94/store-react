@@ -46,7 +46,8 @@ export default function Addresses() {
 
     const handleDeleteAddress = ()=>{
         setBtnLoadingDelete(true);
-        deleteAddres(idAddresDeleted,token).then(res=>{
+        const id = idAddresDeleted;
+        deleteAddres(id,token).then(res=>{
             const msg = res?.data?.message || "Address successfully removed.";
             setOpen(msg); 
         }).catch(err=>{

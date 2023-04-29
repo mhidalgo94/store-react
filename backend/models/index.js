@@ -14,6 +14,8 @@ db.wishlist = require('./WishList/wishListModels.js');
 db.addresses = require('./Addresses/adressesModels.js');
 db.salesOrder = require('./Order/orderModels.js');
 db.statusOrder = require('./Order/statusOrderModels.js');
+db.paymentMethods = require('./PaymentMethod/paymentMethodModels.js')
+
 
 db.sequelize.sync({alter:true}).then(()=>{
     console.log('DB re-sync done!')
@@ -78,6 +80,10 @@ db.salesOrder.belongsTo(db.user,{
     foreignKey:'user_id',
     as:'user',
 });
+
+
+// Establecer relación belongsTo
+db.paymentMethods.belongsTo(db.user)
 
 db.user.hasMany(db.salesOrder);
 

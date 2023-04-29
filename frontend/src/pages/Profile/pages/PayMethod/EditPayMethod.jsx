@@ -1,14 +1,39 @@
-import {Link, useParams} from 'react-router-dom';
+import { useState,useEffect } from 'react';
+import {Link, useParams, useNavigate} from 'react-router-dom';
 import {Box, Typography, Grid, Stack, Button, Paper} from '@mui/material';
 import ProfileBase from '../../ProfileBase';
 import FormPayMethod from '../../../../components/Form/FormPayMethod/FormPayMethod';
 import PaymentsIcon from '@mui/icons-material/Payments';
-
+import CircularProgress from '@mui/material/CircularProgress';
+import { userState } from '../../../../store/userState';
+import { getOnePaymentMethods } from '../../../../api/fetchPaymentMethods';
+import { useSnackBar } from '../../../../store/snackbarState';
 
 export default function EditPayMethod() {
-
+    const [data,setData] = useState({});
     const {id} = useParams();
-    console.log(id)
+    const {token,setLogout} = userState();
+    const [loadingForm, setLoadingForm] = useState(true);
+    const {setOpen} = useSnackBar();
+    const navigate = useNavigate();
+    
+    useEffect(()=>{
+        getOnePaymentMethods(token,id).then(res=>{
+            const newValues = res?.data;
+            setData(newValues);
+        }).catch(err=>{
+            if (err.response.status === 401) {
+                setLogout();
+            }
+            const msg = err?.response?.data?.message || 'Error Server';
+            setOpen(msg,'error');
+            navigate('/account/profile/pay-methods')
+
+        }).finally(()=>{
+            setLoadingForm(false);
+        })
+    },[id,token,setLogout, setOpen, navigate])
+
   return (
     <ProfileBase>
          <Box sx={{my:2}}>
@@ -28,7 +53,13 @@ export default function EditPayMethod() {
                 </Grid>
             </Grid>
             <Paper  sx={{p:5,my:2, borderRadius: '10px'}}>
-                <FormPayMethod edit={true} data={{card_no:id}}/>
+                {loadingForm ?
+                    <Box sx={{ display: 'flex', justifyContent:'center', width:'100%' }}>
+                        <CircularProgress color='lightBlue' size={24}/>
+                    </Box>
+                 :
+                    <FormPayMethod data={data}/>
+                 }
             </Paper>
         </Box>
     </ProfileBase>

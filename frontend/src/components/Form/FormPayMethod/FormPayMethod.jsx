@@ -1,16 +1,58 @@
-import { useState,useEffect } from 'react';
-import {Box, Button, Grid, TextField} from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Box, Grid, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { addPaymentMethods, updatePaymentMethods } from '../../../api/fetchPaymentMethods';
+import { userState } from '../../../store/userState.js';
+import  { useSnackBar } from '../../../store/snackbarState.js';
 
-export default function FormPayMethod({edit=false,data={}}) {
-    console.log(data)
+
+export default function FormPayMethod({data={}}) {
+    const edit = Boolean(Object.keys(data).length);
     const [values, setValues ] = useState(data);
+    const {token,setLogout} = userState();
+    const navigate = useNavigate();
+    const {setOpen} = useSnackBar();
+    const [loadingBtn, setLoadingBtn] = useState(false);
 
-    useEffect(()=>{
-        console.log(values);
-    },[values])
+    const onSubmit = (e)=>{
+        e.preventDefault();
+        setLoadingBtn(true);
+        const formData = values
+        if(!edit){
+            addPaymentMethods(formData, token).then(res=>{
+                const msg = res?.data?.message;
+                setOpen(msg);
+                navigate('/account/profile/pay-methods');
+            }).catch(err=>{
+                if (err.response.status === 401) {
+                    setLogout();
+                }
+                const msg = err?.response?.data?.message || 'Error Server';
+                setOpen(msg,'error');
+            }).finally(()=>{
+                setLoadingBtn(false);
+            })
+        } else{
+            updatePaymentMethods(formData, data.id,token).then(res=>{
+                const msg = res?.data?.message;
+                setOpen(msg);
+                navigate('/account/profile/pay-methods');
+            }).catch(err=>{
+                if (err.response.status === 401) {
+                    setLogout();
+                }
+                const msg = err?.response?.data?.message || 'Error Server';
+                setOpen(msg,'error');
+            }).finally(()=>{
+                setLoadingBtn(false);
+            })
+        }
+       
+    }
 
   return (
-    <Box component='form'>
+    <Box component='form' onSubmit={onSubmit}>
         <Grid container spacing={2}>
             <Grid item md={6} sm={6} xs={12}>
                 <TextField 
@@ -18,9 +60,10 @@ export default function FormPayMethod({edit=false,data={}}) {
                     required
                     size='small'
                     label='Card Number'
-                    name='card_no'
+                    name='numberCard'
+                    // inputProps={{pattern:/^\d{12,19}$/}}
                     fullWidth
-                    value={values?.card_no}
+                    value={values?.numberCard || ''}
                     onChange={(e)=> setValues(v=> ({...v,[e.target.name]:e.target.value}))}
                     />
             </Grid>
@@ -30,9 +73,9 @@ export default function FormPayMethod({edit=false,data={}}) {
                     required
                     size='small'
                     label='Name or Card'
-                    name='name'
+                    name='nameCard'
                     fullWidth
-                    value={values?.address}
+                    value={values?.nameCard || ''}
                     onChange={(e)=> setValues(v=> ({...v,[e.target.name]:e.target.value}))}
                 />
             </Grid>
@@ -42,9 +85,10 @@ export default function FormPayMethod({edit=false,data={}}) {
                     required
                     size='small'
                     label='Exp. Date'
-                    name='exp'
+                    name='expirationDate'
+                    placeholder="Ex: 02/30"
                     fullWidth
-                    value={values?.phone}
+                    value={values?.expirationDate || ''}
                     onChange={(e)=> setValues(v=> ({...v,[e.target.name]:e.target.value}))}
                     />
             </Grid>
@@ -56,14 +100,14 @@ export default function FormPayMethod({edit=false,data={}}) {
                     label='CVC'
                     name='cvc'
                     fullWidth
-                    value={values?.phone}
+                    value={values?.cvc || ''}
                     onChange={(e)=> setValues(v=> ({...v,[e.target.name]:e.target.value}))}
                     />
             </Grid>
         </Grid>
-        <Button sx={{mt:2,textTransform:'capitalize',fontWeight:'600'}} type='submit' variant='contained'>
+        <LoadingButton loading={loadingBtn} sx={{mt:2,textTransform:'capitalize',fontWeight:'600'}} type='submit' variant='contained'>
             {edit ? 'Save Changes' : 'Submit'}
-        </Button>
+        </LoadingButton>
     </Box>
   )
 }
