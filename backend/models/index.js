@@ -1,4 +1,4 @@
-const {Sequelize,sequelize,DataTypes} = require('../db/index.js');
+const {Sequelize,sequelize} = require('../db/index.js');
 
 
 const db = {}
@@ -14,10 +14,11 @@ db.wishlist = require('./WishList/wishListModels.js');
 db.addresses = require('./Addresses/adressesModels.js');
 db.salesOrder = require('./Order/orderModels.js');
 db.statusOrder = require('./Order/statusOrderModels.js');
+db.orderItems = require('./Order/OrderItemsModels.js')
 db.paymentMethods = require('./PaymentMethod/paymentMethodModels.js')
 
 
-db.sequelize.sync({alter:true}).then(()=>{
+db.sequelize.sync({force:true}).then(()=>{
     console.log('DB re-sync done!')
 }).catch(err=>{
     console.log("Sync" + err)
@@ -62,24 +63,19 @@ db.addresses.belongsTo(db.user,{
     as:'user',
 });
 
-// An address can have many sales orders
 // db.addresses.hasMany(db.salesOrder);
-db.salesOrder.belongsTo(db.addresses,{
-    foreignKey:'address_id',
-    as:'address',
-});
+db.salesOrder.belongsTo(db.addresses);
 
 // Match Sales Order with Status Order
-db.salesOrder.belongsTo(db.statusOrder,{
-    foreignKey:'status_order_id',
-    as:'status_order',
-});
+db.salesOrder.belongsTo(db.statusOrder);
 
 // Match Sales order with User
-db.salesOrder.belongsTo(db.user,{
-    foreignKey:'user_id',
-    as:'user',
-});
+db.salesOrder.belongsTo(db.user);
+
+db.orderItems.belongsTo(db.products);
+
+// Define la relación entre SalesOrder y OrderItem
+db.salesOrder.belongsToMany(db.orderItems, { through: 'OrderItemSales' });
 
 
 // Establecer relación belongsTo

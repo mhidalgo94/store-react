@@ -9,7 +9,7 @@ function authenticated(req,res,next){
         const token = authHeader && authHeader.split(' ')[1];
         // console.log({"Token auth":token})
         if(!token){
-            return res.status(401).json({message:"Token not provided."})
+            return res.status(401).json({message:"Token not provided.Require authentication."})
         }
         // Verifica y decodifica el token
         const decoded = jwt.verify(token, config.SECRET_KEY_JWT);

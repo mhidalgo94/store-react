@@ -84,7 +84,7 @@ function AddNewCategory() {
                     loadingPosition="start"
                     startIcon={<AddIcon />}
                     variant="contained"
-                 type='submit' color='primary' sx={{textTransform:'capitalize'}}>Create</LoadingButton>
+                 type='submit' color='primary' sx={{textTransform:'capitalize'}}>New Category</LoadingButton>
 
             </Stack>
         </Box>

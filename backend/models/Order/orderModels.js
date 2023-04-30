@@ -1,4 +1,4 @@
-const { Sequelize,sequelize, DataTypes} = require('../../db/index.js');
+const { sequelize, DataTypes} = require('../../db/index.js');
 
 const SalesOrder = sequelize.define('orderSales', {
     id: {
@@ -11,7 +11,7 @@ const SalesOrder = sequelize.define('orderSales', {
       allowNull: false
     },
     total: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL,
       allowNull: false
     },
     UUID: {
