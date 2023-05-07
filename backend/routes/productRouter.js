@@ -1,21 +1,21 @@
 const productController = require('../controllers/Product/productsController.js');
 const { authenticated } =require('../middleware/authenticate.js')
+const { authorize } =require('../middleware/authorize.js')
 const {uploadProducts} = require('../middleware/multerConfig.js')
-
 
 const router = require('express').Router()
 
 // Create
-router.post('/addProduct', authenticated,uploadProducts.array('images') ,productController.addProduct);
+router.post('/addProduct', authenticated, authorize(['admin','moderator']),uploadProducts.array('images') ,productController.addProduct);
 // List products
-router.get('/allProducts',productController.getAllProducts);
-// List product available
-router.get('/published', productController.getAvailableProducts);
+router.get('/allProducts',authenticated,authorize(['admin','moderator']),productController.getAllProducts);
+// List products public user
+router.get('/', productController.getAvailableProducts);
 // One Product
 router.get('/:id', productController.getOneProduct);
 // Update Product
-router.put('/:id',authenticated,uploadProducts.array('images'), productController.updateProduct);
+router.put('/:id',authenticated,authorize(['admin','moderator']), uploadProducts.array('images'), productController.updateProduct);
 // Remove one product
-router.delete('/:id',authenticated, productController.removeProduct);
+router.delete('/:id',authenticated,authorize(['admin','moderator']), productController.removeProduct);
 
 module.exports = router;

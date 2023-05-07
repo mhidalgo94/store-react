@@ -1,5 +1,5 @@
 const categoryControllers = require('../controllers/Category/categoryControllers.js');
-const { authenticated } =require('../middleware/authenticate.js')
+const { authenticated } = require('../middleware/authenticate.js')
 const { authorize } =require('../middleware/authorize.js')
 
 

@@ -21,8 +21,8 @@ export default function ItemCart({values: item})  {
 
   return (
     <>
-        <Box sx={{display:'flex',alignItems:'center',margin:'10px 5px',justifyContent:'space-between'}}>
-            <Box sx={{display:'flex', flexDirection:'column',alignItems:'center', gap:'2px'}}>
+        <Box sx={{display:'flex',alignItems:'center',margin:'10px 5px',width:'100%'}}>
+            <Box sx={{display:'flex',width:'15%', flexDirection:'column',alignItems:'center', gap:'2px'}}>
                 <IconButton 
                     onClick={ incrementQuantity }
                     variant='outlined'
@@ -36,15 +36,15 @@ export default function ItemCart({values: item})  {
                     <RemoveIcon  color='primary' fontSize='12px'/>
                 </IconButton>
             </Box>
-            <Box>
-                <img src={item.image[0]} alt={item.title} width="100" height='100'   />
+            <Box sx={{width:'25%'}}>
+                <img src={item.images[0]} alt={item.name} width="60" height="60"   />
             </Box>
-            <Box >
-                <Typography variant="subtitle1" fontWeight='bold'>{item.title.substring(0,10)}...</Typography>
+            <Box  sx={{width:'45%'}}>
+                <Typography variant="subtitle1" fontWeight='bold'>{item.name.substring(0,25)}{item.name.length > 25 ? "..." : null}</Typography>
                 <Typography variant="caption text" fontSize='12px' color='grey.A700'>${item.price} x {item.quantity}</Typography>
                 <Typography variant="h6" color='primary' fontWeight='bold'>${item.priceXquantity}</Typography>
             </Box>
-            <Box>
+            <Box sx={{width:'15%'}}>
             <IconButton variant='outlined'   size='small'>
                 <Tooltip title="Remove" arrow>
                     <ClearIcon  onClick={()=>removeForIdProducts(item.id)} />

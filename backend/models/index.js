@@ -18,7 +18,7 @@ db.orderItems = require('./Order/OrderItemsModels.js')
 db.paymentMethods = require('./PaymentMethod/paymentMethodModels.js')
 
 
-db.sequelize.sync({force:true}).then(()=>{
+db.sequelize.sync({alter:true}).then(()=>{
     console.log('DB re-sync done!')
 }).catch(err=>{
     console.log("Sync" + err)
@@ -49,7 +49,7 @@ db.products.User = db.products.belongsTo(db.user,{
 // Relation Products model with Category
 db.products.belongsToMany(db.category,{ through: 'ProductCategory', as:'categories' });
 
-db.category.belongsToMany(db.products, { through: 'ProductCategory' })
+// db.category.belongsToMany(db.products, { through: 'ProductCategory' })
 
 
 // Products and User model with WishList

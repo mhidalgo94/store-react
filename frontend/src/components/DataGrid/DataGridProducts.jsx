@@ -79,7 +79,7 @@ export default function DataGridProducts() {
 
     useEffect(()=>{
         setLoadingTable(true);
-        getAllProducts().then(res=>{
+        getAllProducts(token).then(res=>{
             setData(res?.data)
         }).catch(err=>{
             if (err.response.status === 401) {
@@ -91,7 +91,7 @@ export default function DataGridProducts() {
             setLoadingTable(false);
             
         })
-    },[setLogout, setOpen])
+    },[setLogout, setOpen,token])
 
 
     const columns = [

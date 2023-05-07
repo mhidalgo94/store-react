@@ -21,10 +21,10 @@ export default function CartItems({item,update, remove}) {
     <Box sx={{my:2}}>
         <Paper elevation={2} sx={{p:0.5}}>
             <Stack direction='row' gap={2}>
-              <img width='120px' height='120px' src={item.image[0]} alt={item.title} />
+              <img width='120px' height='120px' src={item.images[0]} alt={item.name} />
               <Box sx={{width:'100%'}} >
                 <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                  <Typography variant='subtitle1'>{item.title}</Typography>
+                  <Typography variant='subtitle1'>{item.name}</Typography>
                   <Tooltip title="Remove" arrow>
                     <IconButton onClick={()=>remove(item.id)} >
                       <CloseIcon  sx={{fontSize:'20px'}} />

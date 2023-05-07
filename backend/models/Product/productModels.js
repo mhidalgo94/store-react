@@ -1,5 +1,4 @@
 const { sequelize, DataTypes} = require('../../db/index.js');
-const { pathStaticPrivate } = require('../../static/index.js');
 const path = require('path');
 
 const Product = sequelize.define("Product",{

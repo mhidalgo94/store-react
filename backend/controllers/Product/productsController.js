@@ -1,8 +1,10 @@
 const db = require('../../models/index.js');
 const path = require('path');
+const { Op } = require('sequelize');
+
 const Product = db.products;
-const Category = db.category;
 const User = db.user;
+const Category = db.category
 
 function makeRelativeFilesRoute(files){
     // This make list route relative files static for save in model Products
@@ -59,6 +61,7 @@ const addProduct = async (req, res)=>{
 
 }
 
+// This controller without filter, just is manager
 const getAllProducts = async (req,res)=>{
     try{
         let products = await Product.findAll({
@@ -89,13 +92,42 @@ const getAllProducts = async (req,res)=>{
 }
 
 const getAvailableProducts = async (req,res)=>{
-    try{
-        let getAvailable = await Product.findAll({available:true});
-        res.status(200).json(getAvailable);
-    }catch{
-        console.log('Something Wrong in get available all products');
-        res.status(500).json({"message":"Server Error"});
-    }
+    try {
+        const { page = 1, limit = 40, search = '' } = req.query;
+        const offset = (page - 1) * limit;
+    
+        const products = await Product.findAndCountAll({
+          where: {
+            [Op.or]: [
+              { name: { [Op.like]: `%${search}%` } },
+              { description: { [Op.like]: `%${search}%` } },
+              { specification: { [Op.like]: `%${search}%` } },
+            ],
+            available:true,
+          },
+          include:[
+            {
+                model:Category,
+                as:'categories',
+                attributes:['nombre'],
+                through: { attributes: [] } 
+            }
+        ],
+          offset,
+          limit,
+        })
+    
+        const totalPages = Math.ceil(products.count / limit);
+    
+        res.status(200).json({
+          data: products.rows,
+          currentPage: page,
+          totalPages,
+        });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error retrieving products' });
+      }
 }
 
 const getOneProduct = async (req,res)=>{

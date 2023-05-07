@@ -57,9 +57,7 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
         </Link>
         }
       </MenuItem>
-      <MenuItem sx={styleLinkMenu}>
-      </MenuItem>
-      {['admin','moderator'].includes(user.role) ?
+      {['admin','moderator'].includes(user.role) &&
         <MenuItem sx={styleLinkMenu}>
         <Link to='/manage/list-products' className="link">
           <ListItem sx={{padding:0,margin:'0 10px'}}>
@@ -68,8 +66,6 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
           </ListItem> 
         </Link>
         </MenuItem> 
-        :
-        null
       }
       <MenuItem sx={styleLinkMenu}>
         {isAuth ?
@@ -86,6 +82,6 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
           </Link>
       }
       </MenuItem>
-    </Menu>
+      </Menu>  
   );
 }
