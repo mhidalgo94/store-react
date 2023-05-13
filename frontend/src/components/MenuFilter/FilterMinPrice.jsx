@@ -1,10 +1,13 @@
+import {useContext} from 'react';
 import { Box, Typography, TextField, Stack } from "@mui/material";
+import { FilterContext } from '../../context/Product/filterProducts';
 
-export default function FilterMinPrice({changeFilter}) {
 
+export default function FilterMinPrice() {
+    const {setFilters} = useContext(FilterContext);
     const changeMinPrice = (event)=>{
         const minPrice = event.target.value;
-        changeFilter(prevValues=> ({...prevValues, minPrice}))
+        setFilters(prevValues=> ({...prevValues, minPrice}))
     
       }
   return (

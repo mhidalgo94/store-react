@@ -26,7 +26,7 @@ export default function CardProduct({ item, id , btnFavorite=false }) {
   const {setOpen} = useSnackBar()
 
   const addCart = ()=>{
-    const verifyInCart = products.find(product => product.id === id);
+    const verifyInCart = products.find(product => parseInt(product.id) === parseInt(id));
     if(verifyInCart){
       setOpen('This product is already in the cart.', 'info')
       return 
@@ -41,6 +41,7 @@ export default function CardProduct({ item, id , btnFavorite=false }) {
   }
 
   const addWishList = ()=>{
+    // terminar el agrego de wish list
     setOpen('Added to wishlist','success')
   }
 
@@ -77,12 +78,13 @@ export default function CardProduct({ item, id , btnFavorite=false }) {
           }}
         >
           <Stack direction="row" spacing={2}>
-            <Typography variant="subtitle1" color="primary">
+            <Typography variant="subtitle1" color="lightBlue.600">
               $ {item.price}
             </Typography>
+
             {item.old_price > item.price &&
              <Box sx={{display:'flex'}}>
-               <Typography variant="subtitle1"color="gray" sx={{ textDecoration: ""}}>$</Typography> 
+               <Typography variant="subtitle1"color="gray" sx={{ textDecoration: ""}}>$ </Typography>
                 <Typography
                   variant="subtitle1"
                   color="gray"

@@ -133,7 +133,10 @@ const getAvailableProducts = async (req,res)=>{
 const getOneProduct = async (req,res)=>{
     try{       
         let id = req.params.id;
-        let getOne = await Product.findOne({where:{ id:id }});
+        let getOne = await Product.findOne({
+            where:{ id:id },
+            attributes:['id','name', 'available','price','old_price', 'images','specification','description']
+        });
         if(!getOne){
             res.status(401).json({message:"The product does not exist"})
         }

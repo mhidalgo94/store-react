@@ -20,9 +20,9 @@ export const getPublicProducts = async (params={})=>{
 
 
 
-export const getOneProduct = async (id,token)=>{
-    const headers = {Authorization: `Bearer ${token}`};
-    const res = await instance.get(`/products/${id}`, {headers});
+export const getOneProduct = async (id,)=>{
+    // const headers = {Authorization: `Bearer ${token}`};
+    const res = await instance.get(`/products/${id}`);
     return res;
 }
 

@@ -2,10 +2,10 @@ import { create } from 'zustand';
 import { persist} from 'zustand/middleware'
 
 const  addCart = (products, newProduct)=>{
-    const item = products.find(item=> item.id === newProduct.id);
+    const item = products.find(item=> parseInt(item.id) === parseInt(newProduct.id));
 
     if (item){
-        item.quantity = newProduct.quantity;
+        item.quantity = newProduct.quantity || 1;
         return [...products]
     }else{
         return [...products,newProduct]
@@ -34,9 +34,10 @@ export const useCartState = create(persist((set,get)=>({
     },
     updateMountProductCart(idItem,quantity){
         set(state =>{
-            const item = state.products.find(item => item.id === idItem);
+            const item = state.products.find(item => parseInt(item.id) === parseInt(idItem));
+            console.log(item)
             item.quantity = quantity;
-            item.priceXquantity = item.price * item.quantity
+            item.priceXquantity = parseFloat(item.price * item.quantity).toFixed(2)
 
         return [...state.products]
         })
@@ -47,7 +48,6 @@ export const useCartState = create(persist((set,get)=>({
             return {...state, products:items}
         })
     },
-    
     // Subtotal pay
     getSubtotal : ()=>{
         const {products} = get();

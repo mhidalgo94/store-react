@@ -5,7 +5,7 @@ import Comment from '../Comment/Comment';
 import FormReview from '../Form/FormReview/FormReview';
 
 
-export default function TabsProduct() {
+export default function TabsProduct({specification, id}) {
     const [value, setValue] = useState('0');
     const styleTab = {
         textTransform:'capitalize',
@@ -22,11 +22,11 @@ export default function TabsProduct() {
                 </TabList>
             </Box>
             <TabPanel value='0'>
-                Specification:
+                {specification}
             </TabPanel>
             <TabPanel value='1' sx={{px:0}}>
                 {/* Reviews client about article */}
-                <Comment />
+                <Comment id={id} />
                 <Divider sx={{my:5}}/>
                 {/* Form for add review about  article */}
                 <FormReview />

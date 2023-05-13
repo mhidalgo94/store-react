@@ -3,7 +3,7 @@ import LayoutStore from "../components/Base/LayoutStore";
 import LayoutManger from "../components/Base/LayoutManger";
 
 import Home from "../pages/Home/Home";
-import Products from "../pages/Products/Products";
+import ProductsProvider from "../pages/Products/ProductsProvider";
 import Product from '../pages/Product/Product';
 import PageCheckoutAlternative1 from "../pages/Checkout/CheckoutAlternative_1";
 import CartShopPage from "../pages/CartShop/CartShopPage";
@@ -38,7 +38,7 @@ const Routers = createBrowserRouter([
         element: <LayoutStore authRequired={false} />,
         children: [
             { path:'', element: <Home/>,},
-            { path:'/shop/products', element: <Products /> },
+            { path:'/shop/products', element: <ProductsProvider /> },
             { path:'/shop/product/:id', element: <Product /> },
             { path:'/checkout-alternative', element: <PageCheckoutAlternative1 /> },
             { path:'/cart-shop', element: <CartShopPage /> },

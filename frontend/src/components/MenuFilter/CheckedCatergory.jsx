@@ -1,11 +1,13 @@
-import { useEffect,useState } from 'react';
+import { useContext, useEffect,useState } from 'react';
 import {Accordion,AccordionDetails,AccordionSummary, Typography,Checkbox, FormControlLabel, Box} from '@mui/material/';
 import {getAllCategories} from '../../api/fetchCategory.js'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSnackBar } from '../../store/snackbarState.js';
+import { FilterContext } from '../../context/Product/filterProducts.jsx';
 
-export default function CheckedCatergory({changeFilter}) {
+export default function CheckedCatergory() {
+    const {setFilters} = useContext(FilterContext)
     const [categories,setCategories] = useState([])
     const [loading, setLoading] = useState(false);
     const {setOpen} = useSnackBar();
@@ -17,7 +19,7 @@ export default function CheckedCatergory({changeFilter}) {
             const  resData = res?.data;
             const allCategories= resData.map(cate=>cate.nombre);
             setCategories(allCategories);
-            changeFilter(preValues=> ({...preValues, category:[...allCategories]}))
+            setFilters(preValues=> ({...preValues, category:[...allCategories]}))
         }).catch(err=>{
             const msg = err?.response?.data?.message || 'Error Server';
             setOpen(msg,'error');
@@ -29,7 +31,7 @@ export default function CheckedCatergory({changeFilter}) {
 
     const changeChecked = (e)=>{
         const value = e.target.name;
-        changeFilter(preValues=>{
+        setFilters(preValues=>{
             const index = preValues.category.indexOf(value);
             if(index > -1) {
                 const newCategories = preValues.category;

@@ -11,7 +11,7 @@ export default function MiniSlider({values, imageSelected,setImageSelected}) {
       }
 
       const nextImage = ()=>{
-        setcurrentSlider(currentSlider === (values.image.length - 3) ? 0 : (prev) => prev + 1);
+        setcurrentSlider(currentSlider === (values.images.length - 3) ? 0 : (prev) => prev + 1);
       }
 
       const styleIcons = {
@@ -23,9 +23,9 @@ export default function MiniSlider({values, imageSelected,setImageSelected}) {
 
   return (
     <div className="slider-images">
-        {values.image.length > 4 && <ArrowBackIosIcon onClick={prevImage} sx={styleIcons}/>}
+        {values.images.length > 4 && <ArrowBackIosIcon onClick={prevImage} sx={styleIcons}/>}
         <div className="images" style={{transform:`translateX(-${(currentSlider * 100)/2}px)`}} >
-            {values.image.map((value,index)=>{
+            {values.images.map((value,index)=>{
                 return (
                 <img key={index} 
                     onClick={()=>setImageSelected(index)} 
@@ -37,7 +37,7 @@ export default function MiniSlider({values, imageSelected,setImageSelected}) {
             })}
             
         </div>
-        {values.image.length > 4 && <ArrowForwardIosIcon  onClick={nextImage} sx={styleIcons}/>}
+        {values.images.length > 4 && <ArrowForwardIosIcon  onClick={nextImage} sx={styleIcons}/>}
 
         
     </div>

@@ -1,4 +1,5 @@
 import LoadingButton from "@mui/lab/LoadingButton/LoadingButton";
+import SearchIcon from '@mui/icons-material/Search';
 import { Box,TextField } from "@mui/material";
 
 export default function SearchProductsFilter({changeSearch,loading}) {
@@ -13,7 +14,9 @@ export default function SearchProductsFilter({changeSearch,loading}) {
   return (  
     <Box component='form' sx={{pt:1,display:'flex',gap:1}} onSubmit={handleSubmit}>
       <TextField type="text" name='search' fullWidth  size='small'  placeholder="Search..."/>
-      <LoadingButton loading={loading} type='submit'  variant="contained" sx={{textTransform:'capitalize'}}>Search</LoadingButton>
+      <LoadingButton loading={loading} type='submit' size='samll' color='info' variant="contained" sx={{textTransform:'capitalize'}}>
+        <SearchIcon />
+        </LoadingButton>
     </Box>
   )
 }
