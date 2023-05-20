@@ -12,3 +12,9 @@ export const getReviews = async (id)=>{
     const res = await instance.get(`/reviews/published/${id}`);
     return res;
 }
+
+
+export const getReviewSummary = async (id)=>{
+    const res = await instance.get(`/reviews/reviewSummary/${id}`);
+    return res;
+}

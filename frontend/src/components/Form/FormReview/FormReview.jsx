@@ -36,7 +36,7 @@ export default function FormReview({addValue}) {
         }
         // console.log(valuesForm)
         addReviews(valuesForm, token).then(res=> {
-            setValues(prev=> ({...prev, rate: 3.0, body:''}))
+            setValues(prev=> ({...prev, rate: 4.0, body:''}))
             console.log(res.data)
             addValue(prev=> ([...prev, res.data.data]))
             setOpen('Review added successfully');

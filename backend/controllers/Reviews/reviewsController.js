@@ -1,4 +1,5 @@
 const db = require('../../models/index.js');
+const { Op, Sequelize } = require('sequelize');
 
 const Reviews = db.reviews;
 const User = db.user;
@@ -44,10 +45,9 @@ const addReview = async (req, res)=>{
 
 const getReviews = async (req,res)=>{
     try{
-        console.log(req.params)
         let { id } = req.params
         let reviews = await Reviews.findAll({
-            where:{product_id: parseInt(id), available:true},
+            where:{ product_id: parseInt(id), available:true },
             attributes:{
                 exclude:['available', 'UUID']
             },
@@ -58,12 +58,35 @@ const getReviews = async (req,res)=>{
         })
         res.status(200).json(reviews);
     }catch(error){
-        console.log('Something Wrong in get all reviews product id');
+        console.log('Something Wrong in get all reviews with product id');
         console.log(error)
         res.status(500).json({"message":"Server Error"});
     }
     
 }
+
+const getReviewSummary = async (req,res)=>{
+    try{
+
+        let { id } = req.params
+        let reviewsSummary = await Reviews.findOne({
+            where:{ product_id: parseInt(id), available:true },
+            attributes: [
+                [Sequelize.fn('avg', Sequelize.col('rate')), 'avg'],
+                [Sequelize.fn('count', Sequelize.col('id')), 'mount'],
+              ],
+              raw: true,
+        })
+        res.status(200).json(reviewsSummary);
+
+        
+    }catch(error){
+        console.log('Something Wrong in get reviews summary with product id');
+        console.log(error)
+        res.status(500).json({"message":"Server Error"});
+    }   
+}
+
 
 const getAllReviews = async (req,res)=>{
     try{
@@ -117,6 +140,7 @@ module.exports = {
     addReview,
     getReviews,
     getAllReviews,
+    getReviewSummary,
     getOneReview,
     updateReview,
     removeReview,

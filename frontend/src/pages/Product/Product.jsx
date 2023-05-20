@@ -83,8 +83,7 @@ export default function Product() {
                     <Typography variant='subtitle1' fontWeight='bold'>Description:</Typography>
                     <Typography variant='body2' textAlign='justify' sx={{mx:1,maxWidth: '380px'}}>{product.description}</Typography>
                     {/* Rating Product */}
-                    <Typography variant='subtitle1' fontWeight='bold' sx={{mt:3}}>Rated:</Typography>
-                    <RatedProduct />
+                    <RatedProduct id={id} />
 
                     <Stack direction='row' spacing={1} sx={{m:1}} alignItems='center'>                    
                         <Typography variant="h4" color='lightBlue.500' >${product.price}</Typography>

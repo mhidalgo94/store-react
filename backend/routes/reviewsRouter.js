@@ -10,6 +10,8 @@ router.post('/addReview', authenticated ,reviewController.addReview);
 router.get('/allReviews', authenticated, reviewController.getAllReviews);
 // List product available for client
 router.get('/published/:id', reviewController.getReviews);
+// Review Summary
+router.get('/reviewSummary/:id',reviewController.getReviewSummary),
 // One Review
 router.get('/:id', authenticated, reviewController.getOneReview);
 // Update Review
