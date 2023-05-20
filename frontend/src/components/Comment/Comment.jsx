@@ -1,44 +1,35 @@
-import {useState} from 'react';
-import { Stack, Avatar, Rating, Typography } from '@mui/material';
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import React from 'react'
-import { Container } from '@mui/system';
+import {useEffect} from 'react';
+import { Box } from '@mui/material';
+import Review from './Reviews';
+import { getReviews } from '../../api/fetchReviews.js'
+import { useSnackBar } from '../../store/snackbarState';
+import CircularProgress from '@mui/material/CircularProgress';
 
-export default function Comment() {
-    const [rate,setRate] = useState(3.5)
-    const photo = false;
-    const f = new Date();
+export default function Comment({id,reviews, setReviews}) {
+    const {setOpen} = useSnackBar();
 
-    const changeRate = (event,newValue)=>{
-        console.log(newValue)
-        setRate(newValue);
-    }
+    useEffect(()=>{
+        getReviews(id).then(res=>{
+            setReviews(res.data);
+        }).catch(err=>{
+            const msg = err?.response?.data?.message || 'Error Server';
+            setOpen(msg, 'error')
+        })
+    },[id,setOpen,setReviews])
 
   return (
-    <Container>
-        <Stack direction='row' spacing={1} alignItems='center'>
-            {photo ?
-                <Avatar
-                    alt="Remy Sharp"
-                    src="/static/images/avatar/1.jpg"
-                    sx={{ width: 56, height: 56 }}
-                /> 
-                :
-                <Avatar>
-                    <AccountCircleIcon />
-                </Avatar>
-            }
-            <Stack>
-                    <Typography variant='h6'>Jhon Valerio</Typography>
-                <Stack direction='row' spacing={1} alignItems='center' gap={1}>
-                    <Rating name="rate" defaultValue={rate} value={rate} onChange={changeRate} precision={0.5} />
-                    <Typography variant='body1' fontWeight='bold'>{rate}</Typography>
-                    <Typography variant='subtitle1'>{`${f.getMonth()+1}/${f.getDate()}/${f.getFullYear()}`}</Typography>
-                </Stack>
-            </Stack>
-        </Stack>
+    <>
+    {reviews.length > 0 
+        ? reviews.map((values,index)=>{
+            return <Review values={values} key={index} />
+        })
+        :
+        <Box sx={{width:'100%',display:'flex', justifyContent:'center', mb:2}}>
+            <CircularProgress />
+        </Box>
 
-        <Typography variant='body1'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe asperiores aspernatur ea suscipit minus eum explicabo culpa quam debitis? Autem quam enim harum, quasi atque quo nihil non excepturi laudantium.</Typography>
-    </Container>
+    }
+
+    </>
   )
 }

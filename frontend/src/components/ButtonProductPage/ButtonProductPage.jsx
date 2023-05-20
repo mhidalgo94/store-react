@@ -24,8 +24,8 @@ export default function ButtonProductPage({ product }) {
 
     }
   return (
-    <Stack direction="row" spacing={3} sx={{my:1}} alignItems='center'>
-        {product.quantity === 0 ? (
+    <Stack direction="row" spacing={2} sx={{my:1}} alignItems='center'>
+        {product.quantity === 1 ? (
             <IconButton disabled sx={{border:'1px solid ', borderRadius:'8px',cursor:'no-drop'}}
             onClick={decrementQuantity}>
                 <RemoveIcon color='grey' />

@@ -18,11 +18,12 @@ db.orderItems = require('./Order/OrderItemsModels.js')
 db.paymentMethods = require('./PaymentMethod/paymentMethodModels.js')
 
 
-db.sequelize.sync({alter:true}).then(()=>{
+db.sequelize.sync({alter:false}).then(()=>{
     console.log('DB re-sync done!')
 }).catch(err=>{
     console.log("Sync" + err)
 })
+
 
 
 // 1  Relation Models
@@ -39,22 +40,24 @@ db.reviews.belongsTo(db.products,{
     onDelete: 'CASCADE'
 })
 
+
+// user with reviews
+db.user.hasMany(db.reviews);
+db.reviews.belongsTo(db.user);
+
+
 // User with products
-db.products.User = db.products.belongsTo(db.user,{
+// db.products.User = db.products.belongsTo(db.user,{
+db.products.belongsTo(db.user,{
     foreignKey:'user_id',
     as:'user',
     onDelete: 'CASCADE'
 })
 
-// Relation Products model with Category
-db.products.belongsToMany(db.category,{ through: 'ProductCategory', as:'categories' });
-
-// db.category.belongsToMany(db.products, { through: 'ProductCategory' })
-
-
 // Products and User model with WishList
 db.user.belongsToMany(db.products, { through: db.wishlist });
 db.products.belongsToMany(db.user, { through: db.wishlist });
+
 
 // User can have multiple addresses
 db.user.hasMany(db.addresses);
@@ -82,6 +85,11 @@ db.salesOrder.belongsToMany(db.orderItems, { through: 'OrderItemSales' });
 db.paymentMethods.belongsTo(db.user)
 
 db.user.hasMany(db.salesOrder);
+
+// Relation Products model with Category
+db.products.belongsToMany(db.category,{ through: 'ProductCategory', as:'categories' });
+
+// db.category.belongsToMany(db.products, { through: 'ProductCategory' })
 
 
 

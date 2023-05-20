@@ -52,7 +52,7 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
         <Link to='/sign-in' className="link">
           <ListItem sx={{padding:0,margin:'0 10px'}}>
               <AccountCircleIcon  />
-              <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1} >Sign In</Typography>
+              <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1} >Create Account</Typography>
           </ListItem>
         </Link>
         }

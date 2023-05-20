@@ -73,12 +73,15 @@ const getAllProducts = async (req,res)=>{
             ],
             include: [
                 {
-                    association:Product.User,
+                    model: db.user,
                     as:'user',
                     attributes:{
                         exclude:['password','is_active','role','updatedAt','createdAt','UUID']
                     }
-                }]
+                }
+            ]
+        }).then(product=> {
+            return product  
         });
 
 
@@ -194,8 +197,8 @@ const removeProduct = async (req,res)=>{
 
     try{
 
-        let id = req.params.id
-        const userEmail = req.user.email
+        let id = req.params.id;
+        const userEmail = req.user.email;
         // Find id user request.
         const user = await User.findOne({where:{email:userEmail}})
         if(user.role !== 'admin' && user.role !== 'moderator'){

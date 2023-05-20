@@ -1,44 +1,76 @@
 const db = require('../../models/index.js');
 
 const Reviews = db.reviews;
-
+const User = db.user;
+const Product = db.products;
 
 const addReview = async (req, res)=>{
-    
-    let values = {
-        name : req.body.body,
-        rate : req.body.rate,
-        product_id : req.body.product_id
-    }
-
     try{
-        const reviews = await Reviews.create(values);
-        res.status(200).json(reviews);
+        const {email} = req.user;
+        const user = await User.findOne({where:{email}})
+        if(!user){
+            return res.status(404).json({message:'User does not exist'})
+        }
+        const {id: productId, rate, body} = req.body;
+        const product = await Product.findByPk(productId);
+        if(!product){
+            return res.status(404).json({message:'Product does not exist'})
+        }
+        const reviews = await Reviews.create({
+            userId:user.id,
+            product_id : productId,
+            rate,
+            body
+        }).then(rev=>{
+            const reload =  rev.reload({ 
+                include: {
+                    model:User,
+                    attributes:['firstName','lastName','image','email']
+                },
+          
+            })
+            return reload;
+        }).then(rectify=>{
+            const {available,UUID, userId, ...rest } = rectify.toJSON();
+            return rest;
+        });
+        res.status(200).json({data:reviews});
     }
-    catch{
+    catch(error){
         console.error('Something Wrong in create review')
         res.status(500).json({"message":"Server Error"})
     }
 }
 
-const getAllReviews = async (req,res)=>{
+const getReviews = async (req,res)=>{
     try{
-        let reviews = await Reviews.findAll({});
-
+        console.log(req.params)
+        let { id } = req.params
+        let reviews = await Reviews.findAll({
+            where:{product_id: parseInt(id), available:true},
+            attributes:{
+                exclude:['available', 'UUID']
+            },
+            include:{
+                model: User,
+                attributes:['firstName','lastName','image','email']
+            }
+        })
         res.status(200).json(reviews);
-    }catch{
-        console.log('Something Wrong in get all reviews');
+    }catch(error){
+        console.log('Something Wrong in get all reviews product id');
+        console.log(error)
         res.status(500).json({"message":"Server Error"});
     }
     
 }
 
-const getAvailableReviews = async (req,res)=>{
+const getAllReviews = async (req,res)=>{
     try{
-        let getAvailable = await Reviews.findAll({available:true});
-        res.status(200).json(getAvailable);
+        let reviews = await Reviews.findAll();
+        res.status(200).json(reviews);
     }catch{
-        console.error('Something Wrong in get available all reviews');
+        console.error('Something Wrong in get all reviews');
         res.status(500).json({"message":"Server Error"});
     }
 }
@@ -83,8 +115,8 @@ const removeReview = async (req,res)=>{
 
 module.exports = {
     addReview,
+    getReviews,
     getAllReviews,
-    getAvailableReviews,
     getOneReview,
     updateReview,
     removeReview,

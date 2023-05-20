@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import {useParams} from 'react-router-dom';
-import { Box,Container, Grid, Typography, Button,Stack } from "@mui/material"
+import { Box, Button,Container, Grid, Typography,Stack } from "@mui/material"
+
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import MiniSlider from "../../components/MiniSlider/MiniSlider";
 import TabsProduct from "../../components/TabsProduct/TabsProduct";
 import CircularProgress from '@mui/material/CircularProgress';
 
-// import { useSnackBar } from "../../store/snackbarState";
-import {useCartState} from './../../store/cartState.js'
-import {getOneProduct} from '../../api/fetchProducts.js'
+import { useSnackBar } from "../../store/snackbarState";
+import { useCartState } from './../../store/cartState.js'
+import { getOneProduct } from '../../api/fetchProducts.js'
 import RatedProduct from "../../components/RatedProduct/RatedProduct";
 import ButtonProductPage from "../../components/ButtonProductPage/ButtonProductPage";
 
@@ -31,23 +32,23 @@ export default function Product() {
         return check || product;
     }
     // Notifications
-    // const {setOpen} = useSnackBar()
+    const { setOpen } = useSnackBar()
 
 
     const checkProdInCart = checkProdCart();
 
-    console.log('check',checkProdInCart)
     useEffect(()=>{
         setLoadingProduct(true);
         getOneProduct(id).then(res=>{
             const values = {...res.data,quantity:0};
             setProduct(values);
         }).catch(err=>{
-            console.log(err)
+            const msg = err?.response?.data?.message || 'Error Server';
+            setOpen(msg, 'error')
         }).finally(()=>{
-            setLoadingProduct(false)
+            setLoadingProduct(false);
         })
-    },[id])
+    },[id, setOpen])
 
 
     const addCart = () =>{
@@ -106,7 +107,7 @@ export default function Product() {
             </Grid>
             <Container sx={{my:4}}>
                 <TabsProduct id={id} specification={product.specification}/>
-        </Container>
+            </Container>
             </>
             :
             <Box sx={{mt:2,p:4,width:'100%'}}>

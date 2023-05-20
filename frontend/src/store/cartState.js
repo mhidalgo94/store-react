@@ -35,7 +35,6 @@ export const useCartState = create(persist((set,get)=>({
     updateMountProductCart(idItem,quantity){
         set(state =>{
             const item = state.products.find(item => parseInt(item.id) === parseInt(idItem));
-            console.log(item)
             item.quantity = quantity;
             item.priceXquantity = parseFloat(item.price * item.quantity).toFixed(2)
 
