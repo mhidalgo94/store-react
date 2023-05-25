@@ -51,13 +51,13 @@ export const useCartState = create(persist((set,get)=>({
     getSubtotal : ()=>{
         const {products} = get();
         const subtotal = products.reduce((sum,value)=> sum + value.priceXquantity, 0);
-        return subtotal;
+        return parseFloat(subtotal).toFixed(2);
 
     },
     // Tax pay
     getTax:()=>{
         const {getSubtotal} = get();
-        const tax = (parseFloat(getSubtotal()) * parseInt(7)) / 100;
+        const tax = parseFloat(getSubtotal() * parseInt(7) / 100).toFixed(2);
         return tax;
     },
     }),

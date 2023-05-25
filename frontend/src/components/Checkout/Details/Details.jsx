@@ -5,12 +5,13 @@ import { useCartState } from '../../../store/cartState';
 export default function DetailsCheckout({valuesDelivery}) {
     const check = Object.keys(valuesDelivery)
 
-    const {products, getSubtotal,getTax} = useCartState();
+    const {products, getSubtotal, getTax} = useCartState();
     const items = products.reduce((sum,value)=> sum + value.quantity, 0)
 
     const subtotal = getSubtotal();
     const tax = getTax();
-    const total = subtotal + tax;
+    const total = parseFloat(subtotal + tax).toFixed(2);
+    console.log(total)
 
   return (
     <Box p={2} my={2}>

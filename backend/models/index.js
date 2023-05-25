@@ -47,20 +47,16 @@ db.reviews.belongsTo(db.user);
 
 
 // User with products
-// db.products.User = db.products.belongsTo(db.user,{
 db.products.belongsTo(db.user,{
     foreignKey:'user_id',
     as:'user',
     onDelete: 'CASCADE'
 })
 
-// Products and User model with WishList
-db.user.belongsToMany(db.products, { through: db.wishlist });
-db.products.belongsToMany(db.user, { through: db.wishlist });
-
 
 // User can have multiple addresses
 db.user.hasMany(db.addresses);
+
 db.addresses.belongsTo(db.user,{
     foreignKey:'user_id',
     as:'user',
@@ -87,11 +83,15 @@ db.paymentMethods.belongsTo(db.user)
 db.user.hasMany(db.salesOrder);
 
 // Relation Products model with Category
-db.products.belongsToMany(db.category,{ through: 'ProductCategory', as:'categories' });
-
-// db.category.belongsToMany(db.products, { through: 'ProductCategory' })
+db.products.belongsToMany(db.category, { through: 'ProductCategory', as:'categories' });
 
 
+// Products and User model with WishList
+db.products.belongsToMany(db.user, { through:  db.wishlist });
+db.user.belongsToMany(db.products, { through:  db.wishlist });
+
+db.wishlist.belongsTo(db.products); // Asociación de Wishlist a Product
+db.wishlist.belongsTo(db.user);
 
 
 module.exports = db;

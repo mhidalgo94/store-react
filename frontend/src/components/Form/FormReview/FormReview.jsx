@@ -55,7 +55,7 @@ export default function FormReview({addValue}) {
 
 
   return (
-    <Container>
+    <Container sx={{mt:4}}>
         <Typography variant='h4'>Write a Review for this product</Typography>
         <Box component='form' my={2} onSubmit={handleSubmit}>
             <Typography variant='h6'>Your Rating:</Typography>

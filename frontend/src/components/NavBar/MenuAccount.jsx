@@ -42,7 +42,7 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
       <MenuItem sx={styleLinkMenu}>
         { isAuth ?
         
-        <Link to='/account/profile' className="link">
+        <Link to='/account/profile/profile-info' className="link">
           <ListItem sx={{padding:0,margin:'0 10px'}}>
               <AccountCircleIcon  />
               <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1} >My Acount</Typography>

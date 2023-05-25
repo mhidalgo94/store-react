@@ -41,6 +41,8 @@ app.use('/api/addresses', router.address);
 
 // Api Payment Methods
 app.use('/api/paymentMethods', router.paymentMetods);
+// Api for Wishlist 
+app.use('/api/wishList', router.wishlist)
 
 
 // test server

@@ -1,29 +1,15 @@
 import {Link} from 'react-router-dom'
-import {
-  Box,
-  Tooltip,
-  IconButton,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
-
+import {Box,Tooltip,IconButton,Card,CardActions,CardContent,CardMedia,Typography,Stack} from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Stack } from "@mui/material";
+
 import { useCartState } from '../../store/cartState';
 import { useSnackBar } from '../../store/snackbarState';
 
-
-
 //  Need finish add to wishlist
-export default function CardProduct({ item, id , btnFavorite=false }) {
+export default function CardProduct({ item, id}) {
 
   const {setNewProduct, addProduct, products}= useCartState()
-  const {setOpen} = useSnackBar()
+  const {setOpen} = useSnackBar();
 
   const addCart = ()=>{
     const verifyInCart = products.find(product => parseInt(product.id) === parseInt(id));
@@ -40,10 +26,7 @@ export default function CardProduct({ item, id , btnFavorite=false }) {
     }
   }
 
-  const addWishList = ()=>{
-    // terminar el agrego de wish list
-    setOpen('Added to wishlist','success')
-  }
+  
 
   return (
     <>
@@ -97,24 +80,10 @@ export default function CardProduct({ item, id , btnFavorite=false }) {
           </Stack>
           <Stack direction="row">
             <Tooltip title="Add to Cart" arrow >
-              <IconButton color="lightBlue" size="small" onClick={addCart}>
+              <IconButton color="primary" size="small" onClick={addCart}>
                 <AddShoppingCartIcon  />
               </IconButton>
             </Tooltip>
-            {btnFavorite ? ( 
-              <Tooltip title="Add to Favorite" arrow >
-                <IconButton color="primary" size="small" onClick={addWishList}>
-                  <FavoriteBorderIcon />
-                </IconButton>
-              </Tooltip>
-            ) :
-            (
-              <Tooltip title="Remove" arrow >
-                <IconButton color="primary" size="small">
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
-            )}
           </Stack>
         </CardActions>
       </Card>

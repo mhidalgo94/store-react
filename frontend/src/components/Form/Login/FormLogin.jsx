@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Box, TextField, Typography, Button} from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
+import { LoadingButton } from '@mui/lab';
 import { Link } from 'react-router-dom';
 import { login } from '../../../api/fetchAuth';
 import {useSnackBar} from '../../../store/snackbarState'
@@ -26,7 +26,7 @@ export default function FormLogin() {
             const token = res?.data?.token;
             setUser(token);
             setOpen(msg);
-            navigate('/account/profile')
+            navigate('/shop/products')
         }).catch(err=>{
             const msg = err?.response?.data?.message || "Error servidor"
             setOpen(msg,'error')
@@ -37,24 +37,21 @@ export default function FormLogin() {
     }
 
     return (
-        <>
-            <Box sx={{textAlign:'center'}}>
-                <Typography variant='h5'>LOGOTIPO</Typography>
-                <Typography variant='subtitle1'>Welcome to LOGOTIPO</Typography>
-            </Box>
-            <Box component='form' onSubmit={handleSubmit}>
-                
-                <TextField color='info' onChange={(e)=>setEmail(e.target.value)} fullWidth required helperText='Email required.' size='small' label='Email' placeholder='example@mail.com' type='email' name='email'/>
-                
-                <TextField fullWidth color='info' onChange={(e)=>setPassword(e.target.value)} required helperText='Password required.' size='small' label='Password' placeholder='*********' type='password' sx={{my:1}} name='password'/>
-                
-                <Button  fullWidth variant='contained' sx={{my:1, textTransform:'capitalize'}} type='submit' color='primary'>
-                    {loadingBtn ? <CircularProgress color='lightBlue' size={24} /> : 'Submit' }  
-                </Button>
-                <Link className='link' to='/sign-in'>
-                    <Button  fullWidth variant='outlined' sx={{my:1, textTransform:'capitalize'}} color='lightBlue' >Sign in</Button>
-                </Link>
-            </Box>
-        </>
+    <>
+        <Box sx={{textAlign:'center'}}>
+            <Typography variant='h5'>LOGOTIPO</Typography>
+            <Typography variant='subtitle1'>Welcome to LOGOTIPO</Typography>
+        </Box>
+        <Box component='form' onSubmit={handleSubmit}> 
+            <TextField color='info' onChange={(e)=>setEmail(e.target.value)} fullWidth required helperText='Email required.' size='small' label='Email' placeholder='example@mail.com' type='email' name='email'/>
+            <TextField fullWidth color='info' onChange={(e)=>setPassword(e.target.value)} required helperText='Password required.' size='small' label='Password' placeholder='*********' type='password' sx={{my:1}} name='password'/>
+            <LoadingButton loading={loadingBtn}  fullWidth variant='contained' sx={{my:1, textTransform:'capitalize'}} type='submit' color='primary'>
+                Login
+            </LoadingButton>
+            <Link className='link' to='/sign-in'>
+                <Button  fullWidth variant='outlined' sx={{my:1, textTransform:'capitalize'}} color='lightBlue' >Sign in</Button>
+            </Link>
+        </Box>
+    </>
     )
 }

@@ -13,6 +13,12 @@ export const getReviews = async (id)=>{
     return res;
 }
 
+export const  getUserReviews = async (token) =>{
+    const headers = { Authorization: `Bearer ${token}`};
+    const res = await instance.get('/reviews/allReviews', {headers});
+    return res;
+}
+
 
 export const getReviewSummary = async (id)=>{
     const res = await instance.get(`/reviews/reviewSummary/${id}`);

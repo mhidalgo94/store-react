@@ -1,5 +1,5 @@
 const productController = require('../controllers/Product/productsController.js');
-const { authenticated } =require('../middleware/authenticate.js')
+const { authenticated,isAuth } =require('../middleware/authenticate.js')
 const { authorize } =require('../middleware/authorize.js')
 const {uploadProducts} = require('../middleware/multerConfig.js')
 
@@ -12,7 +12,7 @@ router.get('/allProducts',authenticated,authorize(['admin','moderator']),product
 // List products public user
 router.get('/', productController.getAvailableProducts);
 // One Product
-router.get('/:id', productController.getOneProduct);
+router.get('/:id',isAuth, productController.getOneProduct);
 // Update Product
 router.put('/:id',authenticated,authorize(['admin','moderator']), uploadProducts.array('images'), productController.updateProduct);
 // Remove one product

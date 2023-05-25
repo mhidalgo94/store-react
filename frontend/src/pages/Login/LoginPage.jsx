@@ -15,7 +15,7 @@ export default function LoginPage() {
   
   useEffect(()=>{
     if(isAuth){
-      navigate('/account/profile')
+      navigate('/shop/products')
     }
   },[isAuth,navigate])
 

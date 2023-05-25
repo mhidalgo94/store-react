@@ -8,9 +8,11 @@ export const addProduct =async (formData,token)=>{
 }
 
 export const getAllProducts = async (token)=>{
-    const headers = {Authorization: `Bearer ${token}`};
+
+    const headers = { Authorization: `Bearer ${token}`};
     const res = await instance.get('/products/allProducts', {headers});
     return res;
+       
 }
 
 export const getPublicProducts = async (params={})=>{
@@ -18,11 +20,9 @@ export const getPublicProducts = async (params={})=>{
     return res;
 }
 
-
-
-export const getOneProduct = async (id,)=>{
-    // const headers = {Authorization: `Bearer ${token}`};
-    const res = await instance.get(`/products/${id}`);
+export const getOneProduct = async (id,token)=>{
+    const headers = {Authorization: `Bearer ${token}`};
+    const res = await instance.get(`/products/${id}`,{headers});
     return res;
 }
 

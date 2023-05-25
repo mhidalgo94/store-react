@@ -29,6 +29,8 @@ export default function TabsProduct({specification, id}) {
             <TabPanel value='1' sx={{px:0}}>
                 {/* Reviews client about article */}
                 <Comment id={id} reviews={reviews} setReviews={setReviews} />
+                {/* <Divider sx={{my:5}}/> */}
+
                 {/* Form for add review about  article */}
                 <FormReview addValue={setReviews} />
             </TabPanel>

@@ -1,10 +1,12 @@
 const db = require('../../models/index.js');
 const path = require('path');
-const { Op } = require('sequelize');
+const { Op, NUMBER } = require('sequelize');
 
 const Product = db.products;
 const User = db.user;
-const Category = db.category
+const Category = db.category;
+const Wishlist = db.wishlist;
+
 
 function makeRelativeFilesRoute(files){
     // This make list route relative files static for save in model Products
@@ -79,7 +81,7 @@ const getAllProducts = async (req,res)=>{
                         exclude:['password','is_active','role','updatedAt','createdAt','UUID']
                     }
                 }
-            ]
+            ]   
         }).then(product=> {
             return product  
         });
@@ -108,9 +110,12 @@ const getAvailableProducts = async (req,res)=>{
             ],
             available:true,
           },
+          attributes:{
+            exclude:['user_id','UUID']
+          },
           include:[
             {
-                model:Category,
+                model: Category,
                 as:'categories',
                 attributes:['nombre'],
                 through: { attributes: [] } 
@@ -119,7 +124,6 @@ const getAvailableProducts = async (req,res)=>{
           offset,
           limit,
         })
-    
         const totalPages = Math.ceil(products.count / limit);
     
         res.status(200).json({
@@ -139,7 +143,18 @@ const getOneProduct = async (req,res)=>{
         let getOne = await Product.findOne({
             where:{ id:id },
             attributes:['id','name', 'available','price','old_price', 'images','specification','description']
-        });
+        }).then(values=>values.toJSON());
+
+        if(req?.user){
+            const user = await User.findOne({where:{email:req.user.email}})
+            const checkWishlist =  await Wishlist.findOne({where:{ProductId: getOne.id, userId:user.id}});
+            if(checkWishlist){
+                getOne.favorite = true;
+            }else{
+                getOne.favorite = false;
+            }
+        }
+
         if(!getOne){
             res.status(401).json({message:"The product does not exist"})
         }

@@ -5,6 +5,7 @@ const users = require('./userRouter.js');
 const auth = require('./authRouter.js');
 const address = require('./addressesRouter.js');
 const paymentMetods = require('./paymentMethodRouter.js')
+const wishlist = require('./wishlistRouter.js')
 
 module.exports ={
     category,
@@ -13,6 +14,6 @@ module.exports ={
     users,
     auth,
     address,
-    paymentMetods
-
+    paymentMetods,
+    wishlist
 }

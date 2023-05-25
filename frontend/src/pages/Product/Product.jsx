@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import {useParams} from 'react-router-dom';
-import { Box, Button,Container, Grid, Typography,Stack } from "@mui/material"
-
+import { Box, Button,Container, Grid, Typography,Stack ,Tooltip,IconButton} from "@mui/material"
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import MiniSlider from "../../components/MiniSlider/MiniSlider";
@@ -14,6 +15,9 @@ import { getOneProduct } from '../../api/fetchProducts.js'
 import RatedProduct from "../../components/RatedProduct/RatedProduct";
 import ButtonProductPage from "../../components/ButtonProductPage/ButtonProductPage";
 
+import {addRemoveWishList} from '../../api/fetchWishlist.js'
+import { userState } from '../../store/userState';
+
 
 
 export default function Product() {
@@ -22,11 +26,13 @@ export default function Product() {
     const {id} = useParams();
     // for include product in cart shop
     const {setNewProduct, addProduct,products:productsCart} = useCartState()
-
     const [product,setProduct] = useState(null)
     // Img for mini slider pre-view
     const [imageSelected, setImageSelected] = useState(0);
     
+    const {token,setLogout} = userState();
+
+
     const checkProdCart = ()=>{
         const check = productsCart.find(item=> parseInt(item.id) === parseInt(id));
         return check || product;
@@ -39,16 +45,19 @@ export default function Product() {
 
     useEffect(()=>{
         setLoadingProduct(true);
-        getOneProduct(id).then(res=>{
+        getOneProduct(id,token).then(res=>{
             const values = {...res.data,quantity:0};
             setProduct(values);
         }).catch(err=>{
+            if (err.response.status === 401) {
+                setLogout();
+            }
             const msg = err?.response?.data?.message || 'Error Server';
             setOpen(msg, 'error')
         }).finally(()=>{
             setLoadingProduct(false);
         })
-    },[id, setOpen])
+    },[id, token,setOpen, setLogout])
 
 
     const addCart = () =>{
@@ -57,6 +66,27 @@ export default function Product() {
             
     }
 
+    const handleAddWishList = ()=>{
+        // terminar el agrego de wish list
+        if(!token){
+          setOpen('You must login or create an account to add the wishlist', 'info')
+          return
+        }
+        addRemoveWishList(id,token).then(res=>{
+            let msg = res?.data?.message;
+            setOpen(msg);
+            setProduct(prev=>({...prev, favorite: !product.favorite}))
+
+        }).catch(err=>{
+          if (err.response.status === 401) {
+            setLogout();
+          }
+        const msg = err?.response?.data?.message || 'Error Server';
+        setOpen(msg,'error');
+        })
+    
+        // setOpen('Added to wishlist','success')
+      }
 
   return (
     <Container sx={{backgroundColor: 'rgb(246, 249, 252)'}}>
@@ -85,7 +115,7 @@ export default function Product() {
                     {/* Rating Product */}
                     <RatedProduct id={id} />
 
-                    <Stack direction='row' spacing={1} sx={{m:1}} alignItems='center'>                    
+                    <Stack direction='row' spacing={1} sx={{m:1,alignItems:'center'}} >                    
                         <Typography variant="h4" color='lightBlue.500' >${product.price}</Typography>
                         {product.old_price > product.price &&
                             <Typography variant="h6" color='primary' sx={{paddingBottom:'10px',textDecoration:'line-through'}}>${product.old_price}</Typography>
@@ -96,12 +126,30 @@ export default function Product() {
                         : 
                         <Typography variant="body1" color='error' sx={{marginBottom:'20px'}}>Stock not enabled</Typography>
                     }
+                    <Stack direction='row' alignItems='center' gap={2}>
 
                     {checkProdInCart.quantity > 0 ? 
                         <ButtonProductPage product={checkProdInCart} />
                         : 
                         <Button sx={{py:1,px:2,fontWeight:600}} onClick={addCart} variant="contained" color="lightBlue" startIcon={<AddShoppingCartIcon />}>Add To Cart</Button>
                     }
+                    <Box>
+                        {product.favorite ? ( 
+                        <Tooltip title="Remove to WishList" arrow >
+                            <IconButton color="primary" onClick={handleAddWishList}>
+                                <FavoriteIcon  sx={{fontSize:'30px'}}/>
+                            </IconButton>
+                        </Tooltip>
+                        ) :
+                        (
+                        <Tooltip title="Add to WishList" arrow >
+                            <IconButton color="gray"  onClick={handleAddWishList}>
+                                <FavoriteBorderIcon sx={{fontSize:'30px'}} />
+                            </IconButton>
+                        </Tooltip>
+                        )}
+                    </Box>
+                    </Stack>
                 </Grid>
             </Grid>
             <Container sx={{my:4}}>

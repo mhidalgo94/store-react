@@ -9,7 +9,7 @@ function authenticated(req,res,next){
         const token = authHeader && authHeader.split(' ')[1];
         // console.log({"Token auth":token})
         if(!token){
-            return res.status(401).json({message:"Token not provided.Require authentication."})
+            return res.status(401).json({message:"Require authentication."})
         }
         // Verifica y decodifica el token
         const decoded = jwt.verify(token, config.SECRET_KEY_JWT);
@@ -25,4 +25,15 @@ function authenticated(req,res,next){
     }
 }
 
-module.exports = {authenticated}
+
+function isAuth(req,res,next){
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1];
+    if(token){
+        const decoded = jwt.verify(token, config.SECRET_KEY_JWT);
+        req.user = decoded;
+    }
+    next()
+}
+
+module.exports = {authenticated, isAuth}

@@ -1,3 +1,4 @@
+import { useState,useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import {Avatar, Button, Box, Grid,Stack, Paper,Typography} from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
@@ -5,14 +6,31 @@ import ProfileBase from '../../ProfileBase';
 
 import {userState} from '../../../../store/userState';
 import {useCartState} from '../../../../store/cartState.js';
+import { getUserReviews } from '../../../../api/fetchReviews.js'
+import {wishListUser} from '../../../../api/fetchWishlist.js'
 
 export default function ProfileInfo() {
 
-  const {user} = userState();
+  const {user,token} = userState();
   const {products} = useCartState();
   const firstName = user.firstName.substring(0,1).toUpperCase() + user.firstName.substring(1);
   const lastName = user.lastName.substring(0,1).toUpperCase() + user.lastName.substring(1);
   const fullName = `${firstName} ${lastName}`;
+
+
+  // Extra Details Profile
+  const [reviews, setReviews ] = useState([])
+  const [wihslist, setWishlist] = useState({count:0})
+
+  useEffect(()=>{
+    getUserReviews(token).then(res=>{
+      setReviews(res.data)
+    })
+    wishListUser(token).then(res=>{
+      console.log(res)
+      setWishlist(prev=>({...prev, count:res?.data?.count}))
+    })
+  },[token])
 
   return (
     <ProfileBase>
@@ -79,14 +97,14 @@ export default function ProfileInfo() {
                     </Grid>
                     <Grid item sm={6} xs={12}>
                       <Paper sx={{p:2}} elevation={2}>
-                        <Typography variant='h5' color='primary' textAlign='center'>3</Typography>
+                        <Typography variant='h5' color='primary' textAlign='center'>{reviews.length}</Typography>
                         <Typography variant='body2' color='grey.600' textAlign='center'>Reviews</Typography>
                       </Paper>
                     </Grid>
                     <Grid item sm={6} xs={12}>
                       <Paper sx={{p:2}} elevation={2}>
-                        <Typography variant='h5' color='primary' textAlign='center'>2</Typography>
-                        <Typography variant='body2' color='grey.600' textAlign='center'>Await Delivery</Typography>
+                        <Typography variant='h5' color='primary' textAlign='center'>{wihslist.count}</Typography>
+                        <Typography variant='body2' color='grey.600' textAlign='center'>Wishlist</Typography>
                       </Paper>
                     </Grid>
                     
