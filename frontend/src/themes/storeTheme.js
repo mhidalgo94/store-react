@@ -2,6 +2,17 @@ import {createTheme} from '@mui/material';
 import { red, lightBlue, grey,blue } from '@mui/material/colors';
 
 const storeTheme = createTheme({
+    breakpoints: {
+        values: {
+          xs: 0,
+          sm: 600,
+          md: 960,
+          lg: 1280,
+          xl: 1920,
+          // Agrega aquí tus breakpoints personalizados
+          minixs: 400,
+        },
+    },
     palette:{
         primary: red,
         success: {

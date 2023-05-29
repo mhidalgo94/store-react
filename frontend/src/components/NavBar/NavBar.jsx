@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {Badge, Tooltip, Typography, Stack } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { Tooltip, Typography } from "@mui/material";
 import CartMenu from "./CartMenu";
 import MenuAccount from "./MenuAccount";
 import styleNavBar from "./styleNavbar";
+import { useCartState } from "../../store/cartState";
 import "./NavBar.scss";
+import useMediaQuery from '@mui/material/useMediaQuery'
+import storeTheme from '../../themes/storeTheme';
+
+import Logo from "./Logo";
 
 export default function NavBar() {
+  const theme = storeTheme;
+  const showLogo = useMediaQuery(theme.breakpoints.up('minixs'));
+
   // Drawer Cart Shop
   const [openCart, setOpenCart] = useState(false);
-
+  const {products} = useCartState();
   // Menu Profile
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -27,42 +35,28 @@ export default function NavBar() {
 
   return (
     <div className="content-navbar">
-      {/* <div className="info">
-        <Typography variant="subtitle1" sx={{ color: "#fff" }}>
-          You Store Art & Craft
-        </Typography>
-      </div> */}
       <div className="navbar">
-        <div className="list-page">
-          <div className="items">
+        <Stack direction='row' spacing={2}>
             <Link className="link" to="/">
               <Typography variant="h6" sx={styleNavBar.styleLink}>
                 Home
               </Typography>
             </Link>
-          </div>
-          <div className="items">
             <Link className="link" to="/shop/products">
               <Typography variant="h6" sx={styleNavBar.styleLink}>
                 Shop
               </Typography>
             </Link>
-          </div>
-        </div>
+        </Stack>
 
-        <div className="logo">
-          <h4>Logotipo</h4>
-        </div>
+        {showLogo && <Logo />}
 
-        <div className="icons">
-          <div className="item">
+        <Stack direction='row' spacing={2}>
             <Link className='link' to='/account/profile/wishlist'>
               <Tooltip title="Wishlist" arrow>
                 <FavoriteBorderIcon sx={styleNavBar.styleIcons} />
               </Tooltip>
             </Link>
-          </div>
-          <div className="item">
             <Tooltip title="Account" arrow>
               <AccountCircleIcon
                 onClick={handleClick}
@@ -70,18 +64,19 @@ export default function NavBar() {
                 sx={styleNavBar.styleIcons}
               />
             </Tooltip>
-            {/* Menu Profile */}
             <MenuAccount anchorEl={anchorEl} open={open} handleClose={handleClose}/>
-          </div>
-          <div className="item">
             <Tooltip title="Cart" arrow>
-              <AddShoppingCartIcon
-                onClick={() => setOpenCart(!openCart)}
-                sx={styleNavBar.styleIcons}
-              />
+              <Badge badgeContent={products.length} invisible={!Boolean(products.length > 0)} color='lightBlue' >
+                <AddShoppingCartIcon
+                  onClick={() => setOpenCart(!openCart)}
+                  sx={styleNavBar.styleIcons}
+                  />
+              </Badge>
             </Tooltip>
-          </div>
-        </div>
+      <CartMenu openCart={openCart} setOpenCart={setOpenCart} />
+
+        </Stack>
+        
       </div>
       {/* Drawer to Cart Shop */}
       <CartMenu openCart={openCart} setOpenCart={setOpenCart} />
