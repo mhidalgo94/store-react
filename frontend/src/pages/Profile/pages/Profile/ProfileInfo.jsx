@@ -27,7 +27,6 @@ export default function ProfileInfo() {
       setReviews(res.data)
     })
     wishListUser(token).then(res=>{
-      console.log(res)
       setWishlist(prev=>({...prev, count:res?.data?.count}))
     })
   },[token])

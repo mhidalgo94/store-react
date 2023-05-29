@@ -23,8 +23,7 @@ import {
     EditAddress,
     WishList,
     PayMethods,
-    NewPayMethod, 
-    EditPayMethod
+    NewPayMethod
 
 } from "../pages/Profile/pages/index";
 
@@ -64,7 +63,6 @@ const Routers = createBrowserRouter([
             { path:'profile/address-edit/:id', element: <EditAddress /> },
             { path:'profile/pay-methods', element: <PayMethods /> },
             { path:'profile/pay-methods-add', element: <NewPayMethod /> },
-            { path:'profile/pay-methods-edit/:id', element: <EditPayMethod /> },
         ]
     },
     {

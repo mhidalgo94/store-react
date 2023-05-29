@@ -7,7 +7,6 @@ import Addresses from './Addresses/Addresses';
 import EditAddress from "./Addresses/EditAddress";
 import NewAddress from "./Addresses/NewAddress";
 import PayMethods from './PayMethod/PayMethods';
-import EditPayMethod from './PayMethod/EditPayMethod';
 import NewPayMethod from "./PayMethod/NewPayMethod";
 
 
@@ -21,6 +20,5 @@ export {
     WishList,
     ProfileInfo,
     PayMethods,
-    EditPayMethod,
     NewPayMethod 
 };

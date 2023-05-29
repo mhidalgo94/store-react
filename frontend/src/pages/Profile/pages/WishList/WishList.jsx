@@ -18,7 +18,6 @@ export default function WishList() {
       setWishlist(res?.data?.wishlist);
     }).finally(()=>{
       setLoading(false);
-      console.log('finally')
     })
   },[token])
 

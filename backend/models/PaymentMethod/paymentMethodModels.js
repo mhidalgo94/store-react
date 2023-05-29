@@ -14,6 +14,10 @@ const PaymentMethods = sequelize.define('PaymentMethods', {
     //   isCreditCard: true
     // }
   },
+  brand: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   nameCard: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -23,14 +27,14 @@ const PaymentMethods = sequelize.define('PaymentMethods', {
     allowNull: false,
     validate: {
       is: {
-          args: /^(0[1-9]|1[0-2])\/\d{2}$/,
+          args:  /^\d{1,2}\/\d{4}$/,
           msg: 'The expiration date field must have the format MM/YYYY'
         }
     }
   },
   cvc: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       len: [3, 4] // Validar que el CVC tenga entre 3 y 4 caracteres
     }

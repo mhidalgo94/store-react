@@ -11,14 +11,23 @@ const addPaymentMethods = async (req, res)=>{
         if(!user){
             return res.status(401).json({message:"User not exists."})
         }
-        const values = req.body;
-        values.userId = user.id;
+
+        const {card,nameCard} = req.body;
         
+        const expirationDate = `${card.exp_month}/${card.exp_year}`
+        console.log(card)
+        values= {brand: card.brand,expirationDate,nameCard,numberCard:card.last4}
+        values.userId = user.id;
         const paymentMetods = await PaymentMethods.create(values);
         res.status(200).json({message:"Added new payment method."});
     }
     catch(err){
-        console.error('Something Wrong in create category.');
+        console.error('Something Wrong in create method payment.');
+        // Verifica si el error es de duplicación de datos
+        if (err.name === 'SequelizeUniqueConstraintError') {
+        // Maneja el error de duplicación de datos
+        return res.status(400).json({ message: 'This card exist in you payment method' });
+        }
         if (err instanceof ValidationError) {
             const errors = err.errors.map(error => error.message);
             return res.status(422).json({ errors });

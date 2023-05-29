@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import {Box, Typography, Grid, Stack, Button, Paper, IconButton} from '@mui/material';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CircularProgress from '@mui/material/CircularProgress';
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ProfileBase from '../../ProfileBase';
 
@@ -97,11 +96,6 @@ export default function PayMethods() {
                                     </Grid>
                                     <Grid item xs={6} sm={3} md={3}>
                                         <Stack direction='row' justifyContent='center'>
-                                            <Link className='link' to={`/account/profile/pay-methods-edit/${item.id}`}>
-                                                <IconButton aria-label='Edit'>
-                                                    <EditIcon />
-                                                </IconButton>
-                                            </Link>
                                             <IconButton aria-label='Delete' onClick={()=>setOpenCloseDialog(true)} onMouseEnter={()=>setIdPayMethodDelete(item.id)}>
                                                 <DeleteIcon />
                                             </IconButton>

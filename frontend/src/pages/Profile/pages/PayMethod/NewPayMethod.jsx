@@ -5,7 +5,12 @@ import ProfileBase from '../../ProfileBase';
 import FormPayMethod from '../../../../components/Form/FormPayMethod/FormPayMethod';
 import AddCardIcon from '@mui/icons-material/AddCard';
 
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
 export default function NewPayMethod() {
+  const stripePromise  = loadStripe(`${process.env.REACT_APP_PUBLIC_KEY}`)
+
   return (
     <ProfileBase>
          <Box sx={{my:2}}>
@@ -25,7 +30,9 @@ export default function NewPayMethod() {
                 </Grid>
             </Grid>
             <Paper  sx={{p:5,my:2, borderRadius: '10px'}}>
-                <FormPayMethod />
+                <Elements stripe={stripePromise}>
+                    <FormPayMethod />
+                </Elements>
             </Paper>
         </Box>
     </ProfileBase>
