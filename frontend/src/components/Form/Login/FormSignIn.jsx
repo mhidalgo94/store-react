@@ -28,7 +28,6 @@ export default function FormSignIn() {
         }).catch(err=>{
             const msg = err?.response?.data?.message || 'Error servidor';
             setOpen(msg,'error');
-            console.log(err);
         }).finally(()=>{
             setLoadingBtn(false);
         });

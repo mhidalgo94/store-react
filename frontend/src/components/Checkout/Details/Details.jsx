@@ -11,7 +11,6 @@ export default function DetailsCheckout({valuesDelivery}) {
     const subtotal = getSubtotal();
     const tax = getTax();
     const total = parseFloat(subtotal + tax).toFixed(2);
-    console.log(total)
 
   return (
     <Box p={2} my={2}>

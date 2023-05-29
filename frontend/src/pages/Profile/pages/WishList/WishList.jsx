@@ -36,7 +36,6 @@ export default function WishList() {
               :
               <Grid container spacing={1} mt={2}>
                 {wishsList.map((values, index) => {
-                // console.log(item)
                 return (
                     <Grid key={index} item xs={12} sm={6} md={3} lg={3}>
                       <CardProduct item={values.Product} id={values.Product.id} />

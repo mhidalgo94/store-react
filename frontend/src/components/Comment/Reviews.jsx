@@ -6,7 +6,6 @@ import { userState } from '../../store/userState';
 
 export default function Reviews({values}) {
     const {user} = userState();
-    console.log(values)
   return (
       <Container sx={{p:1,mt:1}}>
             <Stack direction='row' spacing={1} alignItems='center'>

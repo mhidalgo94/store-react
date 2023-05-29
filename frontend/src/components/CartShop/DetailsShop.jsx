@@ -11,7 +11,6 @@ export default function DetailsShop() {
     const subtotal = getSubtotal();
     const tax = getTax();
     const total = parseFloat(subtotal + tax).toFixed(2);
-    console.log(total)
 
   return (
     <Box>

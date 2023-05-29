@@ -29,7 +29,6 @@ export default function FormPayMethod() {
             setOpen(error.message, 'warning')
             return
         }
-        console.log(paymentMethod)
 
         const formData = {...paymentMethod, nameCard: tag}
         setLoadingBtn(true);
@@ -38,7 +37,6 @@ export default function FormPayMethod() {
             setOpen(msg);
             navigate('/account/profile/pay-methods');
         }).catch(err=>{
-            console.log(err)
             if (err.response?.status === 401) {
                 setLogout();
             }
