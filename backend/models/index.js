@@ -12,10 +12,9 @@ db.user = require('./User/userModels.js');
 db.category = require('./Categoria/categoriaModels.js');
 db.wishlist = require('./WishList/wishListModels.js');
 db.addresses = require('./Addresses/adressesModels.js');
-db.salesOrder = require('./Order/orderModels.js');
-db.statusOrder = require('./Order/statusOrderModels.js');
-db.orderItems = require('./Order/OrderItemsModels.js')
-db.paymentMethods = require('./PaymentMethod/paymentMethodModels.js')
+db.paymentMethods = require('./PaymentMethod/paymentMethodModels.js');
+db.salesOrder =  require('./Order/orderModels.js');;
+db.orderSalesProducts = require('./Order/orderSalesProducts.js');;
 
 
 db.sequelize.sync({alter:false}).then(()=>{
@@ -62,20 +61,17 @@ db.addresses.belongsTo(db.user,{
     as:'user',
 });
 
-// db.addresses.hasMany(db.salesOrder);
-db.salesOrder.belongsTo(db.addresses);
 
-// Match Sales Order with Status Order
-db.salesOrder.belongsTo(db.statusOrder);
 
 // Match Sales order with User
-db.salesOrder.belongsTo(db.user);
+db.salesOrder.belongsTo(db.user, { optional: true});
+// Establece la relación con el modelo Product
 
-db.orderItems.belongsTo(db.products);
+db.salesOrder.belongsToMany(db.products, { through: db.orderSalesProducts, as: 'ProductSales' });
+db.products.belongsToMany(db.salesOrder, { through: db.orderSalesProducts,as: 'salesOrder' });
 
-// Define la relación entre SalesOrder y OrderItem
-db.salesOrder.belongsToMany(db.orderItems, { through: 'OrderItemSales' });
-
+db.salesOrder.hasMany(db.orderSalesProducts)
+db.orderSalesProducts.belongsTo(db.products)
 
 // Establecer relación belongsTo
 db.paymentMethods.belongsTo(db.user)

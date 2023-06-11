@@ -3,14 +3,12 @@ import {Accordion,AccordionDetails,AccordionSummary, Typography,Checkbox, FormCo
 import {getAllCategories} from '../../api/fetchCategory.js'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useSnackBar } from '../../store/snackbarState.js';
 import { FilterContext } from '../../context/Product/filterProducts.jsx';
 
 export default function CheckedCatergory() {
     const {setFilters} = useContext(FilterContext)
     const [categories,setCategories] = useState([])
     const [loading, setLoading] = useState(false);
-    const {setOpen} = useSnackBar();
 
 
     useEffect(()=>{
@@ -20,10 +18,8 @@ export default function CheckedCatergory() {
             const allCategories= resData.map(cate=>cate.nombre);
             setCategories(allCategories);
             setFilters(preValues=> ({...preValues, category:[...allCategories]}))
-        }).catch(err=>{
-            const msg = err?.response?.data?.message || 'Error Server';
-            setOpen(msg,'error');
-        }).finally(()=>{
+        }).catch(err=>{})
+        .finally(()=>{
             setLoading(false)
         })
     // eslint-disable-next-line
@@ -54,21 +50,23 @@ export default function CheckedCatergory() {
             >
             <Typography variant="subtitle1">Filter By Catergories</Typography>
             </AccordionSummary>
-            <AccordionDetails sx={{paddingTop:0}}>
-            {!loading ?
-                categories.length && categories.map((cat,index)=> {
-                    return (
-                        <FormControlLabel  key={index} control={<Checkbox defaultChecked name={cat} onChange={changeChecked}/>} label={cat} />
-                    )
-                })
-            :
-            <Box sx={{width:'100%', display:'flex', justifyContent:'center'}}>
-                <CircularProgress />
-            </Box>
-    }
-        </AccordionDetails>
-      </Accordion>
-      
+            {categories.length + 0 ?
+                <AccordionDetails sx={{paddingTop:0}}>
+                    {!loading ?
+                    categories.length && categories.map((cat,index)=> {
+                        return (
+                            <FormControlLabel  key={index} control={<Checkbox defaultChecked name={cat} onChange={changeChecked}/>} label={cat} />
+                        )
+                    })
+                    :
+                    <Box sx={{width:'100%', display:'flex', justifyContent:'center'}}>
+                        <CircularProgress />
+                    </Box>
+                    }
+                </AccordionDetails>
+            : <Typography variant='body1' sx={{mb:1,textAlign:'center'}}>Without Catergories</Typography>  }
+        </Accordion>
+
     </>
   )
 }

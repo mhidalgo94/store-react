@@ -111,8 +111,8 @@ export default function PayMethods() {
                     
         </Box>
         <CustomDialog isOpen={openCloseDialog} onClose={setOpenCloseDialog}
-        title={'Confirm deletion!'}
-        description={'Are you sure you want to permanently delete this payment method?.'}
+        title={'Confirm Delete!'}
+        description={'Are you sure you want to delete this payment method?'}
         isAcept={handleDeletePaymentMethod}
         loadingBtn={btnLoadingDelete}
         />

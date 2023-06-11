@@ -42,9 +42,11 @@ app.use('/api/addresses', router.address);
 // Api Payment Methods
 app.use('/api/paymentMethods', router.paymentMetods);
 // Api for Wishlist 
-app.use('/api/wishList', router.wishlist)
-
-
+app.use('/api/wishList', router.wishlist);
+// Api Checkout
+app.use('/api/checkout',router.checkout);
+// Api Order Sales
+app.use('/api/orderSales',router.orderSales);
 // test server
 app.get('/',(req,res)=>res.json({"message":"Server Running"}))
 

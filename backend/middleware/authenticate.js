@@ -27,13 +27,18 @@ function authenticated(req,res,next){
 
 
 function isAuth(req,res,next){
-    const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1];
-    if(token){
-        const decoded = jwt.verify(token, config.SECRET_KEY_JWT);
-        req.user = decoded;
+    try{
+        const authHeader = req.headers.authorization;
+        const token = authHeader && authHeader.split(' ')[1];
+        if(token){
+            const decoded = jwt.verify(token, config.SECRET_KEY_JWT);
+            req.user = decoded;
+        }
+    }catch{
+
+    } finally {
+        next()
     }
-    next()
 }
 
 module.exports = {authenticated, isAuth}

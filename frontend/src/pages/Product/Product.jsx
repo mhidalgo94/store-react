@@ -32,6 +32,7 @@ export default function Product() {
     
     const {token,setLogout} = userState();
 
+    const tokenV = token || null 
 
     const checkProdCart = ()=>{
         const check = productsCart.find(item=> parseInt(item.id) === parseInt(id));
@@ -45,7 +46,7 @@ export default function Product() {
 
     useEffect(()=>{
         setLoadingProduct(true);
-        getOneProduct(id,token).then(res=>{
+        getOneProduct(id,tokenV).then(res=>{
             const values = {...res.data,quantity:0};
             setProduct(values);
         }).catch(err=>{
@@ -57,7 +58,7 @@ export default function Product() {
         }).finally(()=>{
             setLoadingProduct(false);
         })
-    },[id, token,setOpen, setLogout])
+    },[id, tokenV,setOpen, setLogout])
 
 
     const addCart = () =>{

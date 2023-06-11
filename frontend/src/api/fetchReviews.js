@@ -19,6 +19,11 @@ export const  getUserReviews = async (token) =>{
     return res;
 }
 
+export const deleteReview = async (id,token)=>{
+    const headers = { Authorization: `Bearer ${token}`};
+    const res = await instance.delete(`/reviews/${id}`, {headers});
+    return res;
+}
 
 export const getReviewSummary = async (id)=>{
     const res = await instance.get(`/reviews/reviewSummary/${id}`);

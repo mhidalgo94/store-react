@@ -12,10 +12,10 @@ const addPaymentMethods = async (req, res)=>{
             return res.status(401).json({message:"User not exists."})
         }
 
+        const vart = req.body
         const {card,nameCard} = req.body;
         
         const expirationDate = `${card.exp_month}/${card.exp_year}`
-        console.log(card)
         values= {brand: card.brand,expirationDate,nameCard,numberCard:card.last4}
         values.userId = user.id;
         const paymentMetods = await PaymentMethods.create(values);
@@ -44,7 +44,9 @@ const getAllPaymentMethods = async (req,res)=>{
         if(!user){
             return res.status(401).json({message:"User not exists."})
         }
-        let paymentMetods = await PaymentMethods.findAll({where:{userId:user.id}});
+        let paymentMetods = await PaymentMethods.findAll({where:{userId:user.id},attributes:{
+            exclude:['userId']
+        }});
         res.status(200).json(paymentMetods);
     }catch(err){
         console.log('Something Wrong in get all payment methods.');

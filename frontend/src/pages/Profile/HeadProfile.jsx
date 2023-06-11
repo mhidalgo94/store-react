@@ -21,7 +21,6 @@ export default function HeadProfile({children}) {
                         <Typography variant='subtitle1' sx={styleProfile.styleText}>Orders</Typography>
                     </Stack>
                 </Link> 
-                <Typography variant='subtitle1' sx={styleProfile.styleText}>0</Typography>
             </Stack>
             <Stack sx={{my:1}} direction='row'  justifyContent='space-between'>
                 <Link className='link' to='/account/profile/wishlist'>
@@ -30,7 +29,6 @@ export default function HeadProfile({children}) {
                         <Typography variant='subtitle1' sx={styleProfile.styleText}>Wishlist</Typography>
                     </Stack>
                 </Link>
-                <Typography variant='subtitle1' sx={styleProfile.styleText}>0</Typography>
             </Stack>
             
             <Typography variant='overline' fontSize='14px' sx={{color:'#7D879C'}}>ACCOUNT SETTINGS</Typography>
@@ -42,7 +40,6 @@ export default function HeadProfile({children}) {
                         <Typography variant='subtitle1' sx={styleProfile.styleText}>Profile Info</Typography>
                     </Stack>
                 </Link>
-                <Typography variant='subtitle1' sx={styleProfile.styleText}>0</Typography>
             </Stack>
             <Stack sx={{my:1}} direction='row' justifyContent='space-between'>
                 <Link className='link' to='/account/profile/addresses'>
@@ -51,7 +48,6 @@ export default function HeadProfile({children}) {
                         <Typography variant='subtitle1' sx={styleProfile.styleText}>Addresses</Typography>
                     </Stack>
                 </Link>
-                <Typography variant='subtitle1' sx={styleProfile.styleText}>0</Typography>
             </Stack>
             <Stack sx={{my:1}} direction='row' justifyContent='space-between'>
                 <Link className='link' to='/account/profile/pay-methods'>
@@ -60,7 +56,6 @@ export default function HeadProfile({children}) {
                         <Typography variant='subtitle1' sx={styleProfile.styleText}>Payments Methods</Typography>
                     </Stack>
                 </Link>
-                <Typography variant='subtitle1' sx={styleProfile.styleText}>0</Typography>
             </Stack>
         </Paper>
 

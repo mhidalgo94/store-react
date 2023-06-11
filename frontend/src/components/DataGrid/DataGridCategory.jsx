@@ -10,7 +10,7 @@ import CustomDialog from "../Dialog/Dialog.jsx";
 
 export default function DataGridDCatergory({loading,data=[],setData}) {
     const {setOpen}  = useSnackBar();
-    const {token} = userState();
+    const {token,setLogout} = userState();
 
     // Dialog for Delete Catergory
     const [btnLoadingDelete, setBtnLoadingDelete] = useState(false);
@@ -31,6 +31,9 @@ export default function DataGridDCatergory({loading,data=[],setData}) {
             setOpen(res.data.message);
             setData(data.filter(values => values.id !== idDeleteCategory))
         }).catch(err=>{
+            if (err.response.status === 401) {
+                setLogout();
+            }
             const msg = err?.response?.data?.message || 'Error Server.';
             setOpen(msg, 'error');
         }).finally(()=>{

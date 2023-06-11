@@ -18,12 +18,13 @@ export default function Addresses() {
     const [addresses, setAddresses] = useState([])
     const [btnLoading, setBtnLoading] = useState(true)
 
-    const getListAddresses = ()=>{
-        getAddresses(token).then(res=>{
-            const resAddresses  = res.data.addresses;
+    const getListAddresses = (tok)=>{
+
+        getAddresses(tok).then(res=>{
+            const resAddresses  = res?.data?.addresses;
             setAddresses(resAddresses);
        }).catch(err=>{
-           if (err.response.status === 401) {
+           if (err?.response?.status === 401) {
                setLogout();
            }
            const msg = err?.response?.data?.message || 'Error Server';
@@ -35,9 +36,9 @@ export default function Addresses() {
 
 
     useEffect(()=>{
-        getListAddresses();
+        getListAddresses(token);
     // eslint-disable-next-line 
-    },[])
+    },[token]);
 
     // Dialog for Delete Address
     const [btnLoadingDelete, setBtnLoadingDelete] = useState(false);

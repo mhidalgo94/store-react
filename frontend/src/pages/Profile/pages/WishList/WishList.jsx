@@ -10,7 +10,7 @@ import { wishListUser } from '../../../../api/fetchWishlist';
 export default function WishList() {
   
   const [loading, setLoading] = useState(true);
-  const [wishsList, setWishlist] = useState([]);
+  const [wishList, setWishlist] = useState([]);
   const {token} = userState();
 
   useEffect(()=>{
@@ -34,17 +34,22 @@ export default function WishList() {
                 <CircularProgress color='lightBlue' size={24} />
               </Box>
               :
-              <Grid container spacing={1} mt={2}>
-                {wishsList.map((values, index) => {
-                return (
-                    <Grid key={index} item xs={12} sm={6} md={3} lg={3}>
-                      <CardProduct item={values.Product} id={values.Product.id} />
-                    </Grid>
-                    )
-                  })
-                }
-              </Grid>
-          }
+              (wishList.length > 0) ?
+                <Grid container spacing={1} mt={2}>
+                  {wishList.map((values, index) => {
+                    return (
+                      <Grid key={index} item xs={12} sm={6} md={3} lg={3}>
+                        <CardProduct item={values.Product} id={values.Product.id} />
+                      </Grid>
+                      )
+                    })
+                  }
+                  </Grid>
+                :
+                <Box sx={{width:'100%', mt:4}}>
+                  <Typography variant='h6' align='center'>You have no items on your wish list</Typography>
+                </Box>
+            }
         </Box>
     </ProfileBase>
   )

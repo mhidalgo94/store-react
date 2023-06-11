@@ -1,16 +1,13 @@
-
 import {Box, Typography, Stack, Divider} from '@mui/material';
 import { useCartState } from '../../../store/cartState';
 
-export default function DetailsCheckout({valuesDelivery}) {
-    const check = Object.keys(valuesDelivery)
+export default function DetailsCheckout() {
 
     const {products, getSubtotal, getTax} = useCartState();
     const items = products.reduce((sum,value)=> sum + value.quantity, 0)
 
     const subtotal = getSubtotal();
     const tax = getTax();
-    const total = parseFloat(subtotal + tax).toFixed(2);
 
   return (
     <Box p={2} my={2}>
@@ -50,43 +47,11 @@ export default function DetailsCheckout({valuesDelivery}) {
             </Stack>
             <Stack direction='row' justifyContent='space-between' sx={{mt:2}}>
                 <Typography variant='body2' fontWeight='bold'>Total:</Typography>
-                <Typography variant='body2' fontWeight='bold'>${total}</Typography>
+                <Typography variant='body2' fontWeight='bold'>${subtotal}</Typography>
             </Stack>
             
         </Box>
        
-        {Boolean(check.length) && <Divider sx={{my:4}}/>}    
-
-        <Box>
-            {valuesDelivery.name && 
-                (
-                    <>
-                    <Typography variant='body2' fontWeight='700' >Name:</Typography>
-                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.name}</Typography>
-                </>
-            )}
-            {valuesDelivery.addressLine && 
-                (
-                <>
-                    <Typography variant='body2' fontWeight='700' >Address:</Typography>
-                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.addressLine}</Typography>
-                </>
-            )}
-            {valuesDelivery.zip_code && 
-                (
-                <>
-                    <Typography variant='body2' fontWeight='700' >Zip Code:</Typography>
-                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.zip_code}</Typography>
-                </>
-            )}
-            {valuesDelivery.phone && 
-                (
-                <>
-                    <Typography variant='body2' fontWeight='700' >Phone:</Typography>
-                    <Typography variant='body2' sx={{px:1}} >{valuesDelivery.phone}</Typography>
-                </>
-            )}
-        </Box>
     </Box>
   )
 }

@@ -29,7 +29,7 @@ export default function Comment({id,reviews, setReviews}) {
         :
         reviews.length > 0 
             ? reviews.map((values,index)=>{
-                return <Review values={values} key={index} />
+                return <Review values={values} key={index} setReviews={setReviews} />
             })
         :
         null

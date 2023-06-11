@@ -19,9 +19,7 @@ export default function FormPayMethod() {
     const element = useElements()
     const onSubmit = async (e)=>{
         e.preventDefault();
-
-
-        const {error, paymentMethod} = await stripe.createPaymentMethod({
+        const {error,paymentMethod} = await stripe.createPaymentMethod({
             type:'card',
             card:element.getElement(CardElement)
         })
@@ -29,7 +27,6 @@ export default function FormPayMethod() {
             setOpen(error.message, 'warning')
             return
         }
-
         const formData = {...paymentMethod, nameCard: tag}
         setLoadingBtn(true);
         addPaymentMethods(formData, token).then(res=>{
@@ -64,7 +61,13 @@ export default function FormPayMethod() {
                 />
             </Grid>
             <Grid sx={{my:2}}  item md={12} sm={12} xs={12}>
-                <CardElement /> 
+                <CardElement
+
+                options={{hidePostalCode: true,cvc: { // Opción para habilitar el campo CVC
+                    showIcon: true,
+                    placeholder: 'CVC',
+                }}}
+                /> 
             </Grid>
         </Grid>
             <Divider />

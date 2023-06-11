@@ -1,5 +1,6 @@
 import {Box, Paper, Typography,Stack, Divider, Button} from '@mui/material'
 import { useCartState } from '../../store/cartState'
+import { Link } from 'react-router-dom';
 
 
 export default function DetailsShop() {
@@ -55,7 +56,9 @@ export default function DetailsShop() {
             </Stack>
             
         </Box>
-        <Button sx={{mt:2,textTransform:'capitalize'}} fullWidth variant='contained' color='primary'>Checkout Now</Button>
+        <Link to='/checkout-alternative' className='link'>
+            <Button sx={{mt:2,textTransform:'capitalize'}} fullWidth variant='contained' color='primary'>Checkout Now</Button>
+        </Link>
         </Paper>
     </Box>
   )

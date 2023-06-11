@@ -1,21 +1,25 @@
 import {Box, Grid, TextField} from '@mui/material';
+import { useContext } from 'react';
+import { CheckoutContext } from '../../../context/Checkout/checkoutPayment';
 
-export default function FormAddressDelivery({values,setValues}) {
-
+export default function FormAddressDelivery() {
     
+    const {valuesCheckout,setValuesCheckout} = useContext(CheckoutContext);
+
+
   return (
-    <Box component='form' sx={{mt:2}}>
-        <Grid container spacing={2}>
+    <Box>
+        <Grid container spacing={2} sx={{py:2}}>
             <Grid item md={6} sm={6} xs={12}>
                 <TextField 
                     type='text'
                     required
                     size='small'
-                    label='Name'
-                    name='name'
+                    placeholder='Your Name'
+                    name='NameDelivery'
                     fullWidth
-                    value={values?.name}
-                    onChange={(e)=> setValues(v=> ({...v,[e.target.name]:e.target.value}))}
+                    value={valuesCheckout?.NameDelivery || ''}
+                    onChange={(e)=> setValuesCheckout(v=> ({...v,[e.target.name]:e.target.value}))}
                     />
             </Grid>
             <Grid item md={6} sm={6} xs={12}>
@@ -23,11 +27,11 @@ export default function FormAddressDelivery({values,setValues}) {
                     type='text'
                     required
                     size='small'
-                    label='Address line'
+                    placeholder='Full Address line'
                     name='addressLine'
+                    value={valuesCheckout?.addressLine || ''}
                     fullWidth
-                    value={values?.address}
-                    onChange={(e)=> setValues(v=> ({...v,[e.target.name]:e.target.value}))}
+                    onChange={(e)=> setValuesCheckout(v=> ({...v,[e.target.name]:e.target.value}))}
                 />
             </Grid>
             <Grid item md={6} sm={6} xs={12}>
@@ -35,11 +39,12 @@ export default function FormAddressDelivery({values,setValues}) {
                     type='text'
                     required
                     size='small'
-                    label='ZIP Code'
+                    placeholder='ZIP Code'
                     name='zip_code'
+                    value={valuesCheckout?.zip_code || ''}
                     fullWidth
-                    value={values?.zip_code}
-                    onChange={(e)=> setValues(v=> ({...v,[e.target.name]:e.target.value}))}
+                    inputProps={{ pattern: "[0-9]{5}",required: true }}
+                    onChange={(e)=> setValuesCheckout(v=> ({...v,[e.target.name]:e.target.value}))}
                     />
             </Grid>
             <Grid item md={6} sm={6} xs={12}>
@@ -47,11 +52,12 @@ export default function FormAddressDelivery({values,setValues}) {
                     type='text'
                     required
                     size='small'
-                    label='Phone to call'
+                    placeholder='Phone to call'
                     name='phone'
+                    value={valuesCheckout?.phone || ''}
+                    inputProps={{pattern:"[0-9]+",minLength: 9, maxLength: 9, required: true}}
                     fullWidth
-                    value={values?.phone}
-                    onChange={(e)=> setValues(v=> ({...v,[e.target.name]:e.target.value}))}
+                    onChange={(e)=> setValuesCheckout(v=> ({...v,[e.target.name]:e.target.value}))}
                     />
             </Grid>
         </Grid>

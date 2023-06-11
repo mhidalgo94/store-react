@@ -12,7 +12,7 @@ import { useSnackBar } from '../../../store/snackbarState';
 
 export default function FormProduct({data={}, id=false}) {
     const [formData, setFormData] = useState(data);
-    const [availableStock, setAvailableStock] = useState(false);
+    const [availableStock, setAvailableStock] = useState(formData.available || false);
     const [prevImages, setPrevImages] = useState(data?.images || []);
     const {token,setLogout} = userState();
     const [loadingBtn, setLoadingBtn] = useState(false)
@@ -136,7 +136,7 @@ export default function FormProduct({data={}, id=false}) {
         </Grid>
         <Box sx={{mt:1, p:1,width:'100%', display:'flex', alignItems:'center'}}>
             <Typography variant="body1">Stock Available</Typography>
-            <Switch checked={formData?.available || false} inputProps={{name:'available'}} onChange={(e)=>onChangeSwitch(e)}  />
+            <Switch checked={availableStock} inputProps={{name:'available'}} onChange={(e)=>onChangeSwitch(e)}  />
         </Box>
         <LoadingButton loading={loadingBtn} variant='contained' color='primary' sx={{mt:2,minWidth:'150px',textTransform:'capitalize'}} type='submit'>
                 Save Product
