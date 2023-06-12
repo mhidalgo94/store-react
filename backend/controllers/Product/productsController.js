@@ -169,6 +169,7 @@ const getOneProduct = async (req,res)=>{
 
 const updateProduct = async (req,res)=>{
     try{
+        console.log('Service updated product')
         const userEmail = req.user.email
        // Find id user request.
        const user = await User.findOne({where:{email:userEmail}})
@@ -195,15 +196,17 @@ const updateProduct = async (req,res)=>{
             newValues.images = images;
         }
 
-        let id = req.params.id
-        const product = await Product.update(newValues, {where: { id:id }})
+        let id = req.params.id;
+        const product = await Product.findOne({where:{id}})
         if(!product){
             return res.status(401).json({message:"The product does not exist."})
         }
+
+        product.update(newValues);
+
         res.status(200).json({message:"Product updated successfully."});
     }catch(err){
         console.log('Something Wrong for update a product.');
-        console.log(err)
         res.status(500).json({"message":"Server Error"});
     }
 }
@@ -220,10 +223,11 @@ const removeProduct = async (req,res)=>{
             return res.status(401).json({message:"You do not have authorization to delete this product."})
         }
 
-        const product = await Product.destroy({where: {id: id}})
+        const product = await Product.findOne({where: {id: id}})
         if(!product){
             return res.status(401).json({message:"The product does not exist"})
         }
+        product.destroy()
         res.status(200).json({"message":"Product deleted successfully."});
     }catch{
         console.log('Something Wrong for remove a product.');

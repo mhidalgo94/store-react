@@ -20,8 +20,10 @@ function authenticated(req,res,next){
         next();
     }catch(err){
         console.error(err);
-        // return res.status(401).json({message:"Token invalid"})
-        return res.status(401).json({message:"User session expired"})
+        if(err.name === 'TokenExpiredError'){
+            return res.status(401).json({message:"User session expired"})
+        }
+        res.status(401).json({message:"User session expired"})
     }
 }
 
