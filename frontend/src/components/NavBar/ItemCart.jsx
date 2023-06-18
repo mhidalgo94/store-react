@@ -21,7 +21,7 @@ export default function ItemCart({values: item})  {
 
   return (
     <>
-        <Box sx={{display:'flex',alignItems:'center',margin:'10px 5px',width:'100%'}}>
+        <Box sx={{display:'flex',alignItems:'center',margin:'10px 0px',width:'100%'}}>
             <Box sx={{display:'flex',width:'15%', flexDirection:'column',alignItems:'center', gap:'2px'}}>
                 <IconButton 
                     onClick={ incrementQuantity }

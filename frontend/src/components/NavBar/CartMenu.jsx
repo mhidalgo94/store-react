@@ -18,7 +18,7 @@ export default function CartMenu({openCart, setOpenCart}) {
         onOpen={(e)=>setOpenCart( true)}
         sx={{width:'calc(100% - 320px)',flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: '340px',
+          width: '330px',
         }}}>
           <Container sx={{marginTop:'20px'}} >
             <Grid display='flex' justifyContent='space-between' alignItems='center' >
@@ -34,9 +34,17 @@ export default function CartMenu({openCart, setOpenCart}) {
             </Grid>
           </Container>
           <Divider sx={{marginTop:2}} />
-          <>
-            {data.map((item,index)=> <ItemCart key={index} values={item}/> )}
-          </>
+          <Box sx={{minHeight:'60%',overflow:'auto'}}>
+
+          {data.length > 0 ?
+              data.map((item,index)=> <ItemCart key={index} values={item}/> )
+              :
+              <Box sx={{height:'70%', textAlign:'center',display:'flex',justifyContent:'center',
+              alignItems:'center',color:'grey.500'}}>
+                <Typography variant='subtitle2'>Empty Cart</Typography>
+             </Box> 
+          }
+          </Box>
           <Container sx={{backgroundColor:'white',p:1,borderTop:'1px solid #f1f1f1', position:'sticky', bottom:0,right:0,height:'100px',width:'100%'}}>
             <Box display='flex' flexDirection='column' gap={1}>
               <Box width='100%'>
