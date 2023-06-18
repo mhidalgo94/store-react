@@ -6,9 +6,10 @@ import CardAddressAccordion from './CardAddressAccordion';
 import CircularProgress from '@mui/material/CircularProgress';
 import {getAddresses} from '../../../api/fetchUser.js'
 import { userState } from '../../../store/userState';
-
+import { useSnackBar } from '../../../store/snackbarState';
 export default function AccordionAddress() {
-    const {token} = userState();
+    const {token, setLogout} = userState();
+    const {setOpen}  = useSnackBar();
     const [address, setAddress] = useState([])
     const [loadingAddress, setLoadingAddress] = useState(false); 
 
@@ -17,7 +18,13 @@ export default function AccordionAddress() {
         setLoadingAddress(true)
         getAddresses(tok).then(res=>{
             const newAddresses = res?.data?.addresses.map(address=>({...address, selected:false}))
-            setAddress(newAddresses)
+            setAddress(newAddresses);  
+        }).catch((err)=>{
+          if (err.response.status === 401) {
+            setLogout();
+        }
+        const msg = err?.response?.data?.message || 'Error Server.';
+        setOpen(msg, 'error');
         }).finally(()=>{
             setLoadingAddress(false)
         })

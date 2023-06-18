@@ -2,12 +2,34 @@ const config = require('../../config/config.js');
 const Stripe = require('stripe');
 const db = require('../../models/index.js');
 
+// const { STRIPE_PUBLISHABLE_KEY } = require('../../config/config.js');
 
 const User = db.user;
 const OrderSales= db.salesOrder;
 const OrderSaleProduct = db.orderSalesProducts;
 
 const stripe = new Stripe(config.STRIPE_PRIVATE_KEY);
+
+
+// const configPayment = async (req,res)=>{
+//   res.status(200).json({publishableKey: STRIPE_PUBLISHABLE_KEY})
+// }
+
+const createPaymentIntent= async (req, res) => {
+  const {amount} = req.body;
+  const amt = amount * 100
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount:amt, // Monto en centavos (aquí puedes personalizarlo según tus necesidades)
+    currency: 'usd', // Moneda (cambia según tus necesidades)
+    automatic_payment_methods: {
+      enabled: true,
+    },
+  });
+
+  res.json({
+    clientSecret: paymentIntent.client_secret,
+  });
+};
 
 
 
@@ -20,61 +42,49 @@ const addCheckout = async (req,res)=>{
           const queryUser = await User.findOne({where:{email: user.email, is_active:true}}).then(user=> user.toJSON());
           userId = queryUser.id;
         }
-        
         const values = req.body;
-        const token = values?.token;
-        if(!token){
-          return res.status(400).json({message:"Payment values are not completed."})
-        }
-        const idPayment = values.token.id;
-        const amount = values.amount * 100; // stripe require in Cents
+        console.log(values)
+        
+        const idPayment = values.paymentIntent.id;
+        const amount = parseFloat(values.amount) * 100; // stripe require in Cents
         const products = values.products;
 
-        if(!values?.addressLine && !values?.zip_code){
+        const {addressLine, zip_code, NameDelivery,phone} = values?.delivery
+
+        if(!addressLine && !zip_code && !NameDelivery && !phone){
           return res.status(400).json({message:"You must fill in address and zip code."})
         }
 
-        const address = `${values.addressLine}  ${values.zip_code}`
-        const payment = await stripe.paymentIntents.create({
-            amount,
-            currency: 'usd',
-            payment_method_data: {
-                type: 'card',
-                card: {
-                  token: idPayment, // Pasa solo el ID del token dentro de card[token]
-                },
-              },
-            confirm:true
-        });
-        if(payment.status === 'succeeded'){
-          const order = await OrderSales.create(
-            { 
-              userId,
-              amount:values.amount,
-              quantity:products.length, 
-              address, 
-              idPayment, 
-              brand: token?.card?.brand,
-              country: token?.card?.brand,
-              idCard: token?.card?.id, last4 : token?.card?.last4
-            }).then(order=>{
-              return order.toJSON();
-            })
-            const listSaleProducts = products.map((product) => ({
-              orderSaleId: order.id,
-              ProductId: product.id,
-              quantity: product.quantity,
-              price: product.price,
-            }));
-            await OrderSaleProduct.bulkCreate(listSaleProducts)  
-            
+        const fullAddress = `${addressLine}  ${zip_code}`
+        
+        const order = await OrderSales.create(
+          { 
+            userId,
+            amount:values.amount,
+            quantity:products.length, 
+            address:fullAddress, 
+            idPayment, 
+            NameDelivery,
+            phone,
+            payment_method: values.paymentIntent.payment_method,
+            client_secret: values.paymentIntent.client_secret,
+          }).then(order=>{
+            return order.toJSON();
+          })
+        const listSaleProducts = products.map((product) => ({
+            orderSaleId: order.id,
+            ProductId: product.id,
+            quantity: product.quantity,
+            price: product.price,
+          }));
+        await OrderSaleProduct.bulkCreate(listSaleProducts)  
+          
 
-            const emailSalesOrder = values?.emailOrderSale;
-            if(!userId && emailSalesOrder){
-              // Send email to emailSalesOrder
-    
-            }
-        }
+        // const emailSalesOrder = values?.emailOrderSale;
+        // if(!userId && emailSalesOrder){
+        //   // Send email to emailSalesOrder
+
+        // }
         
 
         res.status(200).json({message:'Payment confirmed. Thank you for your purchase!'})
@@ -88,5 +98,7 @@ const addCheckout = async (req,res)=>{
 
 
 module.exports={
-    addCheckout
+  // configPayment,
+  createPaymentIntent,
+  addCheckout
 }

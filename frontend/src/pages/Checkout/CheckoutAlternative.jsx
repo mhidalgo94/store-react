@@ -1,16 +1,18 @@
 // Checkout without authentication
 import {useContext, useState} from 'react';
+
 import {useNavigate}  from 'react-router-dom';
 import { CheckoutContext } from '../../context/Checkout/checkoutPayment';
 import {Box,Container,Grid, Paper} from '@mui/material';
-import { CartCheckout, DetailsCheckout, DeliveryCheckout, PaymentMethodCheckout } from '../../components/Checkout';
+import { CartCheckout, DetailsCheckout, DeliveryCheckout } from '../../components/Checkout';
 import LoadingButton from "@mui/lab/LoadingButton/LoadingButton";
 import { addCheckout } from '../../api/fetchCheckout';
-import { useStripe, useElements, CardNumberElement,  } from '@stripe/react-stripe-js';
+import { useStripe, useElements,  PaymentElement} from '@stripe/react-stripe-js';
 import { useSnackBar } from '../../store/snackbarState.js';
 import { useCartState } from '../../store/cartState';
 import CustomDialog from '../../components/Dialog/Dialog.jsx';
 import { userState } from '../../store/userState';
+import PaymentCheckout from '../../components/Checkout/PaymentMethod/PaymentCheckout';
 
 
 export default function CheckoutAlternative() {
@@ -20,46 +22,60 @@ export default function CheckoutAlternative() {
   let tokenAtuh = isAuth ? token : ''
   const {valuesCheckout,setValuesCheckout} = useContext(CheckoutContext);
   const {setOpen} = useSnackBar();
-  const [loadingBtn, setLoadingBtn] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
 
-  // Dialog for Delete Catergory
+  // Dialog for Delete Category
   const [btnLoadingConfirm, setBtnLoadingConfirm] = useState(false);
   const [openCloseDialog, setOpenCloseDialog] = useState(false);
 
-  const confirmPay = ()=>{
-    setBtnLoadingConfirm(true);
-    const values = valuesCheckout;
+
+  const SaveOrder = (paymentIntent)=>{
+    //Guardad order base datos
+    const values = {delivery:valuesCheckout,paymentIntent,products, amount};
+    console.log(values)
     addCheckout(values,tokenAtuh).then(res=>{
       setOpen('Successful payment');
       clearCart();
       navigate('/payment-succeeded');
     }).catch(err=>{
-      const msg = err?.response?.data?.message || 'Error Payment. Try to pay later.';
-      setOpen(msg, 'error');
+      const msg = err?.response?.data?.message || 'Error generating the order.'
+      setOpen(msg,'error')
     }).finally(()=>{
       setBtnLoadingConfirm(false);
       setOpenCloseDialog(false);
     });
   }
+
+  const confirmPay = async()=>{
+    setBtnLoadingConfirm(true);
+    await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${window.location.origin}/payment-succeeded`,
+      },
+      redirect: "if_required",
+    }).then(result=>{
+      if(result?.error){
+        setOpen(result?.error?.message || "An unexpected error occured.Try later",'warning');
+      }else{
+        const {paymentIntent} = result;
+        SaveOrder(paymentIntent);
+      }
+    }).finally(()=>{
+      setBtnLoadingConfirm(false);
+      setOpenCloseDialog(false);
+
+    })    
+
+  }
   
 
-  const handleSubmit = async (e)=>{
+  const handleSubmit = (e)=>{
     e.preventDefault();
-    const cardNumberElement = elements.getElement(CardNumberElement);
-    const { token, error } = await stripe.createToken(cardNumberElement);
+    setOpenCloseDialog(true);
+    
 
-    if(error){
-      setOpen(error.message, 'warning')
-      setLoadingBtn(false)
-      return
-    }
-
-    if(token){
-      setValuesCheckout(prev=>({...prev, token, products, amount}))
-      setOpenCloseDialog(true)
-    }
 
   }
   
@@ -85,10 +101,10 @@ export default function CheckoutAlternative() {
               </Box>
               <Box sx={{p:2}}>
                 <Paper sx={{p:2}}>
-                    <PaymentMethodCheckout />
+                  <PaymentCheckout />
                   <Box sx={{mt:3}}>
                     <LoadingButton disabled={btnLoadingConfirm} loading={btnLoadingConfirm}  color='primary' variant='contained' type='submit' fullWidth>
-                      {!loadingBtn ? 'Pay Now' : 'Processing...'}
+                     Pay Now
                     </LoadingButton>
                   </Box>
                 </Paper>

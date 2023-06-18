@@ -1,8 +1,8 @@
 const db = require('../../models/index.js');
-
 const PaymentMethods = db.paymentMethods;
 const User = db.user;
 const { ValidationError } = require('sequelize');
+
 
 
 const addPaymentMethods = async (req, res)=>{

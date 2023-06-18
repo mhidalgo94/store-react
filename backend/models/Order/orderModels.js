@@ -12,27 +12,30 @@ const SalesOrder = sequelize.define('orderSales', {
     },
     quantity: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 0
+      allowNull: false,
+    },
+    phone: {
+      type: DataTypes.STRING, // Tipo de datos para almacenar el número de teléfono
+      allowNull: false, // No permitir valores nulos
     },
     amount: {
       type: DataTypes.DECIMAL,
-      allowNull: true,
+      allowNull: false,
       defaultValue: 0
     },
     idPayment:{
       type:DataTypes.STRING,
       allowNull:false,
     },
-    brand:{
+    payment_method:{
       type:DataTypes.STRING,
-      allowNull:true,
+      allowNull:false,
     },
-    country:{
+    client_secret:{
       type:DataTypes.STRING,
-      allowNull:true,
+      allowNull:false,
     },
-    idCard:{
+    NameDelivery:{
         type:DataTypes.STRING,
         allowNull:true,
     },

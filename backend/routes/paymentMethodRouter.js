@@ -3,7 +3,6 @@ const { authenticated } =require('../middleware/authenticate.js');
 
 
 const router = require('express').Router()
-
 // Create
 router.post('/addPaymentMethods', authenticated , payMethoControllers.addPaymentMethods);
 // List Payment Methods
