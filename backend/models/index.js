@@ -70,8 +70,9 @@ db.salesOrder.belongsTo(db.user, { optional: true});
 db.salesOrder.belongsToMany(db.products, { through: db.orderSalesProducts, as: 'ProductSales' });
 db.products.belongsToMany(db.salesOrder, { through: db.orderSalesProducts,as: 'salesOrder' });
 
-db.salesOrder.hasMany(db.orderSalesProducts)
-db.orderSalesProducts.belongsTo(db.products)
+db.salesOrder.hasMany(db.orderSalesProducts);
+// db.user.belongsTo(db.salesOrder);
+db.orderSalesProducts.belongsTo(db.products);
 
 // Establecer relación belongsTo
 db.paymentMethods.belongsTo(db.user)

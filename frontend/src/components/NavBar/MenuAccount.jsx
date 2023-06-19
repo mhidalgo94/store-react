@@ -4,8 +4,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from '@mui/icons-material/Login';
 import InventoryIcon from '@mui/icons-material/Inventory';
-import styleNavBar from './styleNavbar';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 
+import styleNavBar from './styleNavbar';
 import { userState } from "../../store/userState";
 
 export default function MenuAccount({ anchorEl,open,handleClose}) {
@@ -57,16 +58,30 @@ export default function MenuAccount({ anchorEl,open,handleClose}) {
         </Link>
         }
       </MenuItem>
-      {['admin','moderator'].includes(user.role) &&
+      {['admin','moderator'].includes(user.role) ?
         <MenuItem sx={styleLinkMenu}>
-        <Link to='/manage/list-products' className="link">
-          <ListItem sx={{padding:0,margin:'0 10px'}}>
-            <InventoryIcon/>
-            <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1}>Inventory</Typography>
-          </ListItem> 
-        </Link>
+          <Link to='/manage/list-products' className="link">
+            <ListItem sx={{padding:0,margin:'0 10px'}}>
+              <InventoryIcon/>
+              <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1}>Inventory</Typography>
+            </ListItem> 
+          </Link>
         </MenuItem> 
+        :
+        null
       }
+      {['admin','moderator'].includes(user.role) ?
+      <MenuItem sx={styleLinkMenu}>
+      <Link to='/manage/list-orders' className="link">
+        <ListItem sx={{padding:0,margin:'0 10px'}}>
+          <PlaylistAddCheckIcon />
+          <Typography variant="subtitle1" sx={{fontWeight:'500'}} m={1}>Orders</Typography>
+        </ListItem> 
+      </Link>
+    </MenuItem>
+    : null
+    }
+
       <MenuItem sx={styleLinkMenu}>
         {isAuth ?
           <ListItem sx={{padding:0,margin:'0 10px'}} onClick={handleLogout}>

@@ -4,7 +4,7 @@ import { Box, Container, Typography, Stack} from "@mui/material";
 import ProfileBase from '../../ProfileBase';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import CircularProgress from '@mui/material/CircularProgress';
-import { getOneOrderSales } from '../../../../api/apiOrderSales';
+import { getOneOrderSales } from '../../../../api/fetchOrderSales';
 import {useSnackBar} from '../../../../store/snackbarState.js'
 import OrderComponent from '../../../../components/Order/OrderComponent';
 

@@ -29,7 +29,7 @@ import {
     NewPayMethod
 
 } from "../pages/Profile/pages/index";
-import { ProductsPage, AddProduct,EditProduct, AddNewCategory } from "../pages/Manage";
+import { ProductsPage, AddProduct,EditProduct, AddNewCategory,ListOrdersPage } from "../pages/Manage";
 import OrderPagePublic from "../pages/OrderPublic/OrderPagePublic";
 
 
@@ -79,6 +79,7 @@ const Routers = createBrowserRouter([
             { path:'add-product', element: <AddProduct /> },
             { path:'edit-product/:id', element: <EditProduct /> },
             { path:'add-category', element: <AddNewCategory /> },
+            { path:'list-orders', element: <ListOrdersPage /> },
         ]
     },
 

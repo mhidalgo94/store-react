@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Box, Container, Typography} from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSnackBar } from '../../store/snackbarState';
-import { getOneOrderSales } from '../../api/apiOrderSales';
+import { getOneOrderSales } from '../../api/fetchOrderSales';
 import OrderComponent from '../../components/Order/OrderComponent'
 
 

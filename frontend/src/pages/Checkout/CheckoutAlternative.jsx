@@ -7,7 +7,7 @@ import {Box,Container,Grid, Paper} from '@mui/material';
 import { CartCheckout, DetailsCheckout, DeliveryCheckout } from '../../components/Checkout';
 import LoadingButton from "@mui/lab/LoadingButton/LoadingButton";
 import { addCheckout } from '../../api/fetchCheckout';
-import { useStripe, useElements,  PaymentElement} from '@stripe/react-stripe-js';
+import { useStripe, useElements} from '@stripe/react-stripe-js';
 import { useSnackBar } from '../../store/snackbarState.js';
 import { useCartState } from '../../store/cartState';
 import CustomDialog from '../../components/Dialog/Dialog.jsx';
@@ -20,7 +20,7 @@ export default function CheckoutAlternative() {
   const {isAuth, token} = userState();
   const navigate = useNavigate();
   let tokenAtuh = isAuth ? token : ''
-  const {valuesCheckout,setValuesCheckout} = useContext(CheckoutContext);
+  const {valuesCheckout} = useContext(CheckoutContext);
   const {setOpen} = useSnackBar();
   const stripe = useStripe();
   const elements = useElements();

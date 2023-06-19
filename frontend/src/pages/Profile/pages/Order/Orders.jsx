@@ -8,7 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import storeTheme from '../../../../themes/storeTheme';
 import CircularProgress from '@mui/material/CircularProgress';
 import {userState}  from '../../../../store/userState.js'
-import { listOrderSales } from '../../../../api/apiOrderSales';
+import { listOrderSales } from '../../../../api/fetchOrderSales';
 
 
 

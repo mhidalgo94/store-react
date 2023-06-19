@@ -105,7 +105,7 @@ export default function DataGridProducts() {
         { field: "actions",type: "actions", headerName: "Options", minWidth: 100, getActions: (params)=>[
             <GridActionsCellItem style={{color:'#0288d1'}} icon={<EditIcon color='info' />} label="Edit" onClick={(event)=>handleEdit(event,params)}  showInMenu/>,
             <GridActionsCellItem sx={{color:'primary.600'}} icon={<DeleteIcon sx={{color:'primary.600'}}/>} label="Delete" onClick={()=>handleDelete(params)} showInMenu/>
-            ],felx:1}
+            ],flex:1}
     ]
 
     const rows = data?.map((obj) =>({

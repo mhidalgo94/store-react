@@ -113,6 +113,9 @@ const getAvailableProducts = async (req,res)=>{
           attributes:{
             exclude:['user_id','UUID']
           },
+          order:[
+            ['createdAt','DESC']
+            ],
           include:[
             {
                 model: Category,
