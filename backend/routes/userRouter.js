@@ -11,10 +11,16 @@ router.post('/addUser', userController.addUser);
 router.post('/verifyCode', userController.verifyCodeUser);
 // Validate Code for active user
 router.post('/resendCode', userController.resetCodeVerifyUser)
+// Verify email for reset password
+router.post('/verify-email', userController.verifyEmailUser)
+// Verify email for reset password
+router.post('/change-password', userController.changePassword)
+
 // List Users
 router.get('/allUsers',authenticated, userController.getAllUsers);
 // One User
 router.get('/:id',authenticated, userController.getOneUser);
+
 
 // self-Update User required params email.
 router.put('/update',authenticated,authorize(['client','admin','moderator']),uploadPublic.single('image'),userController.selfUpdateUser);

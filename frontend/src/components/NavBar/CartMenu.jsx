@@ -4,12 +4,12 @@ import { Button,Container,Typography,Tooltip,Stack, SwipeableDrawer, Divider, Gr
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import ItemCart from './ItemCart';
 import { useCartState } from '../../store/cartState';
-
+import { userState } from '../../store/userState';
 
 export default function CartMenu({openCart, setOpenCart}) {
 
   const {products:data } = useCartState();
-
+  const  {isAuth} = userState();
 
   return (
     <SwipeableDrawer open={openCart}
@@ -48,7 +48,7 @@ export default function CartMenu({openCart, setOpenCart}) {
           <Container sx={{backgroundColor:'white',p:1,borderTop:'1px solid #f1f1f1', position:'sticky', bottom:0,right:0,height:'100px',width:'100%'}}>
             <Box display='flex' flexDirection='column' gap={1}>
               <Box width='100%'>
-                <Link className='link' to='/checkout-alternative'>
+                <Link className='link' to={isAuth ? '/checkout-alternative' : '/login'}>
                   <Button fullWidth variant='contained' disabled={!Boolean(data.length)}>Checkout Now</Button>
                 </Link>
               </Box>

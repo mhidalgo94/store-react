@@ -59,7 +59,6 @@ const getReviews = async (req,res)=>{
         res.status(200).json(reviews);
     }catch(error){
         console.log('Something Wrong in get all reviews with product id');
-        console.log(error)
         res.status(500).json({"message":"Server Error"});
     }
     
@@ -82,7 +81,6 @@ const getReviewSummary = async (req,res)=>{
         
     }catch(error){
         console.log('Something Wrong in get reviews summary with product id');
-        console.log(error)
         res.status(500).json({"message":"Server Error"});
     }   
 }

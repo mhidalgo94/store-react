@@ -12,7 +12,6 @@ const Product = require('../models/Product/productModels.js');
 const orderItem  = async ()=>{
 
     const orderItem = await OrderItem.findAll().then(values=>{
-        console.log(values)
         return values
     });
     return orderItem

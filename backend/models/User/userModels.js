@@ -1,7 +1,5 @@
 const bcrypt = require('bcrypt');
 const { Sequelize,sequelize, DataTypes} = require('../../db/index.js');
-// const path = require('path');
-// const {pathStaticPublic} = require('../../static/index.js');
 
 
 const User = sequelize.define('user', {

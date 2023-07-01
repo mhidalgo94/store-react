@@ -48,9 +48,14 @@ export default function FormLogin() {
             <LoadingButton loading={loadingBtn}  fullWidth variant='contained' sx={{my:1, textTransform:'capitalize'}} type='submit' color='primary'>
                 Login
             </LoadingButton>
-            <Link className='link' to='/sign-in'>
-                <Button  fullWidth variant='outlined' sx={{my:1, textTransform:'capitalize'}} color='lightBlue' >Sign in</Button>
-            </Link>
+            <Box sx={{width:'100%',display:'flex',px:1, justifyContent:'space-between'}}>
+                <Link className='link' to='/sign-in'>
+                    <Typography variant='body2' fontSize={'14px'} sx={{color:'#1877F2'}}>Create Account</Typography>
+                </Link>
+                <Link className='link' to='/verify-email'>
+                    <Typography variant='body2' fontSize={'14px'} sx={{color:'#1877F2'}}>Forgot password?</Typography>
+                </Link>
+            </Box>
         </Box>
     </>
     )

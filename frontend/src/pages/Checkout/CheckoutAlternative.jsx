@@ -33,7 +33,6 @@ export default function CheckoutAlternative() {
   const SaveOrder = (paymentIntent)=>{
     //Guardad order base datos
     const values = {delivery:valuesCheckout,paymentIntent,products, amount};
-    console.log(values)
     addCheckout(values,tokenAtuh).then(res=>{
       setOpen('Successful payment');
       clearCart();

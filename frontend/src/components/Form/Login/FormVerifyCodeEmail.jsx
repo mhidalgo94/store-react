@@ -4,7 +4,6 @@ import { verifyUserClient } from '../../../api/fetchUser';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { useSnackBar } from '../../../store/snackbarState';
-import { userState } from '../../../store/userState';
 import { useNavigate } from 'react-router-dom';
 
 export default function VerifyCodeEmail() {
@@ -12,7 +11,6 @@ export default function VerifyCodeEmail() {
   const [loadingBtn, setLoadingBtn] = useState()
   const navigate = useNavigate()
   const {setOpen} = useSnackBar();
-  const {setLogin} = userState();
 
   const handleSubmit=(e)=>{
     e.preventDefault();
@@ -23,7 +21,6 @@ export default function VerifyCodeEmail() {
 
     verifyUserClient(body).then(res=>{
       setOpen('Code verified successfully.')
-      setLogin(res.data.user);
       navigate('/login');
     }).catch(err=>{
       const msg = err.response?.data?.message;

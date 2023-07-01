@@ -11,8 +11,6 @@ import { useSnackBar } from '../../store/snackbarState';
 export default function Reviews({values,setReviews}) {
     const {user,token,setLogout} = userState();
     const {setOpen} = useSnackBar();
-    // console.log(values)s
-
     // Dialog for Delete Catergory
     const [btnLoadingDelete, setBtnLoadingDelete] = useState(false);
     const [openCloseDialog, setOpenCloseDialog] = useState(false);
@@ -25,7 +23,6 @@ export default function Reviews({values,setReviews}) {
             setReviews(prevReviews=> prevReviews.filter(reviews => reviews.id !== values.id))
             setOpen(msg)
         }).catch(err=>{
-            console.log()
             if (err.response.status === 401) {
                 setLogout();
                 const msg = 'Authentication expired. Login again please'

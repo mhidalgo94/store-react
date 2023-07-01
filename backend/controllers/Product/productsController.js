@@ -90,7 +90,6 @@ const getAllProducts = async (req,res)=>{
         res.status(200).json(products);
     }catch(err){
         console.log('Something Wrong in get all products');
-        console.error(err)
         res.status(500).json({"message":"Server Error"});
     }
     
@@ -98,7 +97,7 @@ const getAllProducts = async (req,res)=>{
 
 const getAvailableProducts = async (req,res)=>{
     try {
-        const { page = 1, limit = 40, search = '' } = req.query;
+        const { page = 1, limit = 9, search = '' } = req.query;
         const offset = (page - 1) * limit;
     
         const products = await Product.findAndCountAll({
@@ -135,7 +134,6 @@ const getAvailableProducts = async (req,res)=>{
           totalPages,
         });
       } catch (error) {
-        console.log(error);
         res.status(500).json({ message: 'Error retrieving products' });
       }
 }

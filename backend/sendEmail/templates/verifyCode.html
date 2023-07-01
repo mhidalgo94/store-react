@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      color: #00B9E8;
+      margin-top: 0;
+    }
+    
+    p {
+      margin-bottom: 20px;
+    }
+    
+    .verification-code {
+      border: gray 1px solid;
+      color: #424242;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Email Verification</h1>
+    <p>Dear {{name}},</p>
+    <p>Below is the verification code to complete the sign-in process:</p>
+    <p class="verification-code" id="verificationCode">{{code}}</p>
+    <p>Please enter this code on the login page to verify your email.</p>
+    <p>If you didn't request this verification code, please ignore this message.</p>
+    <p>Thank you,</p>
+    <p>Support Team</p>
+  </div>
+</body>
+
+</html>

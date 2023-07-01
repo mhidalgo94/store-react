@@ -25,9 +25,8 @@ const addAddress = async (req, res)=>{
         })
     }
     catch(error){
-        console.error('Something Wrong in create address.')
-        console.log(error)
-        res.status(500).json({"message":"Server Error"})
+        console.error('Something Wrong in create address.');
+        res.status(500).json({"message":"Server Error"});
     }
 }
 
@@ -85,8 +84,6 @@ const removeAddress = async (req,res)=>{
         res.status(200).json({"message":"Address successfully removed."});
     }catch(err){
         console.error('Something Wrong for remove a address.');
-
-        console.log(err)
         res.status(500).json({"message":"Server Error"});
     }
 

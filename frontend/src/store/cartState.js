@@ -57,7 +57,6 @@ export const useCartState = create(persist((set,get)=>({
     getSubtotal : ()=>{
         const {products} = get();
         // const subtotal = products.reduce((sum,value)=> sum + value.priceXquantity, 0);
-        // console.log(parseFloat(subtotal).toFixed(2))
         let total = 0;
         for (const product of products) {
             const { quantity, price } = product;

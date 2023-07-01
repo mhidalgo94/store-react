@@ -14,7 +14,8 @@ import SignIn from "../pages/Login/SignIn";
 import VerifyCodePage from "../pages/Login/VerifyCode/VerifyCodePage";
 import ResendCodePage from "../pages/Login/ResendCodeVerifyUser/ResendCodeVerifyUser";
 import SuccessPaymentPage from '../pages/Payment/SuccessPaymentPage';
-
+import VerifyEmail from "../pages/Login/ChangePassword/VerifyEmail";
+import ChangePassword from "../pages/Login/ChangePassword/ChangePassword";
 
 import { 
     Orders, 
@@ -49,6 +50,8 @@ const Routers = createBrowserRouter([
             { path:'/sign-in', element: <SignIn /> },
             { path:'/resendCode', element: <ResendCodePage /> },
             { path:'/verify-code', element: <VerifyCodePage /> },
+            { path:'/verify-email', element: <VerifyEmail /> },
+            { path:'/change-password/:id', element: <ChangePassword /> },
             { path:'/payment-succeeded', element: <SuccessPaymentPage /> },
             { path:'/order-sales/:id', element: <OrderPagePublic /> },
 

@@ -33,6 +33,17 @@ export const resendCode = async (email)=>{
     return res
 }
 
+export const verifyEmail = async(formData)=>{
+    const res = await instance.post('/user/verify-email', formData);
+    return res;
+}
+
+export const changePassword = async(formData)=>{
+    const res = await instance.post('/user/change-password',formData);
+    return res;
+}
+
+
 // Other fetch about data user.
 export const getAddresses = async (token)=>{
     const headers = {Authorization: `Bearer ${token}`};

@@ -51,8 +51,6 @@ const getOneOrderSales = async (req,res)=>{
         res.status(200).json(orderSales);
     }catch(err){
       console.error('Something Wrong in get a order sales.');
-      console.log(err)
-
       res.status(500).json({"message":"Server Error"});
     }
 }
@@ -98,7 +96,7 @@ const listOrderSalesManager = async (req,res)=>{
             return res.status(404).json({message:'User does not exist'});
         }
         const queryOrderSale = await SalesOrder.findAll({
-            where:{userId:queryUser.id},
+            // where:{userId:queryUser.id},
             attributes:{
                 exclude:['idPayment','userId']
             },
@@ -115,7 +113,6 @@ const listOrderSalesManager = async (req,res)=>{
         })
         res.status(200).json(queryOrderSale)
     }catch(err){
-        console.log(err)
         console.log('Something Error in listOrderSalesManager');
         res.status(500).json({"message":"Server Error"});
 

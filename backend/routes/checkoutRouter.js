@@ -1,4 +1,4 @@
-const { isAuth } = require('../middleware/authenticate.js')
+const { isAuth,authenticated } = require('../middleware/authenticate.js')
 
 const checkoutController =require('../controllers/Checkout/checkoutController.js');
 const router = require('express').Router();
@@ -9,7 +9,7 @@ const router = require('express').Router();
 // Create payment intent
 router.post('/create-payment-intent',checkoutController.createPaymentIntent)
 
-router.post('/addCheckout',isAuth, checkoutController.addCheckout)
+router.post('/addCheckout',authenticated, checkoutController.addCheckout)
 
 
 module.exports = router

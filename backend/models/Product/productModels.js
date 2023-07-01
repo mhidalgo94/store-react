@@ -50,13 +50,6 @@ const Product = sequelize.define("Product",{
         unique:true
     },
 })
-// ,{
-//     hooks:{
-//         afterUpdate:(product,option)=>{
-//             console.log('after update')
-//         }    
-//     },
-// })
 
 
 Product.afterUpdate((record, options)=>{
@@ -88,7 +81,6 @@ Product.afterUpdate((record, options)=>{
 })
 
 Product.afterDestroy((record, options)=>{
-    console.log('afterDelte**********')
     const {dataValues} = record;
     const oldFiles = dataValues.images;
 

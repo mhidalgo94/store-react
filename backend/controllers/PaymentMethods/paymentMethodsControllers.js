@@ -32,7 +32,6 @@ const addPaymentMethods = async (req, res)=>{
             const errors = err.errors.map(error => error.message);
             return res.status(422).json({ errors });
           } else {
-            console.error(err);
             return res.status(500).json({ error: 'Error al crear el método de pago' });
           }
     }
@@ -50,7 +49,6 @@ const getAllPaymentMethods = async (req,res)=>{
         res.status(200).json(paymentMetods);
     }catch(err){
         console.log('Something Wrong in get all payment methods.');
-        console.log(err);
         res.status(500).json({"message":"Server Error"});
     }
     

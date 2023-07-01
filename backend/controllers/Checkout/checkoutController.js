@@ -1,6 +1,8 @@
 const config = require('../../config/config.js');
 const Stripe = require('stripe');
 const db = require('../../models/index.js');
+const {OrderComplete} = require('../../sendEmail/sendEmail.js')
+
 
 // const { STRIPE_PUBLISHABLE_KEY } = require('../../config/config.js');
 
@@ -37,13 +39,12 @@ const addCheckout = async (req,res)=>{
 
     try{
         const user = req?.user;
-        let userId = null;
-        if(user){
-          const queryUser = await User.findOne({where:{email: user.email, is_active:true}}).then(user=> user.toJSON());
-          userId = queryUser.id;
-        }
+        if(!user){
+          return res.status(401).json({message:'Require authentication'})
+        } 
+        const queryUser = await User.findOne({where:{email: user.email, is_active:true}}).then(user=> user.toJSON());
+        let userId = queryUser.id;
         const values = req.body;
-        console.log(values)
         
         const idPayment = values.paymentIntent.id;
         const amount = parseFloat(values.amount) * 100; // stripe require in Cents
@@ -77,16 +78,14 @@ const addCheckout = async (req,res)=>{
             quantity: product.quantity,
             price: product.price,
           }));
-        await OrderSaleProduct.bulkCreate(listSaleProducts)  
           
-
-        // const emailSalesOrder = values?.emailOrderSale;
-        // if(!userId && emailSalesOrder){
-        //   // Send email to emailSalesOrder
-
-        // }
+        await OrderSaleProduct.bulkCreate(listSaleProducts)  
         
-
+        
+        const fullName = `${user.firstName} ${user.lastName}`;
+        const link = `${process.env.HOST_FRONTEND}/order-sales/${order.UUID}`
+        OrderComplete(user.email,fullName,link)
+        
         res.status(200).json({message:'Payment confirmed. Thank you for your purchase!'})
 
     }catch(err){

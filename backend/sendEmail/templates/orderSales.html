@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      color: #00B9E8;
+      margin-top: 0;
+    }
+    
+    p {
+      margin-bottom: 20px;
+    }
+    
+    .link {
+      display: inline-block;
+      background-color: #b2ebf2;
+      color: #424242;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Order Confirmation</h1>
+    <p>Dear {{name}},</p>
+    <p>Thank you for your recent purchase from our e-commerce store. We are pleased to inform you that your order has been successfully processed and confirmed.</p>
+    
+    <p>You can view the details of your order by clicking the following link:</p>
+    <p><a class="link" href="{{link}}">View Order Details</a></p>
+    <p>If you have any questions or need assistance regarding your order, please don't hesitate to contact our customer support team. We're here to help!</p>
+    <p>Thank you for choosing us.</p>
+    <p>Best regards,</p>
+    <p>The "Be inspired" Team</p>
+  </div>
+</body>
+
+</html>

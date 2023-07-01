@@ -86,32 +86,34 @@ export default function DataGridListOrderSales(){
     },[token,setLogout, setOpen])
 
     const columns = [
-        { field: "id", hide: true },
-        { field: "UUID", hide: true },
-        { field: 'userName', headerName: 'User Buyer',flex:0.8 },
-        { field: 'address', headerName: 'Address',flex:1 },
-        { field: 'amount', headerName: 'Amount',flex:0.5, },
-        { field: 'idPayment', headerName: 'Id Payment',flex:1.5 },
-        { field: 'phone', headerName: 'Phone',flex:0.7 },
-        { field: 'status', headerName: 'Status', renderCell : StateSelect,flex:1 },
+        { field: "UUID", hide: true,flex:1},
+        { field: "id", hide: false ,headerName:'ID',flex:1},
+        { field: 'userName', headerName: 'User Buyer', flex:1},
+        // { field: 'address', headerName: 'Address',flex:1},
+        { field: 'amount', headerName: 'Amount',flex:0.5},
+        { field: 'idPayment', headerName: 'Id Payment',flex:1},
+        { field: 'phone', headerName: 'Phone',flex:1},
+        { field: 'date', headerName: 'Date',flex:1},
+        { field: 'status', headerName: 'Status', renderCell : StateSelect,flex:1},
         { field: "actions",type: "actions", headerName: "Options", getActions: (params)=>[
             <GridActionsCellItem style={{color:'#0288d1'}} icon={<InsertLinkIcon color='info' />} label="Edit" onClick={(event)=>navigate(`/order-sales/${params.row.UUID}`)}/>,
-            ],flex:0.5}
+            ],}
     ]
 
     const rows = rowsData?.map(obj=>({
-        id: obj.id,
         UUID:obj.UUID,
+        id:obj.UUID.split('-')[4],
         quantity: obj.quantity,
         address: obj.address,
         amount: `$${obj.amount}`,
         status: obj.status,
         idPayment: obj.client_secret.split('_secret')[0],
         phone: obj.phone,
+        date: obj.createdAt,
         userName: obj?.user ? `${obj.user.firstName} ${obj.user.lastName}`: 'Anonimus',
     }))
   return (
-    <Box sx={{ height: 500, width: '100%', mb: 1 }}>
+    <Box sx={{ height: 500, width: '100%', mb: 1,overflowX: 'auto' }}>
         <DataGrid rows={rows} columns={columns} loading={loadingTable} pageSize={30} rowsPerPageOptions={[30]}
         disableSelectionOnClick
         />

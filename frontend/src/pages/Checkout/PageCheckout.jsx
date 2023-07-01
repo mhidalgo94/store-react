@@ -8,15 +8,19 @@ import { createPaymentIntent } from '../../api/fetchCheckout';
 import CheckoutAlternative from './CheckoutAlternative';
 import { Box } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import { userState } from '../../store/userState';
 
 export default function PageCheckOut() {
-
+  const {isAuth} = userState();
   const [clientSecret, setClientSecret] = useState(null);
   const {products,amount} = useCartState();
   const navigate = useNavigate();
 
-  if(products.length === 0){
+  if(!isAuth){
+    navigate('/login');
+  }
+
+  if(products.length === 0 && isAuth){
     navigate('/shop/products')
   }
 
