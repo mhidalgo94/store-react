@@ -3,6 +3,12 @@ const handlebars = require('handlebars');
 const transporter = require('./baseEmail.js');
 const path = require('path');
 
+const { Op } = require('sequelize');
+const db = require('../models/index.js');
+
+const User = db.user;
+
+
 
 const pathTemplates = path.join(__dirname,'templates' );
 
@@ -78,6 +84,39 @@ function RegistrationCompleted(emailTo, name){
     })
 }
 
+async function notifyBuyManager(name,link){
+    const pathTManager = path.join(pathTemplates,'userBuy.html');
+    const sourceManger = fs.readFileSync(pathTManager, 'utf-8');
+    const templateManager = handlebars.compile(sourceManger);
+
+    const users =await  User.findAll({
+        where: {
+            role: {
+              [Op.or]: ['admin', 'moderator'],
+            },
+          },
+          attributes: ['email'],
+    })
+    const emailList = users.map((user) => user.email);
+    const htmlEmailManager = templateManager({name,link})
+
+    let emailOptionsManager = {
+        from: 'storebeinspired@gmail.com',
+        to: emailList,
+        subject:'Un usuario ha comprado nuevos products.',
+        html: htmlEmailManager
+    }
+
+
+    transporter.sendMail(emailOptionsManager,(err,data)=>{
+        if(err){
+            console.log('Error Email Verfify Code',err)
+        }else{
+            console.log('Send Email successfully')
+        }
+    })
+}
+
 function OrderComplete(emailTo,name,link){
     const pathT = path.join(pathTemplates,'orderSales.html');
     const source = fs.readFileSync(pathT, 'utf-8');
@@ -99,6 +138,8 @@ function OrderComplete(emailTo,name,link){
             console.log('Send Email successfully')
         }
     })
+    /// envio de correo para notificar manager store
+    notifyBuyManager(name,link)
 
 }
 

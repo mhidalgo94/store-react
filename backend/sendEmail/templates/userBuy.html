@@ -4,13 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Email Verification</title>
+  <title>Order Confirmation</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f6f6f6;
       margin: 0;
       padding: 0;
+    }
+
+    .logo-container{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     
     .container {
@@ -31,21 +39,13 @@
       margin-bottom: 20px;
     }
     
-    .verification-code {
-      border: gray 1px solid;
+    .link {
+      display: inline-block;
+      background-color: #b2ebf2;
       color: #424242;
-      font-weight: bold;
-      padding: 10px;
-      border-radius: 6px;
-      text-align: center;
-      cursor: pointer;
-    }
-    .logo-container{
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -55,14 +55,12 @@
     <img src="./logo2.png" alt="logotipo"/>
   </div>
   <div class="container">
-    <h1>Email Verification</h1>
-    <p>Dear {{name}},</p>
-    <p>Below is the verification code to complete the sign-in process:</p>
-    <p class="verification-code" id="verificationCode">{{code}}</p>
-    <p>Please enter this code on the login page to verify your email.</p>
-    <p>If you didn't request this verification code, please ignore this message.</p>
-    <p>Thank you,</p>
-    <p>Support Team</p>
+    <h1>Cliente ha comprado en la tienda</h1>
+    <p>Dear Manager Kika be inspired</p>
+    <p>Un cliente llamado {{name}} ha comprado en la tienda revie las ordenes de ventas para ver productos.</p>
+    
+    <p><a class="link" href="{{link}}">View Order Details</a></p>
+    <p>Best regards</p>
   </div>
 </body>
 

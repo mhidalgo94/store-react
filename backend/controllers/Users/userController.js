@@ -105,6 +105,7 @@ const verifyEmailUser = async (req,res)=>{
 
         res.status(200).json({message:'Check your email to retrieve password'});
     }catch(err){
+        console.log(err)
         console.log('Error for Verify Email');
         res.status(500).json({message:'Error Server'});
     }

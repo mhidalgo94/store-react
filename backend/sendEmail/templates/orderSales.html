@@ -12,6 +12,14 @@
       margin: 0;
       padding: 0;
     }
+
+    .logo-container{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
     
     .container {
       max-width: 600px;
@@ -43,6 +51,9 @@
 </head>
 
 <body>
+  <div class="logo-container">
+    <img src="./logo2.png" alt="logotipo"/>
+  </div>
   <div class="container">
     <h1>Order Confirmation</h1>
     <p>Dear {{name}},</p>
