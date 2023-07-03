@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import {Link} from 'react-router-dom';
 import PhoneIcon from "@mui/icons-material/Phone";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -43,10 +44,16 @@ export default function Footer() {
           <Typography variant="h6" sx={{ color: "white" }}>
             Custom Care
           </Typography>
-          <Typography variant="subtitle1">How to Buy</Typography>
-          <Typography variant="subtitle1">Track Your Order</Typography>
-          <Typography variant="subtitle1">Returns & Refounds</Typography>
-          <Typography variant="subtitle1">Terms & Conditions</Typography>
+          <Link to='/how-to-buy' className="link">
+            <Typography variant="subtitle1">How to Buy</Typography>
+          </Link>
+          <Link to='/return-refound' className="link">
+            <Typography variant="subtitle1">Returns & Refounds</Typography>
+          </Link>
+          <Link to='/termins-conditions' className="link">
+            <Typography variant="subtitle1">Terms & Conditions</Typography>
+          </Link>
+
         </div>
       </div>  
     </div>

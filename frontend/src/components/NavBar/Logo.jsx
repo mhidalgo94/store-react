@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Logo() {
   return (
-    <h4>Logo</h4>
+    <img src='/logo2.png' style={{width:'100px'}} alt='logo'/>
   )
 }

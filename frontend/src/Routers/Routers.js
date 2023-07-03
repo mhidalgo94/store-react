@@ -32,9 +32,9 @@ import {
 } from "../pages/Profile/pages/index";
 import { ProductsPage, AddProduct,EditProduct, AddNewCategory,ListOrdersPage } from "../pages/Manage";
 import OrderPagePublic from "../pages/OrderPublic/OrderPagePublic";
-
-
-
+import Howtobuy from "../pages/HowToBuy/Howtobuy";
+import ReturnRefound from "../pages/ReturnRefound/ReturnRefound";
+import TerminCondition from "../pages/TermConditions/TerminCondition";
 
 const Routers = createBrowserRouter([
     {
@@ -54,6 +54,9 @@ const Routers = createBrowserRouter([
             { path:'/change-password/:id', element: <ChangePassword /> },
             { path:'/payment-succeeded', element: <SuccessPaymentPage /> },
             { path:'/order-sales/:id', element: <OrderPagePublic /> },
+            { path:'/how-to-buy', element: <Howtobuy /> },
+            { path:'/return-refound', element: <ReturnRefound /> },
+            { path:'/termins-conditions', element: <TerminCondition /> },
 
         ]
     },

@@ -8,10 +8,10 @@ import {userState} from '../../../../store/userState';
 import {useCartState} from '../../../../store/cartState.js';
 import { getUserReviews } from '../../../../api/fetchReviews.js'
 import {wishListUser} from '../../../../api/fetchWishlist.js'
-
+import { listOrderSales } from '../../../../api/fetchOrderSales';
 export default function ProfileInfo() {
 
-  const {user,token} = userState();
+  const {user,token,setLogout} = userState();
   const {products} = useCartState();
   const firstName = user.firstName.substring(0,1).toUpperCase() + user.firstName.substring(1);
   const lastName = user.lastName.substring(0,1).toUpperCase() + user.lastName.substring(1);
@@ -21,14 +21,30 @@ export default function ProfileInfo() {
   // Extra Details Profile
   const [reviews, setReviews ] = useState([])
   const [wihslist, setWishlist] = useState({count:0})
+  const [allOrders, setAllOrders] = useState(0)
 
   useEffect(()=>{
     getUserReviews(token).then(res=>{
-      setReviews(res.data)
+      setReviews(res?.data || []);
+    }).catch(err=>{
+      if (err?.response?.status === 401) {
+          setLogout();
+      }
     })
     wishListUser(token).then(res=>{
-      setWishlist(prev=>({...prev, count:res?.data?.count}))
-    })
+      setWishlist(prev=>({...prev, count:res?.data?.count}));
+    }).catch(err=>{
+      if (err?.response?.status === 401) {
+          setLogout();
+      }
+    });
+    listOrderSales(token).then(res=>{
+      setAllOrders(res?.data?.length || 0);
+    }).catch(err=>{
+      if (err?.response?.status === 401) {
+          setLogout();
+      }
+    });
   },[token])
 
   return (
@@ -84,7 +100,7 @@ export default function ProfileInfo() {
                 <Grid item container md={6} sm={5} xs={12} spacing={1} alignItems='center'>
                     <Grid item sm={6} xs={12}>
                       <Paper elevation={2} sx={{p:2}}>
-                        <Typography variant='h5' color='primary' textAlign='center'>14</Typography>
+                        <Typography variant='h5' color='primary' textAlign='center'>{allOrders}</Typography>
                         <Typography variant='body2' color='grey.600' textAlign='center'>all Orders</Typography>
                       </Paper>
                     </Grid>
