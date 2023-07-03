@@ -34,6 +34,7 @@ function FormResendCode() {
   return (
     <>
          <Box sx={{textAlign:'center'}}>
+            <img src='/logo2.png' style={{width:'100px'}} alt='logo'/>
             <Typography variant='subtitle1'>Resend code for verify you email.</Typography>
         </Box>
         <Box component='form' onSubmit={handleSubmit}>

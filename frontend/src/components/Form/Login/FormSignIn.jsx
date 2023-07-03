@@ -37,9 +37,9 @@ export default function FormSignIn() {
 
     return (
         <>
-            <Box sx={{textAlign:'center'}}>
-                <Typography variant='h5'>LOGOTIPO</Typography>
-                <Typography variant='subtitle1'>Welcome to LOGOTIPO</Typography>
+            <Box sx={{textAlign:'center'}}>   
+                <img src='/logo2.png' style={{width:'100px'}} alt='logo'/>
+                <Typography variant='subtitle1'>Create Account</Typography>
             </Box>
             <Box component='form' onSubmit={handleSubmit}>
                 

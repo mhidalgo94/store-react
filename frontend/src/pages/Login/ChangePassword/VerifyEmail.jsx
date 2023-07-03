@@ -32,6 +32,7 @@ export default function VerifyEmail() {
     <BaseLogin>
         <>
          <Box sx={{textAlign:'center'}}>
+             <img src='/logo2.png' style={{width:'100px'}} alt='logo'/>
             <Typography variant='subtitle1'>Verify your email.</Typography>
         </Box>
         <Box component='form' onSubmit={handleSubmit}>

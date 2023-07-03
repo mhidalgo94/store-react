@@ -39,8 +39,8 @@ export default function FormLogin() {
     return (
     <>
         <Box sx={{textAlign:'center'}}>
-            <Typography variant='h5'>LOGOTIPO</Typography>
-            <Typography variant='subtitle1'>Welcome to LOGOTIPO</Typography>
+            <img src='/logo2.png' style={{width:'100px'}} alt='logo'/>
+            <Typography variant='subtitle1'>Login Account</Typography>
         </Box>
         <Box component='form' onSubmit={handleSubmit}> 
             <TextField color='info' onChange={(e)=>setEmail(e.target.value)} fullWidth required helperText='Email required.' size='small' label='Email' placeholder='example@mail.com' type='email' name='email'/>
