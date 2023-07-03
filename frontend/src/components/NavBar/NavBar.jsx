@@ -4,20 +4,23 @@ import {Badge, Tooltip, Typography, Stack } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import MenuIcon from '@mui/icons-material/Menu';
 import CartMenu from "./CartMenu";
 import MenuAccount from "./MenuAccount";
+import MenuNavigate from './MenuNavigate';
 import styleNavBar from "./styleNavbar";
 import { useCartState } from "../../store/cartState";
 import "./NavBar.scss";
 import useMediaQuery from '@mui/material/useMediaQuery'
 import storeTheme from '../../themes/storeTheme';
-
 import Logo from "./Logo";
 
 export default function NavBar() {
   const theme = storeTheme;
-  const showLogo = useMediaQuery(theme.breakpoints.up('minixs'));
+  const showLinks = useMediaQuery(theme.breakpoints.up('minixs'));
 
+  // Drawer menu navigate
+  const [openNavigate, setOpenNavigate] = useState(false);
   // Drawer Cart Shop
   const [openCart, setOpenCart] = useState(false);
   const {products} = useCartState();
@@ -36,6 +39,7 @@ export default function NavBar() {
   return (
     <div className="content-navbar">
       <div className="navbar">
+      {showLinks && 
         <Stack direction='row' spacing={2}>
             <Link className="link" to="/">
               <Typography variant="h6" sx={styleNavBar.styleLink}>
@@ -48,8 +52,19 @@ export default function NavBar() {
               </Typography>
             </Link>
         </Stack>
+      }
+      <MenuNavigate open={openNavigate} setOpen={setOpenNavigate}/>
 
-        {showLogo && <Logo />}
+      {showLinks ? 
+        <Logo />
+        :
+        <Stack direction='row' alignItems='center'>
+          <Tooltip arrow onClick={()=>setOpenNavigate(!openNavigate)}>
+            <MenuIcon sx={styleNavBar.styleIcons} />
+          </Tooltip>
+          <Logo />
+        </Stack>
+      }
 
         <Stack direction='row' spacing={2}>
             <Link className='link' to='/account/profile/wishlist'>

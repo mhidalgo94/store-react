@@ -1,4 +1,5 @@
-import {Link} from 'react-router-dom';
+import { useEffect } from 'react';
+import {Link,useLocation} from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button,Container,Typography,Tooltip,Stack, SwipeableDrawer, Divider, Grid, IconButton,Box} from "@mui/material";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -10,6 +11,13 @@ export default function CartMenu({openCart, setOpenCart}) {
 
   const {products:data } = useCartState();
   const  {isAuth} = userState();
+
+  const location = useLocation();
+
+    useEffect(() => {
+      setOpenCart(false);
+    }, [location.pathname,setOpenCart]);
+
 
   return (
     <SwipeableDrawer open={openCart}
@@ -53,9 +61,15 @@ export default function CartMenu({openCart, setOpenCart}) {
                 </Link>
               </Box>
               <Box width='100%'>
+              {data.length > 0 ?
                 <Link className='link' to='/cart-shop'>
                   <Button fullWidth variant='outlined'>View Cart</Button>
                 </Link>
+                :
+                <Link className='link' to='/shop/products'>
+                  <Button fullWidth color='lightBlue' variant='outlined'>Go Shop</Button>
+                </Link>
+              }
               </Box>
             </Box>
           </Container>

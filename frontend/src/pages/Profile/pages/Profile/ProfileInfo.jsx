@@ -45,7 +45,7 @@ export default function ProfileInfo() {
           setLogout();
       }
     });
-  },[token])
+  },[token,setLogout])
 
   return (
     <ProfileBase>

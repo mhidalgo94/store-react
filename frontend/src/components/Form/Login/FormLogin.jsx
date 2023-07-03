@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import {Box, TextField, Typography, Button} from '@mui/material';
+import {Box, TextField, Typography} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { Link } from 'react-router-dom';
 import { login } from '../../../api/fetchAuth';
