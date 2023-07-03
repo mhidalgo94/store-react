@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box } from "@mui/material"
+import { Box, Chip, Tooltip } from "@mui/material"
 import MenuItem from '@mui/material/MenuItem';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import FormControl from '@mui/material/FormControl';
@@ -63,7 +63,27 @@ const StateSelect=(cellValues)=>{
     )
 }
 
+const DateOrder = (cellValues)=>{
+    const {row} = cellValues;
 
+    const currentDate = new Date();
+    const date = new Date(row.date);
+
+    const toDay = currentDate.toDateString() === date.toDateString();
+
+    if(!toDay){
+        return (
+            <Tooltip title={`Before day  ${row.date}`} arrow>
+                <Chip label="Old Order" variant="outlined" color='info'  size='small'/>
+            </Tooltip>
+        )
+    }
+    return (
+        <Tooltip title={`Today  ${row.date}`} arrow>
+            <Chip label="New Order" variant="outlined" size='small' color='success' sx={{color:''}} />
+        </Tooltip>
+    )
+}
 export default function DataGridListOrderSales(){
     const [loadingTable, setLoadingTable] = useState(true);
     const [rowsData, setRowsData]= useState([]);
@@ -87,13 +107,13 @@ export default function DataGridListOrderSales(){
 
     const columns = [
         { field: "UUID", hide: true,flex:1},
-        { field: "id", hide: false ,headerName:'ID',flex:1},
+        { field: "id", hide: false ,headerName:'ID Order',flex:1},
         { field: 'userName', headerName: 'User Buyer', flex:1},
         // { field: 'address', headerName: 'Address',flex:1},
         { field: 'amount', headerName: 'Amount',flex:0.5},
         { field: 'idPayment', headerName: 'Id Payment',flex:1},
         { field: 'phone', headerName: 'Phone',flex:1},
-        { field: 'date', headerName: 'Date',flex:1},
+        { field: 'date', headerName: 'Date',flex:1,renderCell : DateOrder},
         { field: 'status', headerName: 'Status', renderCell : StateSelect,flex:1},
         { field: "actions",type: "actions", headerName: "Options", getActions: (params)=>[
             <GridActionsCellItem style={{color:'#0288d1'}} icon={<InsertLinkIcon color='info' />} label="Edit" onClick={(event)=>navigate(`/order-sales/${params.row.UUID}`)}/>,
