@@ -35,7 +35,7 @@ import OrderPagePublic from "../pages/OrderPublic/OrderPagePublic";
 import Howtobuy from "../pages/HowToBuy/Howtobuy";
 import ReturnRefound from "../pages/ReturnRefound/ReturnRefound";
 import TerminCondition from "../pages/TermConditions/TerminCondition";
-
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 const Routers = createBrowserRouter([
     {
         path:'/',
@@ -57,6 +57,7 @@ const Routers = createBrowserRouter([
             { path:'/how-to-buy', element: <Howtobuy /> },
             { path:'/return-refound', element: <ReturnRefound /> },
             { path:'/termins-conditions', element: <TerminCondition /> },
+            { path:'*', element: <NotFoundPage/>,},
 
         ]
     },
