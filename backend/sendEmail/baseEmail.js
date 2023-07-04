@@ -26,8 +26,6 @@ async function refreshAccessToken() {
  // Verificar si el token de acceso ha expirado
 if (OAuth2_Client.isTokenExpiring())  {
    refreshAccessToken();
-}else{
-  console.log('Token OAtuh_Cliente not expired')
 }
 
 
