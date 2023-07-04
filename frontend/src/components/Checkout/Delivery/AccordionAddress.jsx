@@ -32,6 +32,7 @@ export default function AccordionAddress() {
 
     useEffect(()=>{
         getListAddresses(token);
+        // eslint-disable-next-line
     },[token])
 
   return (
