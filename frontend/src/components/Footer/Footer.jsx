@@ -35,7 +35,7 @@ export default function Footer() {
             </div>
             <div className="item">
               <AlternateEmailIcon />{" "}
-              <Typography variant="subtitle1">info@gmail.com</Typography>
+              <Typography variant="subtitle1">storebeinspired@gmail.com</Typography>
             </div>
           </div>
         </div>
