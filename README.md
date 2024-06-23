@@ -38,6 +38,8 @@ The application allows users to browse products, add them to the shopping cart, 
 - **JWT**: JSON Web Tokens for user authentication.
 - **bcrypt**: Password hashing.
 
+
+
 ## Prerequisites
 
 - Node.js (v12 or higher)
