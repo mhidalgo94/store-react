@@ -53,3 +53,7 @@ The application allows users to browse products, add them to the shopping cart, 
    ```bash
    git clone https://github.com/mhidalgo94/store-react.git
    cd store-react
+
+
+## You can see image README.md frontend folder
+https://github.com/mhidalgo94/store-react/tree/master/frontend
