@@ -10,8 +10,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 
 
-![E-Commerce Screenshot](frontend/img-ecommerce/1.png)
-![E-Commerce Screenshot](frontend/img-ecommerce/2.png)
-![E-Commerce Screenshot](frontend/img-ecommerce/3.png)
-![E-Commerce Screenshot](frontend/img-ecommerce/4.png)
-![E-Commerce Screenshot](frontend/img-ecommerce/5.png)
+![E-Commerce Screenshot](img-ecommerce/1.png)
+![E-Commerce Screenshot](img-ecommerce/2.png)
+![E-Commerce Screenshot](img-ecommerce/3.png)
+![E-Commerce Screenshot](img-ecommerce/4.png)
+![E-Commerce Screenshot](img-ecommerce/5.png)
